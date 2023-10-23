@@ -5,10 +5,26 @@
 using namespace std;
 #include "HomeUser.cpp"
 #include "HomeAdmin.cpp"
+#include "Date.cpp"
 
 int main(){
+    title();
+    system("cls");
     float choice;
     
+    //demo
+    int day, month, year;
+    cout << "Enter current date: \n";
+    cout << "Enter day: ";
+    cin >> day;
+    cout << "Enter month: ";
+    cin >> month;
+    cout << "Enter year: ";
+    cin >> year;
+    //
+
+    Date currentDate(day, month, year);
+
     do{
         system("cls");
         cout << "CONTROL PANNEL \n";
@@ -18,7 +34,6 @@ int main(){
 
         cout << "Your choice: ";
         cin >> choice;
-        cin.ignore();
 
         if(!(choice == int(choice) && choice >= 1 && choice <= 3)){
             cout << "Invalid input!! Please choose again.\n" << endl;
@@ -28,15 +43,14 @@ int main(){
 
     switch(int(choice)){
         case 1:
-            HomeAdmin();
+            homeAdmin(currentDate);
             break;
 
         case 2:
-            HomeUser();
+            homeUser(currentDate);
             break;
         case 3:
             exit(1);
             break;
     }
-//    getch();
 }

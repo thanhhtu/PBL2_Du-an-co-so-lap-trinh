@@ -31,11 +31,12 @@ class ListUserAccount : public List<Account>{
         bool checkSignIn(Account &user, const string &username, const string &password);    //coi co tring username va password khong
         void signIn(Account &user);
 
+        void getUserInforByID(); //lay user account theo ID
         // void editUser();   
         // void editUsers();   //menu quan ly tk user (them, xoa, tim kiem)
         // void addUser();  //them 1 tk user
         // void deleteUser();   //xoa tk user
-        // void getUserByID(); //lay user account theo ID 
+ 
 };
 
 #endif

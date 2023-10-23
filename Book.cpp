@@ -33,12 +33,12 @@ void Book::setID(const string &ID){
     this->ID = ID;
 }
 
-const string &getDate(){
-    return this->date;
+Date Book::getOpeningDate(){
+    return this->openingDate;
 }
 
-void setDate(const string &date){
-    this->date = date;
+void Book::setOpeningDate(const Date &openingDate){
+    this->openingDate = openingDate;
 }
 
 const string &Book::getMoney(){
@@ -53,12 +53,19 @@ void Book::setMoney(const string &money){
 void Book::setBook(ifstream &f){
     getline(f, this->IDBook, '-');
     getline(f, this->ID, '-');
-    getline(f, this->date, '-');
+
+    string dt;
+    getline(f, dt, '-');
+    Date tDate(dt);   //class date tu string dt
+    this->setOpeningDate(tDate);   //copy class tDate sang class this->date
+
     getline(f, this->money);
 }
 
 void Book::saveBook(ofstream &f){
-    
+    string dt = this->openingDate.toString();    //chuyen class this->date sang string r luu vao string dt
+
+    f << this->IDBook << "-" << this->ID << "-" << dt << "-" << this->money;
 }
 
 #endif

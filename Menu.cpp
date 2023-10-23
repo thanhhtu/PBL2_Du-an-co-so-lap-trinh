@@ -46,6 +46,26 @@ void title() {
 	printf("\n");
 	
 	printf("\nPress any key to start the program ");
+
+	getch();
+	while (true){
+		break;
+	}
+}
+
+int toContinue(){
+	char choice;
+	printf("\nPress c to continue.\nPress b to back to menu.\nPress any key to exit the program.\n");
+	printf("Your choice: ");
+
+	scanf("%c", &choice);
+	if(choice == 'c' || choice == 'C'){
+		return 1;
+	}else if(choice == 'b' || choice == 'B'){
+		return 2;
+	}else{
+		return 0;
+	}
 }
 
 /* 

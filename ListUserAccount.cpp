@@ -6,6 +6,9 @@ using namespace std;
 #include "ListUserAccount.h"
 #include "Menu.cpp"
 
+#ifndef LISTUSERACCOUNT_CPP
+#define LISTUSERACCOUNT_CPP
+
 ListUserAccount::ListUserAccount(){
     this->numOfUser = 0;
     this->head = NULL;
@@ -52,7 +55,6 @@ void ListUserAccount::saveUsers(){
 }
 
 void ListUserAccount::printInforUsers(){
-    cout << "List of user accounts: \n";
     for(int i = 0; i < this->length(); i++){
         cout << "Numerical order " << i + 1 << ": \n";
         this->get(i).printInfor();
@@ -68,7 +70,6 @@ bool ListUserAccount::checkID(const string &ID){
         }
     }
     return false;
-
 }
 
 bool ListUserAccount::checkUsername(const string &username){
@@ -183,5 +184,24 @@ void ListUserAccount::signIn(Account &user){
         cout << "\nSign in successfully!\n";
         return;
     }
-
 }
+
+void ListUserAccount::getUserInforByID(){
+    string tempID;
+    cout << "Enter ID of user account: ";
+    getline(cin, tempID);
+
+    for(int i = 0; i < this->length(); i++){
+        if(this->get(i).getID() == tempID){
+            this->get(i).printInfor();
+            return;
+        }
+    }
+
+    if(this->checkID(tempID) == false){
+        cout << "There is not this user account in the system.\n";
+        return;
+    }
+}
+
+#endif

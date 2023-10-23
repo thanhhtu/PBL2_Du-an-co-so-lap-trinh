@@ -6,6 +6,9 @@ using namespace std;
 #include "ListAdminAccount.h"
 #include "Menu.cpp"
 
+#ifndef LISTADMINACCOUNT_CPP
+#define LISTADMINACCOUNT_CPP
+
 ListAdminAccount::ListAdminAccount(){
     this->head = NULL;
 }
@@ -80,5 +83,6 @@ void ListAdminAccount::signIn(Account &admin){
         cout << "\nSign in successfully!\n";
         return;
     }
-
 }
+
+#endif

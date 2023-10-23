@@ -3,15 +3,16 @@
 #include<fstream>
 #include<conio.h>
 using namespace std;
+#include "Date.cpp"
 
 #ifndef BOOK_H
 #define BOOK_H
 
 class Book{
-	private:
+	protected:
 		string IDBook; 
         string ID;  //ID account
-        Date date;
+        Date openingDate;
 		string money;
 	
 	public:
@@ -25,8 +26,8 @@ class Book{
 		const string &getID();
 		void setID(const string &ID);
 
-		Date getDate();
-		void setDate(const Date &date);
+		Date getOpeningDate();
+		void setOpeningDate(const Date &openingDate);
 
 		const string &getMoney();
 		void setMoney(const string &money);

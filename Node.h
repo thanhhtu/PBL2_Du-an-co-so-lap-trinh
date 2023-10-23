@@ -19,8 +19,7 @@ class Node{
         Node(const Node<T> &n);
         Node(const T &data);
         ~Node();
-        
-//        template<class U> friend class LinkedList;
+
 };
 
 #endif
