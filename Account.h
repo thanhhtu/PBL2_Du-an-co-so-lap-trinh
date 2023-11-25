@@ -2,6 +2,8 @@
 #include<string>
 #include<fstream>
 #include<conio.h>
+#include<iomanip>
+#include<map>
 using namespace std;
 
 #ifndef ACCOUNT_H
@@ -26,37 +28,35 @@ class Account{
 		~Account();
 
 		//get, set attributes
-		const string &getID();
+		string getID() const;
 		void setID(const string &ID);
 		
-		const string &getUsername();
+		string getUsername() const;
 		void setUsername(const string &username);
 		
-		const string &getPassword();
+		string getPassword() const;
 		void setPassword(const string &password);		
 		
-		const string &getName();
+		string getName() const;
 		void setName(const string &name);
 		
-		const string &getIDCard();
+		string getIDCard() const;
 		void setIDCard(const string &IDCard);
 		
-		const string &getAddress();
+		string getAddress() const;
 		void setAddress(const string &address);
 		
-		const string &getTel();
+		string getTel() const;
 		void setTel(const string &tel);
 		
 		//other methods
 		void setAccount(ifstream &f);	//lay 1 account tu file
 		void saveAccount(ofstream &f);	//ghi 1 account vao lai file
 
-		void printInfor();		//in ra thong tin ca nhan cua 1 account
+		void printInfor() const;		//in ra thong tin ca nhan cua 1 account
 
 		Account &operator = (const Account &acc);
-
-		
-
 };
+
 #endif
 

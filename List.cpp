@@ -7,6 +7,7 @@ using namespace std;
 
 #ifndef LIST_CPP
 #define LIST_CPP
+
 template<class T>
 List<T>::List(){
     this->head = NULL;

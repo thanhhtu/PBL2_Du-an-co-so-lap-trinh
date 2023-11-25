@@ -2,11 +2,13 @@
 #include<string>
 #include<fstream>
 #include<conio.h>
+#include<map>
 using namespace std;
 #include "Account.h"
 
 #ifndef ACCOUNT_CPP
 #define ACCOUNT_CPP
+
 Account::Account(){
 
 }
@@ -26,49 +28,49 @@ Account::~Account(){
 
 }
 
-const string &Account::getID(){
+string Account::getID() const{
 	return this->ID;
 }
 void Account::setID(const string &ID){
 	this->ID = ID;
 }
 
-const string &Account::getUsername(){
+string Account::getUsername() const{
 	return this->username;
 }
 void Account::setUsername(const string &username){
 	this->username = username;
 }
 
-const string &Account::getPassword(){
+string Account::getPassword() const{
 	return this->password;
 }
 void Account::setPassword(const string &password){
 	this->password = password;
 }
 
-const string &Account::getName(){
+string Account::getName() const{
 	return this->name;
 }
 void Account::setName(const string &name){
 	this->name = name;
 }
 
-const string &Account::getIDCard(){
+string Account::getIDCard() const{
 	return this->IDCard;
 }
 void Account::setIDCard(const string &IDCard){
 	this->IDCard = IDCard;
 }
 
-const string &Account::getAddress(){
+string Account::getAddress() const{
 	return this->address;
 }
 void Account::setAddress(const string &address){
 	this->address = address;
 }
 
-const string &Account::getTel(){
+string Account::getTel() const{
 	return this->tel;
 }
 void Account::setTel(const string &tel){
@@ -88,7 +90,7 @@ void Account::saveAccount(ofstream &f){
 	f << this->ID << "-" << this->username << "-" << this->password << "-" << this->name << "-" << this->IDCard << "-" << this->address << "-" << this->tel;
 }
 
-void Account::printInfor(){
+void Account::printInfor() const{
 	cout << "Account ID: " << this->ID << endl;
 	cout << "Name: " << this->name << endl;
 	cout << "Identity card number: " << this->IDCard << endl;

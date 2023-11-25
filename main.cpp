@@ -10,21 +10,11 @@ using namespace std;
 int main(){
     title();
     system("cls");
-    float choice;
     
-    //demo
-    int day, month, year;
-    cout << "Enter current date: \n";
-    cout << "Enter day: ";
-    cin >> day;
-    cout << "Enter month: ";
-    cin >> month;
-    cout << "Enter year: ";
-    cin >> year;
-    //
+    Date currentDate;
+	cin >> currentDate;
 
-    Date currentDate(day, month, year);
-
+    float choice;
     do{
         system("cls");
         cout << "CONTROL PANNEL \n";
@@ -45,7 +35,6 @@ int main(){
         case 1:
             homeAdmin(currentDate);
             break;
-
         case 2:
             homeUser(currentDate);
             break;
@@ -53,4 +42,6 @@ int main(){
             exit(1);
             break;
     }
+
+    return 0;
 }

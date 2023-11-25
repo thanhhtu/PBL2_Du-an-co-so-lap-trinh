@@ -2,6 +2,8 @@
 #include<string>
 #include<fstream>
 #include<conio.h>
+#include<cctype>
+#include<map>
 using namespace std;
 #include "TermBook.h"
 
@@ -9,14 +11,17 @@ using namespace std;
 #define TERMBOOK_CPP
 
 TermBook::TermBook(){
-
+    interestRates[3] = 0.00825;     //3.3%/nam
+    interestRates[6] = 0.0215;      //4.3%/nam
+    interestRates[12] = 0.055;      //5.5%/nam
+    interestRates[18] = 0.09;        //6.0%/nam
 }
 
 TermBook::~TermBook(){
 
 }
 
-const int &TermBook::getTerm(){
+int TermBook::getTerm() const{
     return this->term;
 }
 
@@ -41,62 +46,52 @@ void TermBook::setBook(ifstream &f){
 }
 
 void TermBook::saveBook(ofstream &f){
-    string dt = this->openingDate.toString();    //chuyen class this->date sang string r luu vao string dt
+    string dt = this->openingDate.dtAsString();    //chuyen class this->date sang string r luu vao string dt
 
     f << this->IDBook << "-" << this->ID << "-" << dt << "-" << this->term << "-" << this->money;
 }
 
-void TermBook::printTermBook(){
+void TermBook::printTermBook() const{
     cout << "ID Book: " << this->IDBook << endl;
-    cout << "The opening date: ";
-    this->openingDate.printDate();
+    cout << "The opening date: " << this->openingDate << endl;
+    cout << "The term: " << this->getTerm() << endl;
     cout << "The money you add: " << this->money << endl;
 }
-///////////////
-float TermBook::interestRate(const Date &currentDate, const Account &user, int time){
-    float tempMoney = stof(this->money);
-    int tempTerm = this->term;
-    
-    float interest;
 
-    if(tempTerm > time){
-        interest = 0;
-    }else if(tempTerm == 3){
-        interest = tempMoney * 0.2 * 3;
-    }else if(tempTerm == 6){
-        interest = tempMoney * 0.2 * 6;
+float TermBook::interestRate(const Date &currentDate, const Account &user) const{
+    //Check if the term of the book has come
+    if(openingDate.getDayDifference(currentDate) < this->term * 30){      //mac dinh 1 thang co 30 ngay
+        //If not, ask the user if they want to withdraw money
+        cout << "The term of this book has not yet come. Are you sure you want to withdraw money?\n";
+        int choice;
+        do{
+            cout << "1. Yes. \n";
+            cout << "2. No. \n";
+            cout << "Your choice: ";
+            cin >> choice;
+            if(!(choice >= 1 && choice <= 2)){
+                cout << "Invalid input!! Please choose again.\n" << endl;
+            }
+        }while(!(choice >= 1 && choice <= 2));
+
+        //If the user chooses to withdraw money early, return 0
+        if(choice == 1){
+            cin.ignore();
+            return 0;
+        }else{
+            //If the user chooses not to withdraw money, don't calculate interest
+            cin.ignore();
+            return 0;
+        }
     }
 
-    return interest;
+    //Calculate the interest rate
+    auto it = interestRates.find(this->term);
+    float interest = it->second;
+    
+    //Calculate the interest earned
+    float interestEarned = stof(this->money) * interest;
+    return interestEarned;
 }
-// float TermBook::interestRate(Date currentDate, Account user){
-//     float interest = 0;
-
-//     int time = this->openingDate.timeTerm(currentDate);
-
-//     if(this->term <= time){
-//         cout << "The term of this book has not yet come. Are you sure you want to withdraw money?\n";
-//         float choice;
-//         do{
-//             cout << "1. Yes. \n";
-//             cout << "2. No. \n"; 
-
-//             cout << "Your choice: ";
-//             cin >> choice;
-
-//             if(!(choice == int(choice) && choice >= 1 && choice <= 2)){
-//                 cout << "Invalid input!! Please choose again.\n" << endl;
-//             }   
-//         }while(!(choice == int(choice) && choice >= 1 && choice <= 2));
-
-//         if(choice == 1){
-//             cout << "Interest rate of your bank book is: " << interest << endl;
-//             return 0;
-//         }else{
-//             return 0;
-//         }
-
-//     }
-// }
 
 #endif

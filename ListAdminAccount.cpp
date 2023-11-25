@@ -4,7 +4,6 @@
 #include<conio.h>
 using namespace std;
 #include "ListAdminAccount.h"
-#include "Menu.cpp"
 
 #ifndef LISTADMINACCOUNT_CPP
 #define LISTADMINACCOUNT_CPP

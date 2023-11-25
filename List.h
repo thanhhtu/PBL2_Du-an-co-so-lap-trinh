@@ -4,8 +4,10 @@
 #include<conio.h>
 using namespace std;
 #include "Node.cpp"
+
 #ifndef LIST_H
 #define LIST_H
+
 template<class T>
 class List{
     protected:
@@ -26,5 +28,6 @@ class List{
         void remove(Node<T> *delNode); //delNode: con tro tai vi tri Node muon xoa //dung friend cung duoc
 
 };
+
 #endif
 

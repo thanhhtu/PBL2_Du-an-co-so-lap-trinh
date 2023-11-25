@@ -2,6 +2,7 @@
 #include<string>
 #include<fstream>
 #include<conio.h>
+#include<map>
 using namespace std;
 #include "Date.cpp"
 
@@ -20,22 +21,18 @@ class Book{
 		~Book();
 		
 		//get, set attributes
-		const string &getIDBook();
+		string getIDBook() const;
 		void setIDBook(const string &IDBook);
 		
-		const string &getID();
+		string getID() const;
 		void setID(const string &ID);
 
-		Date getOpeningDate();
+		Date getOpeningDate() const;
 		void setOpeningDate(const Date &openingDate);
 
-		const string &getMoney();
+		string getMoney() const;
 		void setMoney(const string &money);
-
-		//other method
-		void setBook(ifstream &f);	//lay 1 book tu file
-		void saveBook(ofstream &f);	//ghi 1 book vao lai file
-
 };
+
 #endif
 

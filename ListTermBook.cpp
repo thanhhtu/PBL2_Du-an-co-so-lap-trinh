@@ -4,10 +4,10 @@
 #include<conio.h>
 using namespace std;
 #include "ListTermBook.h"
-#include "Menu.cpp"
 
 #ifndef LISTTERMBOOK_CPP
 #define LISTTERMBOOK_CPP
+
 ListTermBook::ListTermBook(){
     this->numOfTermBook = 0;
     this->head = NULL;
@@ -61,12 +61,12 @@ void ListTermBook::printTermBooks(){
     }
 }
 
-void ListTermBook::printUserTermBook(Account user){
+void ListTermBook::printUserTermBook(const Account &user){
     cout << "Your term books\n";
     int count = 0;
     for(int i = 0; i < this->length(); i++){
         if(this->get(i).getID() == user.getID()){
-            cout << "Numerical order " << count + 1 << ": \n";
+            cout << "Numerical order " << ++count << ": \n";
             this->get(i).printTermBook();
             cout << endl;
         }
@@ -82,7 +82,7 @@ bool ListTermBook::checkIDBook(const string &IDBook){
     return false;
 }
 
-void ListTermBook::openTermBook(TermBook &termBook, Account user, const Date &currentDate){
+void ListTermBook::openTermBook(TermBook &termBook, const Account &user, const Date &currentDate){
     string tempIDBook; 
     string tempID = user.getID();  
     Date tempOpeningDate(currentDate);
@@ -102,6 +102,7 @@ void ListTermBook::openTermBook(TermBook &termBook, Account user, const Date &cu
         cout << "1. 3-month saving book.\n";
         cout << "2. 6-month saving book.\n";
         cout << "3. 12-month saving book.\n";
+        cout << "4. 18-month saving book.\n";
 
         cout << "Your choice: ";
         cin >> choice;
@@ -115,10 +116,11 @@ void ListTermBook::openTermBook(TermBook &termBook, Account user, const Date &cu
         tempTerm = 3;
     }else if(choice == 2){
         tempTerm = 6;
-    }else{
+    }else if(choice == 3){
         tempTerm = 12;
+    }else{
+        tempTerm = 18;
     }
-
     cout << "Enter the amount of money: ";
     getline(cin, tempMoney);
 
@@ -133,6 +135,17 @@ void ListTermBook::openTermBook(TermBook &termBook, Account user, const Date &cu
     this->insertLast(termBook);
     
     this->saveTermBooks();    
+}
+
+TermBook* ListTermBook::findBookbyID(const string &IDBook) const{
+    Node<TermBook> *current = head;
+    while(current != NULL){
+        if(current->data.getIDBook() == IDBook){
+            return &(current->data);    //Return address of the TermBook object
+        }
+        current = current->next;
+    }
+    return NULL;     //Return nullptr if not found
 }
 
 #endif

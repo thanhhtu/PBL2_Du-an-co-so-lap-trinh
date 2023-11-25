@@ -5,10 +5,9 @@
 using namespace std;
 
 #include "TermBook.cpp"
-#include "Account.cpp"
 #include "ListUserAccount.cpp"
+#include "Menu.cpp"
 #include "Date.cpp"
-
 
 #ifndef LISTTERMBOOK_H
 #define LISTTERMBOOK_H
@@ -24,11 +23,12 @@ class ListTermBook : public List<TermBook>{
         void saveTermBooks();   //ghi list term books lai vao file
         void printTermBooks();  //list term books
 
-        void printUserTermBook(Account user);   //term books cua 1 nguoi
+        void printUserTermBook(const Account &user);   //term books cua 1 nguoi
 
         bool checkIDBook(const string &IDBook);
-        void openTermBook(TermBook &termBook, Account user, const Date &currentDate);
+        void openTermBook(TermBook &termBook, const Account &user, const Date &currentDate);
 
+        TermBook* findBookbyID(const string &IDBook) const;
 };
 
 #endif

@@ -3,10 +3,7 @@
 #include<fstream>
 #include<conio.h>
 using namespace std;
-
-#include "Account.cpp"
 #include "Menu.cpp"
-#include "Account.cpp"
 #include "ListAdminAccount.cpp"
 #include "ListUserAccount.cpp"
 #include "Date.h"
