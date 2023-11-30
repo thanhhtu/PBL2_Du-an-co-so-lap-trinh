@@ -21,7 +21,7 @@ class NonTermBook : public Book{
 		void setBook(ifstream &f);	//lay 1 book tu file
 		void saveBook(ofstream &f);	//ghi 1 book vao lai file
 
-        void printNonTermBook() const;
+        void printBook() const;
         
         float interestRate(const Date &currentDate, const Account &user) const;
 };

@@ -51,7 +51,7 @@ void TermBook::saveBook(ofstream &f){
     f << this->IDBook << "-" << this->ID << "-" << dt << "-" << this->term << "-" << this->money;
 }
 
-void TermBook::printTermBook() const{
+void TermBook::printBook() const{
     cout << "ID Book: " << this->IDBook << endl;
     cout << "The opening date: " << this->openingDate << endl;
     cout << "The term: " << this->getTerm() << endl;

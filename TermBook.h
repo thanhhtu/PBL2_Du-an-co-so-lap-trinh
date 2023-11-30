@@ -25,7 +25,7 @@ class TermBook : public Book{
         void setBook(ifstream &f);
 		void saveBook(ofstream &f);
 
-        void printTermBook() const;
+        void printBook() const;
         
         float interestRate(const Date &currentDate, const Account &user) const;
 };

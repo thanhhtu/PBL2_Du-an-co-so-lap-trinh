@@ -37,7 +37,7 @@ void NonTermBook::saveBook(ofstream &f){
     f << this->IDBook << "-" << this->ID << "-" << dt << "-" << this->money;
 }
 
-void NonTermBook::printNonTermBook() const{
+void NonTermBook::printBook() const{
     cout << "ID Book: " << this->IDBook << endl;
     cout << "The opening date: " << this->openingDate << endl;
     cout << "The money you add: " << this->money << endl;

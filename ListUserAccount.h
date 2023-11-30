@@ -33,11 +33,8 @@ class ListUserAccount : public List<Account>{
         void signIn(Account &user);
 
         void getUserInforByID(); //lay user account theo ID
-        // void editUser();   
-        // void editUsers();   //menu quan ly tk user (them, xoa, tim kiem)
-        // void addUser();  //them 1 tk user
-        // void deleteUser();   //xoa tk user
- 
+        
+//        void deleteUserByID(ListTermBook &listTermBook, ListNonTermBook &listNonTermBook, const string &ID);   //xoa tk user
 };
 
 #endif

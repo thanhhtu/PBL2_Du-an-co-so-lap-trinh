@@ -29,7 +29,10 @@ class ListNonTermBook : public List<NonTermBook>{
         bool checkIDBook(const string &IDBook);
         void openNonTermBook(NonTermBook &nonTermBook, const Account &user, const Date &currentDate);
 
-        NonTermBook* findBookbyID(const string &IDBook) const;
+        NonTermBook* findBookByID(const string &IDBook) const;
+
+        void removeBookByIDBook(const string &IDBook);
+   //     void removeBookByID(const string &ID);
 };
 
 #endif

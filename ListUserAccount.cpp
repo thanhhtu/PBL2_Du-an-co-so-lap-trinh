@@ -203,4 +203,17 @@ void ListUserAccount::getUserInforByID(){
     }
 }
 
+// void ListUserAccount::deleteUserByID(ListTermBook &listTermBook, ListNonTermBook &listNonTermBook, const string &ID){
+//     Node<Account> *current = this->head;
+//     while(current != NULL){
+//         if(this->data.getID() == ID){
+//             this->remove(currnet);
+//             break;
+//         }else{
+//             current = current->next;
+//         }
+//     }
+//     this->saveUsers();
+// }
+
 #endif

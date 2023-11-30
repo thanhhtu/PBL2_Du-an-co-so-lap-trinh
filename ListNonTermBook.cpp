@@ -56,20 +56,24 @@ void ListNonTermBook::printNonTermBooks(){
     cout << "NON-TERM BOOK\n";
     for(int i = 0; i < this->length(); i++){
         cout << "Numerical order " << i + 1 << ": \n";
-        this->get(i).printNonTermBook();
+        this->get(i).printBook();
         cout << endl;
     }
 }
 
 void ListNonTermBook::printUserNonTermBook(const Account &user){
-    cout << "Your non-term books\n";
+    cout << "NON-TERM BOOKS\n";
     int count = 0;
     for(int i = 0; i < this->length(); i++){
         if(this->get(i).getID() == user.getID()){
             cout << "Numerical order " << ++count << ": \n";
-            this->get(i).printNonTermBook();
+            this->get(i).printBook();
             cout << endl;
         }
+    }
+
+    if(count == 0){
+        cout << "You do not have any non-term books." << endl;
     }
 }
 
@@ -110,7 +114,7 @@ void ListNonTermBook::openNonTermBook(NonTermBook &nonTermBook, const Account &u
     this->saveNonTermBooks();    
 }
 
-NonTermBook* ListNonTermBook::findBookbyID(const string &IDBook) const{
+NonTermBook* ListNonTermBook::findBookByID(const string &IDBook) const{
     Node<NonTermBook> *current = head;
     while(current != NULL){
         if(current->data.getIDBook() == IDBook){
@@ -120,5 +124,30 @@ NonTermBook* ListNonTermBook::findBookbyID(const string &IDBook) const{
     }
     return NULL; 
 }
+
+void ListNonTermBook::removeBookByIDBook(const string &IDBook){
+    Node<NonTermBook> *current = this->head;
+    while(current != NULL){
+        if(current->data.getIDBook() == IDBook){
+            this->remove(current);
+            break;
+        }else{
+            current = current->next;
+        }
+    }
+    this->saveNonTermBooks();
+}
+
+// void ListNonTermBook::removeBookByID(const string &ID){
+//     Node<NonTermBook> *current = this->head;
+//     while(current != NULL){
+//         if(current->data.getID() == ID){
+//             this->remove(current);
+//         }else{
+//             current = current->next;
+//         }
+//     }
+//     this->saveNonTermBooks();
+// }
 
 #endif

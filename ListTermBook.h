@@ -28,7 +28,10 @@ class ListTermBook : public List<TermBook>{
         bool checkIDBook(const string &IDBook);
         void openTermBook(TermBook &termBook, const Account &user, const Date &currentDate);
 
-        TermBook* findBookbyID(const string &IDBook) const;
+        TermBook* findBookByID(const string &IDBook) const;
+
+        void removeBookByIDBook(const string &IDBook);
+   //     void removeBookByID(const string &ID);
 };
 
 #endif

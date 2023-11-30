@@ -38,6 +38,7 @@ void ListTermBook::setTermBooks(){
 
     f.close();    
 }
+
 void ListTermBook::saveTermBooks(){
     ofstream f ("dataTermBook.txt");
 
@@ -56,20 +57,23 @@ void ListTermBook::printTermBooks(){
     cout << "Term books\n";
     for(int i = 0; i < this->length(); i++){
         cout << "Numerical order " << i + 1 << ": \n";
-        this->get(i).printTermBook();
+        this->get(i).printBook();
         cout << endl;
     }
 }
 
 void ListTermBook::printUserTermBook(const Account &user){
-    cout << "Your term books\n";
+    cout << "TERM BOOKS\n";
     int count = 0;
     for(int i = 0; i < this->length(); i++){
         if(this->get(i).getID() == user.getID()){
             cout << "Numerical order " << ++count << ": \n";
-            this->get(i).printTermBook();
+            this->get(i).printBook();
             cout << endl;
         }
+    }
+    if(count == 0){
+        cout << "You do not have any term books." << endl;
     }
 }
 
@@ -137,7 +141,7 @@ void ListTermBook::openTermBook(TermBook &termBook, const Account &user, const D
     this->saveTermBooks();    
 }
 
-TermBook* ListTermBook::findBookbyID(const string &IDBook) const{
+TermBook* ListTermBook::findBookByID(const string &IDBook) const{
     Node<TermBook> *current = head;
     while(current != NULL){
         if(current->data.getIDBook() == IDBook){
@@ -148,4 +152,28 @@ TermBook* ListTermBook::findBookbyID(const string &IDBook) const{
     return NULL;     //Return nullptr if not found
 }
 
+void ListTermBook::removeBookByIDBook(const string &IDBook){
+    Node<TermBook> *current = this->head;
+    while(current != NULL){
+        if(current->data.getIDBook() == IDBook){
+            this->remove(current);
+            break;
+        }else{
+            current = current->next;
+        }
+    }
+    this->saveTermBooks();
+}
+
+// void ListTermBook::removeBookByID(const string &ID){
+//     Node<TermBook> *current = this->head;
+//     while(current != NULL){
+//         if(current->data.getID() == ID){
+//             this->remove(current);
+//         }else{
+//             current = current->next;
+//         }
+//     }
+//     this->saveTermBooks();
+// }
 #endif

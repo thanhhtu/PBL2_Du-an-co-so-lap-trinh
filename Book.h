@@ -32,6 +32,13 @@ class Book{
 
 		string getMoney() const;
 		void setMoney(const string &money);
+
+		virtual void setBook(ifstream &f) = 0;	//lay 1 book tu file
+		virtual void saveBook(ofstream &f) = 0;	//ghi 1 book vao lai file
+
+        virtual void printBook() const = 0;
+        
+        virtual float interestRate(const Date &currentDate, const Account &user) const = 0;
 };
 
 #endif

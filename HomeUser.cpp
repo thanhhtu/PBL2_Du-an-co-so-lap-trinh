@@ -179,11 +179,12 @@ MENU:
                     cin >> IDBook;
                     cin.ignore();
 
-                    TermBook *termBook = listTermBook.findBookbyID(IDBook);
+                    TermBook *termBook = listTermBook.findBookByID(IDBook);
                     if(termBook != NULL){
                         float interestEarned = termBook->interestRate(currentDate, user);
                         cout << "Interest earned: " << interestEarned << endl;
                     }    
+                    listTermBook.removeBookByIDBook(IDBook);
                                        
                     break; 
                 }
@@ -196,12 +197,13 @@ MENU:
                     cin >> IDBook;
                     cin.ignore();
 
-                    NonTermBook *nonTermBook = listNonTermBook.findBookbyID(IDBook);
+                    NonTermBook *nonTermBook = listNonTermBook.findBookByID(IDBook);
                     if(nonTermBook != NULL){
                         float interestEarned = nonTermBook->interestRate(currentDate, user);
                         cout << "Interest earned: " << interestEarned << endl;
                     }    
-                                       
+                    listNonTermBook.removeBookByIDBook(IDBook);
+
                     break; 
                 }
             }

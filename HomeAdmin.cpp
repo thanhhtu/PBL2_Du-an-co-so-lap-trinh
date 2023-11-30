@@ -32,6 +32,7 @@ MENU:
         cout << "1. List user account information.\n";
         cout << "2. Look up user information via ID account.\n";
         cout << "3. Delete a user account via ID account.\n";
+        cout << "4. Exit.\n";
 
         cout << "Your choice: ";
         cin >> choice;
