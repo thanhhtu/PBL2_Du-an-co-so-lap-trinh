@@ -158,16 +158,15 @@ MENU:
                 cout << "Which type of book do you want to withdraw?\n";
                 cout << "1. Term Book.\n";
                 cout << "2. Non-term Book.\n";
-                cout << "3. All book.\n";
 
                 cout << "Your choice: ";
                 cin >> choice;
                 cin.ignore();
                 
-                if(!(choice == int(choice) && choice >= 1 && choice <= 3)){
+                if(!(choice == int(choice) && choice >= 1 && choice <= 2)){
                     cout << "Invalid input!! Please choose again.\n" << endl;
                 }        
-            }while(!(choice == int(choice) && choice >= 1 && choice <= 3));
+            }while(!(choice == int(choice) && choice >= 1 && choice <= 2));
 
             switch((int)choice){
                 case 1:{
@@ -214,10 +213,5 @@ MENU:
             } else if (isContinue == 2) {
                 goto MENU;
             }
-            
-            break; 
-
-        
-
     }
 }

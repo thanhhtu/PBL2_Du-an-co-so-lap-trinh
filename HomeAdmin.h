@@ -12,7 +12,7 @@ using namespace std;
 #define HOMEADMIN_H
 
 void homeAdmin(const Date &currentDate);
-void menuAdmin(ListUserAccount &listUser, Account &user, const Date &currentDate);
+void menuAdmin(Account &user, ListUserAccount &listUser, TermBook &termBook, ListTermBook &listTermBook, NonTermBook &nonTermBook, ListNonTermBook &listNonTermBook, const Date &currentDate);
 
 #endif
 

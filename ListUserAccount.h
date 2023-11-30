@@ -34,7 +34,7 @@ class ListUserAccount : public List<Account>{
 
         void getUserInforByID(); //lay user account theo ID
         
-//        void deleteUserByID(ListTermBook &listTermBook, ListNonTermBook &listNonTermBook, const string &ID);   //xoa tk user
+        void removeUserByID(const string &ID);   //xoa tk user
 };
 
 #endif

@@ -31,7 +31,7 @@ class ListTermBook : public List<TermBook>{
         TermBook* findBookByID(const string &IDBook) const;
 
         void removeBookByIDBook(const string &IDBook);
-   //     void removeBookByID(const string &ID);
+        void removeBookByID(const string &ID);
 };
 
 #endif

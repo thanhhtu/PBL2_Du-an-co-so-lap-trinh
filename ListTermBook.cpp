@@ -165,15 +165,15 @@ void ListTermBook::removeBookByIDBook(const string &IDBook){
     this->saveTermBooks();
 }
 
-// void ListTermBook::removeBookByID(const string &ID){
-//     Node<TermBook> *current = this->head;
-//     while(current != NULL){
-//         if(current->data.getID() == ID){
-//             this->remove(current);
-//         }else{
-//             current = current->next;
-//         }
-//     }
-//     this->saveTermBooks();
-// }
+void ListTermBook::removeBookByID(const string &ID){
+    Node<TermBook> *current = this->head;
+    while(current != NULL){
+        if(current->data.getID() == ID){
+            this->remove(current);
+        }
+        current = current->next;
+    }
+    this->saveTermBooks();
+}
+
 #endif

@@ -171,7 +171,7 @@ bool ListUserAccount::checkSignIn(Account &user, const string &username, const s
 void ListUserAccount::signIn(Account &user){
     string tempUsername, tempPassword;
     cout << "Enter your username: ";
-    cin >> tempUsername;
+    getline(cin, tempUsername);
 
     cout << "Enter your password: ";
     enterPassword(tempPassword);
@@ -203,17 +203,17 @@ void ListUserAccount::getUserInforByID(){
     }
 }
 
-// void ListUserAccount::deleteUserByID(ListTermBook &listTermBook, ListNonTermBook &listNonTermBook, const string &ID){
-//     Node<Account> *current = this->head;
-//     while(current != NULL){
-//         if(this->data.getID() == ID){
-//             this->remove(currnet);
-//             break;
-//         }else{
-//             current = current->next;
-//         }
-//     }
-//     this->saveUsers();
-// }
+void ListUserAccount::removeUserByID(const string &ID){
+    Node<Account> *current = this->head;
+    while(current != NULL){
+        if(current->data.getID() == ID){
+            this->remove(current);
+            break;
+        }else{
+            current = current->next;
+        }
+    }
+    this->saveUsers();
+}
 
 #endif

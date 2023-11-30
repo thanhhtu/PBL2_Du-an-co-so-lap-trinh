@@ -138,16 +138,15 @@ void ListNonTermBook::removeBookByIDBook(const string &IDBook){
     this->saveNonTermBooks();
 }
 
-// void ListNonTermBook::removeBookByID(const string &ID){
-//     Node<NonTermBook> *current = this->head;
-//     while(current != NULL){
-//         if(current->data.getID() == ID){
-//             this->remove(current);
-//         }else{
-//             current = current->next;
-//         }
-//     }
-//     this->saveNonTermBooks();
-// }
+void ListNonTermBook::removeBookByID(const string &ID){
+    Node<NonTermBook> *current = this->head;
+    while(current != NULL){
+        if(current->data.getID() == ID){
+            this->remove(current);
+        }
+        current = current->next;
+    }
+    this->saveNonTermBooks();
+}
 
 #endif
