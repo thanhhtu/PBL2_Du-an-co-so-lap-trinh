@@ -4,8 +4,8 @@
 #include<conio.h>
 #include<iomanip>
 #include<stdexcept>
-using namespace std;
 #include "Date.h"
+using namespace std;
 
 #ifndef DATE_CPP
 #define DATE_CPP
@@ -121,27 +121,37 @@ istream &operator >> (istream &in, Date &dt) {
     }
 
     Date lastDate(lastD, lastM, lastY);
-    cout << "The logged date: ";
-    cout << setfill('0') << setw(2) << right << lastDate.day << "/" << setw(2) << right << lastDate.month << "/" << setw(4) << right << lastDate.year << setfill(' ') << endl;
 
-    cout << "Please enter the system login date" << endl;
-    cout << "Enter day: "; 
-    in >> dt.day;
-    cout << "Enter month: "; 
-    in >> dt.month;
-    cout << "Enter year: "; 
-    in >> dt.year;
+    do{
+        SetColor(15);
+        cout << "                                  The last logged date: ";
+        cout << setfill('0') << setw(2) << right << lastDate.day << "/" << setw(2) << right << lastDate.month << "/" << setw(4) << right << lastDate.year << setfill(' ') << endl;
+        box(30, 1, 40, 2, 15, 1, "      ENTER THE SYSTEM LOGIN DATE");
 
-    // Kiem tra ngay nhap vao co hop le hay k
-    while (!dt.isValid() || dt.dateCompare(lastDate) < 0) {
-        cout << "Invalid date or date before the last entry date. Enter again:\n";
-        cout << "Enter day: "; 
-        in >> dt.day;
-        cout << "Enter month: "; 
-        in >> dt.month;
-        cout << "Enter year: "; 
-        in >> dt.year;
-    }
+        keDuoi(30, 3, 40, 2, 15, 1, "Day: ");
+        gotoXY(30, 3); cout << char(195);    //displays '├'
+        gotoXY(70, 3); cout << char(180);    // displays '┤'
+        gotoXY(36, 4); in >> dt.day;
+
+        keDuoi(30, 5, 40, 2, 15, 1, "Month: ");
+        gotoXY(30, 5); cout << char(195);   
+        gotoXY(70, 5); cout << char(180);   
+        gotoXY(38, 6); in >> dt.month;
+
+        keDuoi(30, 7, 40, 2, 15, 1, "Year: ");
+        gotoXY(37, 8); in >> dt.year;
+
+        if(!dt.isValid() || dt.dateCompare(lastDate) < 0){
+            gotoXY(27, 11);
+            cout << "Error: Invalid date or date before the last entry date!\n";
+            if(!dt.isValid() || dt.dateCompare(lastDate) < 0){
+                gotoXY(27,12);
+                SetColor(72);
+                system("pause");
+                system("cls");
+            }
+        } 
+    }while(!dt.isValid() || dt.dateCompare(lastDate) < 0);
     
     //ghi du lieu vao tep (che do append)
     ofstream fo("dateData.txt", ios::app);

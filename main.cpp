@@ -14,33 +14,33 @@ int main(){
     Date currentDate;
 	cin >> currentDate;
 
-    float choice;
-    do{
+    ShowCur(0);
+    while (true)
+    {
         system("cls");
-        cout << "CONTROL PANNEL \n";
-        cout << "1. ADMIN. \n";
-        cout << "2. USER. \n"; 
-        cout << "3. EXIT.\n";
+        box(30, 2, 30, 2, 15, 1, "           YOU ARE");
+        box(30, 5, 30, 2, 11, 1, "             ADMIN");
+        gotoXY(30, 5); cout << char(218);
+        gotoXY(60, 5); cout << char(191);
 
-        cout << "Your choice: ";
-        cin >> choice;
+        box(30, 7, 30, 2, 11, 1, "            USER");
+        gotoXY(30, 7); cout << char(195);
+        gotoXY(60, 7); cout << char(180);
+        
+        int check = menuMain(30, 5, 30, 2);  //menuMain trong file Menu
+        char c;   
+        bool exitLoop = false;
 
-        if(!(choice == int(choice) && choice >= 1 && choice <= 3)){
-            cout << "Invalid input!! Please choose again.\n" << endl;
-        }   
-
-    }while(!(choice == int(choice) && choice >= 1 && choice <= 3));
-
-    switch(int(choice)){
-        case 1:
-            homeAdmin(currentDate);
-            break;
-        case 2:
-            homeUser(currentDate);
-            break;
-        case 3:
-            exit(1);
-            break;
+        switch(check){
+            case 5:
+                textcolor(1);
+                homeAdmin(currentDate);
+                break;
+            case 7: 
+                textcolor(1);
+                homeUser(currentDate);
+                break;
+        }
     }
 
     return 0;

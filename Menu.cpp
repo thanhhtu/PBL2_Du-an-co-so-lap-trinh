@@ -115,4 +115,143 @@ void enterNumber(string &number){
 	return;
 }
 
+void box(int x, int y, int w, int h, int t_color, int b_color, string nd){
+	//========== BACKGROUNG ==========
+	textcolor(b_color);
+	for(int iy = y + 1; iy <= y + h - 1; iy++){
+		for(int ix = x + 1; ix <= x + w - 1; ix++){
+			gotoXY(ix, iy);
+			cout << " ";
+		}
+	}
+	
+	//========== NOI DUNG ==========
+	SetColor(15);	//15: chu mau trang
+	gotoXY(x + 1, y + 1);
+	cout << nd;
+	
+	//========== VE VIEN ==========
+	textcolor(1);
+	SetColor(t_color);
+	//ke ngang
+	if(h <= 1 || w <= 1) return;
+	for(int ix = x; ix <= x + w; ix++){
+		gotoXY(ix, y);
+		cout << char(196);	//196: ke ngang
+		gotoXY(ix, y + h);
+		cout << char(196);
+	}
+	//ke doc
+	for(int iy = y; iy <= y + h; iy++){
+		gotoXY(x, iy);
+		cout << char(179);	//179: ke doc
+		gotoXY(x + w, iy);
+		cout << char(179);
+	}
+	//4 goc
+	gotoXY(x, y);
+	cout << char(218);	//218: goc tren ben trai
+	gotoXY(x + w, y);
+	cout << char(191);	//191: goc tren ben phai
+	gotoXY(x, y + h);
+	cout << char(192);	//192: goc tren ben phai
+	gotoXY(x + w, y + h);
+	cout << char(217);	//217: goc tren ben phai
+}
+
+void thanhSang(int x, int y, int w, int h, int b_color, string nd){
+	textcolor(b_color);
+	for(int iy = y + 1; iy <= y + h - 1; iy++){
+		for(int ix = x + 1; ix <= x + w - 1; ix++){
+			gotoXY(ix, iy);
+			cout << " ";
+		}
+	}
+	
+	SetColor(15);	
+	gotoXY(x + 1, y + 1);
+	cout << nd;
+}
+
+void keDuoi(int x, int y, int w, int h, int t_color, int b_color, string nd){
+	//========== BACKGROUNG ==========
+	textcolor(b_color);
+	for(int iy = y + 1; iy <= y + h - 1; iy++){
+		for(int ix = x + 1; ix <= x + w - 1; ix++){
+			gotoXY(ix, iy);
+			cout << " ";
+		}
+	}
+	
+	//========== NOI DUNG ==========
+	SetColor(15);	//15: chu mau trang
+	gotoXY(x + 1, y + 1);
+	cout << nd;
+	
+	//========== VE VIEN ==========
+	textcolor(1);
+	SetColor(t_color);
+	//ke ngang
+	if(h <= 1 || w <= 1) return;
+	for(int ix = x; ix <= x + w; ix++){
+		gotoXY(ix, y + h);
+		cout << char(196);
+	}
+	//ke doc
+	for(int iy = y; iy <= y + h; iy++){
+		gotoXY(x, iy);
+		cout << char(179);	//179: ke doc
+		gotoXY(x + w, iy);
+		cout << char(179);
+	}
+	gotoXY(x, y + h);
+	cout << char(192);	//192: goc tren ben phai
+	gotoXY(x + w, y + h);
+	cout << char(217);	//217: goc tren ben phai	
+}
+
+int menuMain(int x, int y, int w, int h){
+    int xp = x;     //xp, yp: toa do thanh sang
+    int yp = y;     //xcu, ycu: toa do cu
+    int xcu = xp;
+    int ycu = yp;
+    
+    bool kt = true; //kt: dam bam hay chua (true: bam r, false: chua bam)
+
+    ShowCur(0);
+    while(true){
+        if(kt == true){
+            gotoXY(xcu, ycu);
+            if(ycu == 5) thanhSang(xcu, ycu, w, h, 1, "            ADMIN");
+            if(ycu == 7) thanhSang(xcu, ycu, w, h, 1, "            USER");
+            xcu = xp;
+            ycu = yp;
+            if(ycu == 5) thanhSang(xp, yp, w, h, 150, "            ADMIN"); //reset thanh sang cu
+            if(ycu == 7) thanhSang(xp, yp, w, h, 150, "            USER");
+            kt = false;
+        }
+
+        if(_kbhit()){
+            char c = getch();
+            
+            if(c == -32){
+                kt = true;
+                c = getch();    
+                if(c == 72 && yp != y){   
+                    yp -= 2;
+                }else if(c == 72 && yp == y){
+                    yp = y + h * (2 - 1) ;
+                }else if(c == 80  && yp != y + h * (2 - 1)){
+                    yp += 2;
+                }else if(c == 80  && yp == y + h * (2 - 1)){
+                    yp = y;
+                } 
+            }else if(c == 13){
+                kt = false;
+                return yp;
+            }
+        }   
+    }
+}
+
 #endif
