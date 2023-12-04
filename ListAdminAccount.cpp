@@ -1,9 +1,3 @@
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<conio.h>
-#include<limits>
-using namespace std;
 #include "ListAdminAccount.h"
 
 #ifndef LISTADMINACCOUNT_CPP

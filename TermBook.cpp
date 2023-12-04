@@ -1,10 +1,3 @@
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<conio.h>
-#include<cctype>
-#include<map>
-using namespace std;
 #include "TermBook.h"
 
 #ifndef TERMBOOK_CPP

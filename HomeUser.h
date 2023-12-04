@@ -12,7 +12,7 @@ using namespace std;
 #define HOMEUSER_H
 
 void homeUser(const Date &currentDate);
-void log(Account &user, ListUserAccount &listUser);
+void log(Account &user, ListUserAccount &listUser, TermBook &termBook, ListTermBook &listTermBook, NonTermBook &nonTermBook, ListNonTermBook &listNonTermBook, const Date &currentDate);
 void menuUser(Account &user, ListUserAccount &listUser, TermBook &termBook, ListTermBook &listTermBook, NonTermBook &nonTermBook, ListNonTermBook &listNonTermBook, const Date &currentDate);
 
 #endif

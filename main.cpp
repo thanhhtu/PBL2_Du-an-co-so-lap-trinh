@@ -2,14 +2,13 @@
 #include<string>
 #include<fstream>
 #include<conio.h>
-#include<limits.h>
+#include<windows.h>
+#include<limits>
 using namespace std;
 #include "HomeUser.cpp"
 #include "HomeAdmin.cpp" 
 #include "Date.cpp"
 
-//text: 15 white, 14: yellow, 12: red, 72: gray (setcolor), 11: light blue
-//bg: 100: yellow, 150: blue, 177 - 180: light blue, 120 - 140: light gray
 int main(){
     title();
     ShowCur(0);
@@ -67,7 +66,5 @@ int main(){
             homeUser(currentDate);
             break;
     }
-
-
     return 0;
 }

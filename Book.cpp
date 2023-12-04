@@ -1,9 +1,3 @@
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<conio.h>
-#include<cctype>
-using namespace std;
 #include "Book.h"
 
 #ifndef BOOK_CPP

@@ -164,7 +164,7 @@ MENU:
             break;            
 
         case y + 6:
-            gotoXY(x + 25, y + 14); cout << "GOODBYE! SEE YOU AGAIN!";
+            gotoXY(x + 20, y + 10); cout << "GOODBYE! SEE YOU AGAIN!";
             exit(1);
     }
 }

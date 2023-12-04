@@ -1,8 +1,3 @@
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<conio.h>
-using namespace std;
 #include "ListUserAccount.h"
 
 #ifndef LISTUSERACCOUNT_CPP
@@ -183,6 +178,7 @@ INFOR:
     this->insertLast(user);
     
     this->saveUsers();
+    return;
 }
 
 bool ListUserAccount::checkSignIn(Account &user, const string &username, const string &password){

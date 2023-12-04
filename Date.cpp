@@ -1,11 +1,4 @@
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<conio.h>
-#include<iomanip>
-#include<stdexcept>
 #include "Date.h"
-using namespace std;
 
 #ifndef DATE_CPP
 #define DATE_CPP

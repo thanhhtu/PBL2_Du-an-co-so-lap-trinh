@@ -18,12 +18,10 @@ void homeUser(const Date &currentDate){
     listNonTermBook.setNonTermBooks();
     
     //dang ky, dang nhap
-    log(user, listUser);
-    
-    menuUser(user, listUser, termBook, listTermBook, nonTermBook, listNonTermBook, currentDate);
+    log(user, listUser, termBook, listTermBook, nonTermBook, listNonTermBook, currentDate);
 }
 
-void log(Account &user, ListUserAccount &listUser){
+void log(Account &user, ListUserAccount &listUser, TermBook &termBook, ListTermBook &listTermBook, NonTermBook &nonTermBook, ListNonTermBook &listNonTermBook, const Date &currentDate){
     ShowCur(0);
     system("cls");
 
@@ -66,10 +64,14 @@ void log(Account &user, ListUserAccount &listUser){
         case y:
             textcolor(1);
             listUser.signUp(user);
+            system("cls");    
+            menuUser(user, listUser, termBook, listTermBook, nonTermBook, listNonTermBook, currentDate);
             break;
         case y + 2: 
             textcolor(1);
             listUser.signIn(user);
+            system("cls"); 
+            menuUser(user, listUser, termBook, listTermBook, nonTermBook, listNonTermBook, currentDate);
             break;
     }
 }
@@ -83,15 +85,15 @@ MENU:
     textcolor(15);
 
     const int x = 30, y = 5, w = 60, h = 2;
-    string text1 = "                 View personal information";
-    string text2 = "                   List all saving books";
-    string text3 = "                Open fixed-term saving books";
-    string text4 = "               Open saving books without term";
-    string text5 = "                 Withdraw money via ID book";
+    string text1 = "                View personal information";
+    string text2 = "                  List all saving books";
+    string text3 = "               Open fixed-term saving books";
+    string text4 = "              Open saving books without term";
+    string text5 = "                Withdraw money via ID book";
     string text6 = "                           Exit";
 
     box(x, y - 3, w, h, 14, 1, 14, "************************ USER MENU ************************");
-    box(x, y, w, h, 14, 1, 11, text1);
+    box(x, y, w, h, 14, 1, 15, text1);
     box(x, y + 2, w, h, 14, 1, 15, text2); 
     box(x, y + 4, w, h, 14, 1, 15, text3);
     box(x, y + 6, w, h, 14, 1, 15, text4);
@@ -163,38 +165,6 @@ MENU:
 			break;
 
         case y + 2:
-        OPENTERM:
-			system("cls");
-            fflush(stdin);
-            listTermBook.openTermBook(termBook, user, currentDate);
-
-			isContinue = toContinue();
-			if(isContinue == 1){
-				goto OPENTERM;
-			}
-			else if(isContinue == 2){
-				goto MENU;
-			}
-			
-            break;
-
-        case y + 4:
-        OPENNONTERM:
-			system("cls");
-            fflush(stdin);
-            listNonTermBook.openNonTermBook(nonTermBook, user, currentDate);
-
-			isContinue = toContinue();
-			if(isContinue == 1){
-				goto OPENNONTERM;
-			}
-			else if(isContinue == 2){
-				goto MENU;
-			}
-			
-            break;
-            
-        case y + 6:
         LIST:
             system("cls");
             fflush(stdin);
@@ -212,6 +182,38 @@ MENU:
 			
             break;
 
+        case y + 4:
+        OPENTERM:
+			system("cls");
+            fflush(stdin);
+            listTermBook.openTermBook(termBook, user, currentDate);
+
+			isContinue = toContinue();
+			if(isContinue == 1){
+				goto OPENTERM;
+			}
+			else if(isContinue == 2){
+				goto MENU;
+			}
+			
+            break;
+
+        case y + 6:
+        OPENNONTERM:
+			system("cls");
+            fflush(stdin);
+            listNonTermBook.openNonTermBook(nonTermBook, user, currentDate);
+
+			isContinue = toContinue();
+			if(isContinue == 1){
+				goto OPENNONTERM;
+			}
+			else if(isContinue == 2){
+				goto MENU;
+			}
+			
+            break;
+            
         case y + 8:
         WITHDRAW:	
 		    system("cls");
@@ -278,8 +280,10 @@ MENU:
                 goto MENU;
             }
 
+            break;
+            
         case y + 10:
-            gotoXY(x + 25, y + 14); cout << "GOODBYE! SEE YOU AGAIN!";
+            gotoXY(x + 20, y + 14); cout << "GOODBYE! SEE YOU AGAIN!";
             exit(1);
     }
 }

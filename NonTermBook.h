@@ -2,6 +2,8 @@
 #include<string>
 #include<fstream>
 #include<conio.h>
+#include<cctype>
+#include<map>
 using namespace std;
 #include "Book.cpp"
 #include "Date.cpp"

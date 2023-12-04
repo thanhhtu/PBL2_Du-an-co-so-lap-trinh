@@ -1,9 +1,3 @@
-#include<iostream>
-#include<string>
-#include<fstream>
-#include<conio.h>
-#include<map>
-using namespace std;
 #include "Account.h"
 
 #ifndef ACCOUNT_CPP
