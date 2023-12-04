@@ -109,40 +109,68 @@ void ListUserAccount::signUp(Account &user){
         cout << "Error: The ID has been already existed!\n";
     }
 
-    do{
-        cout << "Enter username: ";
-        getline(cin, tempUsername);
+    system("cls");
+    SetColor(15);
 
-        if(this->checkUsername(tempUsername)){
-            cout << "This username has been used. Please enter other username!\n\n";
-        }
+    int x = 30, y = 5, w = 45, h = 2;
+    box(x, y - 3, w, h, 14, 1, 14, "************* USER SIGN UP **************");
 
-    }while(this->checkUsername(tempUsername));
+    box(x, y, w, h, 15, 1, 15, " Username: ");
+    gotoXY(x + 12, y + 1); getline(cin, tempUsername);
 
-    cout << "Enter password: ";
-    enterPassword(tempPassword);
+    keDuoi(x, y + 2, w, h, 15, 1, 15, " Password: ");
+    gotoXY(x, y + 2); cout << char(195);   
+    gotoXY(x + w, y + 2); cout << char(180);   
+    gotoXY(x + 12, y + 2 + 1); enterPassword(tempPassword);
 
-    cout << "\n\nYour information \n";
+    if(this->checkUsername(tempUsername) == true){
+        gotoXY(x - 5, y + 6);
+        cout << "Error: This username has been used. Please enter other username!";
+        gotoXY(x - 5, y + 7);
+        SetColor(72);
+        system("pause");
+        system("cls");
+        this->signUp(user);        
+    }
 
-    cout << "Enter full name: ";
-    getline(cin, tempName);
+    system("cls");
+    x = 28, y = 5, w = 60, h = 2;
+INFOR:
+    box(x, y - 3, w, h, 14, 1, 14, "***************** USER INFORMATION FORM ******************");
 
-    do{
-        cout << "Enter identity card number: ";
-        getline(cin, tempIDCard);
+    box(x, y, w, h, 15, 1, 15, " Full name: ");
+    gotoXY(x + 13, y + 1); getline(cin, tempName);
 
-        if(this->checkIDCard(tempIDCard)){
-            cout << "The identity card number matches the registered account. Please re-enter!\n\n";
-        }
+    keDuoi(x, y + 2, w, h, 15, 1, 15, " Identity card number: ");
+    gotoXY(x, y + 2); cout << char(195);   
+    gotoXY(x + w, y + 2); cout << char(180);   
+    gotoXY(x + 24, y + 2 + 1); getline(cin, tempIDCard);
 
-    }while(this->checkIDCard(tempIDCard));
+    keDuoi(x, y + 4, w, h, 15, 1, 15, " Address: ");
+    gotoXY(x, y + 4); cout << char(195);   
+    gotoXY(x + w, y + 4); cout << char(180);   
+    gotoXY(x + 11, y + 4 + 1); getline(cin, tempAddress);
 
-    cout << "Enter your address: ";
-    getline(cin, tempAddress);
-    cout << "Enter your phone number: ";
-    enterNumber(tempTel);
-    
-    cout << "\nSign up successfully!\n";
+    keDuoi(x, y + 6, w, h, 15, 1, 15, " Phone number: ");
+    gotoXY(x, y + 6); cout << char(195);   
+    gotoXY(x + w, y + 6); cout << char(180);   
+    gotoXY(x + 16, y + 6 + 1); getline(cin, tempTel);
+
+    if(this->checkIDCard(tempIDCard) == true){
+        gotoXY(x - 5, y + 10);
+        cout << "Error: The identity card number matches the registered account. Please re-enter!";
+        gotoXY(x - 5, y + 11);
+        SetColor(72);
+        system("pause");
+        system("cls");
+        goto INFOR;  
+    }
+
+    gotoXY(x + 20, y + 10);
+    cout << "Sign in successfully!";
+    gotoXY(x + 17, y + 11);
+    SetColor(72);
+    system("pause");
 
     user.setID(tempID);
     user.setUsername(tempUsername);
@@ -169,18 +197,34 @@ bool ListUserAccount::checkSignIn(Account &user, const string &username, const s
 }
 
 void ListUserAccount::signIn(Account &user){
-    string tempUsername, tempPassword;
-    cout << "Enter your username: ";
-    getline(cin, tempUsername);
+    SetColor(15);
+    system("cls");
 
-    cout << "Enter your password: ";
-    enterPassword(tempPassword);
+    string tempUsername, tempPassword;
+    
+    int x = 30, y = 5, w = 40, h = 2;
+    box(x, y - 3, w, h, 14, 1, 14, "************* USER SIGN IN ************");
+    box(x, y, w, h, 15, 1, 15, " Username: ");
+    gotoXY(x + 12, y + 1); getline(cin, tempUsername); 
+    keDuoi(x, y + 2, w, h, 15, 1, 15, " Password: ");
+    gotoXY(x, y + 2); cout << char(195);   
+    gotoXY(x + w, y + 2); cout << char(180);   
+    gotoXY(x + 12, y + 2 + 1); enterPassword(tempPassword);
 
     if(this->checkSignIn(user, tempUsername, tempPassword) == false){
-        cout << "\nUsername or password is not correct! Please enter again!\n";
+        gotoXY(x - 5, y + 6);
+        cout << "Error: Username or password is not correct! Please enter again!";
+        gotoXY(x - 5, y + 7);
+        SetColor(72);
+        system("pause");
+        system("cls");
         this->signIn(user);
     }else{
-        cout << "\nSign in successfully!\n";
+        gotoXY(x + 9, y + 6);
+        cout << "Sign in successfully!\n";
+        gotoXY(x + 6, y + 7);
+        SetColor(72);
+        system("pause");
         return;
     }
 }

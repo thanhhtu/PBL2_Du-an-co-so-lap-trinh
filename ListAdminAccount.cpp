@@ -2,6 +2,7 @@
 #include<string>
 #include<fstream>
 #include<conio.h>
+#include<limits>
 using namespace std;
 #include "ListAdminAccount.h"
 
@@ -68,18 +69,37 @@ bool ListAdminAccount::checkSignIn(Account &admin, const string &username, const
 }
 
 void ListAdminAccount::signIn(Account &admin){
-    string tempUsername, tempPassword;
-    cout << "Enter your username: ";
-    cin >> tempUsername;
+    SetColor(15);
 
-    cout << "Enter your password: ";
-    enterPassword(tempPassword);
+    string tempUsername, tempPassword;
+
+    int x = 30, y = 5, w = 40, h = 2;
+    box(x, y - 3, w, h, 11, 1, 11, "************* ADMIN SIGN IN ************");
+
+    box(x, y, w, h, 15, 1, 15, " Username: ");
+    gotoXY(x + 12, y + 1); getline(cin, tempUsername);
+
+    keDuoi(x, y + 2, w, h, 15, 1, 15, " Password: ");
+    gotoXY(x, y + 2); cout << char(195);   
+    gotoXY(x + w, y + 2); cout << char(180);   
+    gotoXY(x + 12, y + 2 + 1); enterPassword(tempPassword);
+
+
 
     if(this->checkSignIn(admin, tempUsername, tempPassword) == false){
-        cout << "\nUsername or password is not correct! Please enter again!\n\n";
+        gotoXY(x - 5, y + 6);
+        cout << "Error: Username or password is not correct! Please enter again!";
+        gotoXY(x - 5, y + 7);
+        SetColor(72);
+        system("pause");
+        system("cls");
         this->signIn(admin);
     }else{
-        cout << "\nSign in successfully!\n";
+        gotoXY(x + 9, y + 6);
+        cout << "Sign in successfully!\n";
+        gotoXY(x + 6, y + 7);
+        SetColor(72);
+        system("pause");
         return;
     }
 }

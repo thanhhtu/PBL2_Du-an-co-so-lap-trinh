@@ -115,7 +115,7 @@ void enterNumber(string &number){
 	return;
 }
 
-void box(int x, int y, int w, int h, int t_color, int b_color, string nd){
+void box(int x, int y, int w, int h, int t_color, int b_color, int nd_color, string nd){
 	//========== BACKGROUNG ==========
 	textcolor(b_color);
 	for(int iy = y + 1; iy <= y + h - 1; iy++){
@@ -126,7 +126,7 @@ void box(int x, int y, int w, int h, int t_color, int b_color, string nd){
 	}
 	
 	//========== NOI DUNG ==========
-	SetColor(15);	//15: chu mau trang
+	SetColor(nd_color);	//15: chu mau trang
 	gotoXY(x + 1, y + 1);
 	cout << nd;
 	
@@ -159,7 +159,7 @@ void box(int x, int y, int w, int h, int t_color, int b_color, string nd){
 	cout << char(217);	//217: goc tren ben phai
 }
 
-void thanhSang(int x, int y, int w, int h, int b_color, string nd){
+void thanhSang(int x, int y, int w, int h, int b_color, int nd_color, string nd){
 	textcolor(b_color);
 	for(int iy = y + 1; iy <= y + h - 1; iy++){
 		for(int ix = x + 1; ix <= x + w - 1; ix++){
@@ -168,12 +168,12 @@ void thanhSang(int x, int y, int w, int h, int b_color, string nd){
 		}
 	}
 	
-	SetColor(15);	
+	SetColor(nd_color);	
 	gotoXY(x + 1, y + 1);
 	cout << nd;
 }
 
-void keDuoi(int x, int y, int w, int h, int t_color, int b_color, string nd){
+void keDuoi(int x, int y, int w, int h, int t_color, int b_color, int nd_color, string nd){
 	//========== BACKGROUNG ==========
 	textcolor(b_color);
 	for(int iy = y + 1; iy <= y + h - 1; iy++){
@@ -184,7 +184,7 @@ void keDuoi(int x, int y, int w, int h, int t_color, int b_color, string nd){
 	}
 	
 	//========== NOI DUNG ==========
-	SetColor(15);	//15: chu mau trang
+	SetColor(t_color);	//15: chu mau trang
 	gotoXY(x + 1, y + 1);
 	cout << nd;
 	
@@ -210,48 +210,26 @@ void keDuoi(int x, int y, int w, int h, int t_color, int b_color, string nd){
 	cout << char(217);	//217: goc tren ben phai	
 }
 
-int menuMain(int x, int y, int w, int h){
-    int xp = x;     //xp, yp: toa do thanh sang
-    int yp = y;     //xcu, ycu: toa do cu
-    int xcu = xp;
-    int ycu = yp;
-    
-    bool kt = true; //kt: dam bam hay chua (true: bam r, false: chua bam)
-
-    ShowCur(0);
-    while(true){
-        if(kt == true){
-            gotoXY(xcu, ycu);
-            if(ycu == 5) thanhSang(xcu, ycu, w, h, 1, "            ADMIN");
-            if(ycu == 7) thanhSang(xcu, ycu, w, h, 1, "            USER");
-            xcu = xp;
-            ycu = yp;
-            if(ycu == 5) thanhSang(xp, yp, w, h, 150, "            ADMIN"); //reset thanh sang cu
-            if(ycu == 7) thanhSang(xp, yp, w, h, 150, "            USER");
-            kt = false;
-        }
-
-        if(_kbhit()){
-            char c = getch();
-            
-            if(c == -32){
-                kt = true;
-                c = getch();    
-                if(c == 72 && yp != y){   
-                    yp -= 2;
-                }else if(c == 72 && yp == y){
-                    yp = y + h * (2 - 1) ;
-                }else if(c == 80  && yp != y + h * (2 - 1)){
-                    yp += 2;
-                }else if(c == 80  && yp == y + h * (2 - 1)){
-                    yp = y;
-                } 
-            }else if(c == 13){
-                kt = false;
-                return yp;
-            }
-        }   
-    }
+int move(int x, int y, int h, int &yp, int &kt, int soKhung){
+	if(_kbhit()){
+		char c = getch();
+		if(c == -32){
+			kt = true;
+			c = getch();    
+			if(c == 72 && yp != y){   
+				yp -= 2;
+			}else if(c == 72 && yp == y){
+				yp = y + h * (2 - 1) ;
+			}else if(c == 80  && yp != y + h * (soKhung - 1)){
+				yp += 2;
+			}else if(c == 80  && yp == y + h * (soKhung - 1)){
+				yp = y;
+			} 
+		}else if(c == 13){
+			kt = false;
+			return yp;
+		}
+	}   
 }
 
 #endif

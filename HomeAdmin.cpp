@@ -22,7 +22,6 @@ void homeAdmin(const Date &currentDate){
 
     //dang ky, dang nhap
     system("cls");
-    cout << "SIGN IN\n";
     listAdmin.signIn(admin);
 
     menuAdmin(user, listUser, termBook, listTermBook, nonTermBook, listNonTermBook, currentDate);
@@ -33,25 +32,61 @@ void menuAdmin(Account &user, ListUserAccount &listUser, TermBook &termBook, Lis
 
 MENU:
     system("cls");
-    float choice;
-    do{
-        cout << "MENU ADMIN\n";
-        cout << "1. List user account information.\n";
-        cout << "2. Look up user information via ID account.\n";
-        cout << "3. Delete a user account via ID account.\n";
-        cout << "4. Exit.\n";
+    SetColor(0);
+    textcolor(15);
 
-        cout << "Your choice: ";
-        cin >> choice;
-        cin.ignore();
-        
-        if(!(choice == int(choice) && choice >= 1 && choice <= 3)){
-            cout << "Invalid input!! Please choose again.\n" << endl;
-        }        
-    }while(!(choice == int(choice) && choice >= 1 && choice <= 3));
+    const int x = 30, y = 5, w = 60, h = 2;
+    string text1 = "               List user account information";
+    string text2 = "          Look up user information via ID account";
+    string text3 = "            Delete a user account via ID account";
+    string text4 = "                           Exit";
 
-    switch(int(choice)){
-        case 1:
+    box(x, y - 3, w, h, 11, 1, 11, "************************ ADMIN MENU ***********************");
+    box(x, y, w, h, 11, 1, 11, text1);
+    box(x, y + 2, w, h, 11, 1, 15, text2); 
+    box(x, y + 4, w, h, 11, 1, 15, text3);
+    box(x, y + 6, w, h, 11, 1, 15, text4);
+
+    gotoXY(x, y); cout << char(218);
+    gotoXY(x + w, y); cout << char(191);
+    gotoXY(x, y + 2); cout << char(195);
+    gotoXY(x + w, y + 2); cout << char(180); 
+    gotoXY(x, y + 4); cout << char(195);
+    gotoXY(x + w, y + 4); cout << char(180);
+    gotoXY(x, y + 6); cout << char(195);
+    gotoXY(x + w, y + 6); cout << char(180); 
+    
+    int xp = x;     //xp, yp: toa do thanh sang
+    int yp = y;     
+    int xcu, ycu;   //xcu, ycu: toa do cu
+    int check;
+    int kt = true;
+
+    while(true){
+        if(kt == true){
+            gotoXY(xcu, ycu);
+            if(ycu == y) thanhSang(xcu, ycu, w, h, 1, 15, text1);
+            if(ycu == y + 2) thanhSang(xcu, ycu, w, h, 1, 15, text2);
+            if(ycu == y + 4) thanhSang(xcu, ycu, w, h, 1, 15, text3);
+            if(ycu == y + 6) thanhSang(xcu, ycu, w, h, 1, 15, text4);            
+            xcu = xp;
+            ycu = yp;
+            if(ycu == y) thanhSang(xp, yp, w, h, 150, 15, text1); 
+            if(ycu == y + 2) thanhSang(xp, yp, w, h, 150, 15, text2);
+            if(ycu == y + 4) thanhSang(xp, yp, w, h, 150, 15, text3);
+            if(ycu == y + 6) thanhSang(xp, yp, w, h, 150, 15, text4);
+            kt = false;            
+        }
+        check = move(x, y, h, yp, kt, 4);
+        if(check == y || check == y + 2 || check == y + 4 || check == y + 6){
+            break;
+        }
+    }
+
+    SetColor(0);
+    textcolor(15);
+    switch(check){
+        case y:
         LISTACCOUNT:
 			system("cls");
             cout << "LIST OF USER ACCOUNT INFORMATION\n";
@@ -68,7 +103,7 @@ MENU:
 
 			break;
 
-        case 2:
+        case y + 2:
         FINDUSER:
 			system("cls");
             fflush(stdin);
@@ -84,7 +119,7 @@ MENU:
 			
             break;
 
-        case 3:
+        case y + 4:
         DELETEUSER:
 			system("cls");
             fflush(stdin);
@@ -127,5 +162,9 @@ MENU:
 			}
 			
             break;            
+
+        case y + 6:
+            gotoXY(x + 25, y + 14); cout << "GOODBYE! SEE YOU AGAIN!";
+            exit(1);
     }
 }

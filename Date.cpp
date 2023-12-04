@@ -124,28 +124,33 @@ istream &operator >> (istream &in, Date &dt) {
 
     do{
         SetColor(15);
-        cout << "                                  The last logged date: ";
+        gotoXY(29, 1);
+        cout << "     The last logged date: ";
         cout << setfill('0') << setw(2) << right << lastDate.day << "/" << setw(2) << right << lastDate.month << "/" << setw(4) << right << lastDate.year << setfill(' ') << endl;
-        box(30, 1, 40, 2, 15, 1, "      ENTER THE SYSTEM LOGIN DATE");
+        
+        int x = 30, y = 4, w = 40, h = 2;
+        box(x, y - 2, w, h, 15, 1, 15, "      ENTER THE SYSTEM LOGIN DATE");
 
-        keDuoi(30, 3, 40, 2, 15, 1, "Day: ");
-        gotoXY(30, 3); cout << char(195);    //displays '├'
-        gotoXY(70, 3); cout << char(180);    // displays '┤'
-        gotoXY(36, 4); in >> dt.day;
+        keDuoi(x, y, w, h, 15, 1, 15, " Day: ");
+        gotoXY(x, y); cout << char(195);    //displays '├'
+        gotoXY(x + w, y); cout << char(180);    // displays '┤'
+        gotoXY(x + 7, y + 1); in >> dt.day;
 
-        keDuoi(30, 5, 40, 2, 15, 1, "Month: ");
-        gotoXY(30, 5); cout << char(195);   
-        gotoXY(70, 5); cout << char(180);   
-        gotoXY(38, 6); in >> dt.month;
+        keDuoi(x, y + 2, w, h, 15, 1, 15, " Month: ");
+        gotoXY(x, y + 2); cout << char(195);   
+        gotoXY(x + w, y + 2); cout << char(180);   
+        gotoXY(x + 9, y + 2 + 1); in >> dt.month;
 
-        keDuoi(30, 7, 40, 2, 15, 1, "Year: ");
-        gotoXY(37, 8); in >> dt.year;
+        keDuoi(x, y + 4, w, h, 15, 1, 15, " Year: ");
+        gotoXY(x, y + 4); cout << char(195);   
+        gotoXY(x + w, y + 4); cout << char(180);   
+        gotoXY(x + 8, y + 4 + 1); in >> dt.year;
 
         if(!dt.isValid() || dt.dateCompare(lastDate) < 0){
-            gotoXY(27, 11);
+            gotoXY(x - 5, y + 8);
             cout << "Error: Invalid date or date before the last entry date!\n";
             if(!dt.isValid() || dt.dateCompare(lastDate) < 0){
-                gotoXY(27,12);
+                gotoXY(x - 5, y + 9);
                 SetColor(72);
                 system("pause");
                 system("cls");

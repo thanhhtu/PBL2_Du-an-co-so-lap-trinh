@@ -2,46 +2,72 @@
 #include<string>
 #include<fstream>
 #include<conio.h>
+#include<limits.h>
 using namespace std;
 #include "HomeUser.cpp"
-#include "HomeAdmin.cpp"
+#include "HomeAdmin.cpp" 
 #include "Date.cpp"
 
+//text: 15 white, 14: yellow, 12: red, 72: gray (setcolor), 11: light blue
+//bg: 100: yellow, 150: blue, 177 - 180: light blue, 120 - 140: light gray
 int main(){
     title();
+    ShowCur(0);
     system("cls");
-    
+
     Date currentDate;
 	cin >> currentDate;
+    system("cls");
 
-    ShowCur(0);
-    while (true)
-    {
-        system("cls");
-        box(30, 2, 30, 2, 15, 1, "           YOU ARE");
-        box(30, 5, 30, 2, 11, 1, "             ADMIN");
-        gotoXY(30, 5); cout << char(218);
-        gotoXY(60, 5); cout << char(191);
+    const int x = 33, y = 5, w = 30, h = 2;
+    string text1 = "            ADMIN";
+    string text2 = "            USER";
 
-        box(30, 7, 30, 2, 11, 1, "            USER");
-        gotoXY(30, 7); cout << char(195);
-        gotoXY(60, 7); cout << char(180);
-        
-        int check = menuMain(30, 5, 30, 2);  //menuMain trong file Menu
-        char c;   
-        bool exitLoop = false;
+    box(x, y - 3, w, h, 12, 14, 12, "********** YOU ARE **********");
+    box(x, y, w, h, 15, 1, 15, text1);
+    box(x, y + 2, w, h, 15, 1, 15, text2);
 
-        switch(check){
-            case 5:
-                textcolor(1);
-                homeAdmin(currentDate);
-                break;
-            case 7: 
-                textcolor(1);
-                homeUser(currentDate);
-                break;
+    gotoXY(x, y); cout << char(218);
+    gotoXY(x + w, y); cout << char(191);
+    gotoXY(x, y + 2); cout << char(195);
+    gotoXY(x + w, y + 2); cout << char(180);
+    
+    int xp = x;     //xp, yp: toa do thanh sang
+    int yp = y;     
+    int xcu, ycu;   //xcu, ycu: toa do cu
+    int check;
+    int kt = true;
+
+    while(true){
+        if(kt == true){
+            gotoXY(xcu, ycu);
+            if(ycu == y) thanhSang(xcu, ycu, w, h, 1, 15, text1);
+            if(ycu == y + 2) thanhSang(xcu, ycu, w, h, 1, 15, text2);
+            xcu = xp;
+            ycu = yp;
+            if(ycu == y) thanhSang(xp, yp, w, h, 78, 15, text1); //reset thanh sang cu
+            if(ycu == y + 2) thanhSang(xp, yp, w, h, 78, 15, text2);
+            kt = false;            
+        }
+        check = move(x, y, h, yp, kt, 2);
+        if(check == y || check == y + 2){
+            break;
         }
     }
+
+    switch(check){
+        case y:
+            textcolor(1);
+            cin.ignore();
+            homeAdmin(currentDate);
+            break;
+        case y + 2: 
+            textcolor(1);
+            cin.ignore();
+            homeUser(currentDate);
+            break;
+    }
+
 
     return 0;
 }
