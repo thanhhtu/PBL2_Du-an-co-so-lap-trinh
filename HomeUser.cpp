@@ -22,14 +22,14 @@ void homeUser(const Date &currentDate){
 }
 
 void log(Account &user, ListUserAccount &listUser, TermBook &termBook, ListTermBook &listTermBook, NonTermBook &nonTermBook, ListNonTermBook &listNonTermBook, const Date &currentDate){
-    ShowCur(0);
     system("cls");
+    ShowCur(0);
 
-    const int x = 33, y = 5, w = 30, h = 2;
+    const int x = 45, y = 5, w = 30, h = 2;
     string text1 = "           Sign up";
     string text2 = "           Sign in";
 
-    box(x, y - 3, w, h, 14, 1, 14, "======= USER INTERFACE =======");
+    box(x, y - 3, w, h, 14, 1, 14, "******* USER INTERFACE *******");
     box(x, y, w, h, 14, 1, 15, text1);
     gotoXY(x, y); cout << char(218);
     gotoXY(x + w, y); cout << char(191);
@@ -147,7 +147,7 @@ MENU:
     SetColor(0);
     textcolor(15);
     switch(check){
-        case y:
+        case y:{
         INFOR:
 			system("cls");
             cout << "YOUR INFORMATION\n";
@@ -162,9 +162,10 @@ MENU:
 				goto MENU;
 			}
 
-			break;
+			break;            
+        }
 
-        case y + 2:
+        case y + 2:{
         LIST:
             system("cls");
             fflush(stdin);
@@ -180,9 +181,10 @@ MENU:
 				goto MENU;
 			}
 			
-            break;
+            break;            
+        }
 
-        case y + 4:
+        case y + 4:{
         OPENTERM:
 			system("cls");
             fflush(stdin);
@@ -196,9 +198,10 @@ MENU:
 				goto MENU;
 			}
 			
-            break;
+            break;            
+        }
 
-        case y + 6:
+        case y + 6:{
         OPENNONTERM:
 			system("cls");
             fflush(stdin);
@@ -212,9 +215,10 @@ MENU:
 				goto MENU;
 			}
 			
-            break;
+            break;            
+        }
             
-        case y + 8:
+        case y + 8:{
         WITHDRAW:	
 		    system("cls");
             fflush(stdin);
@@ -280,10 +284,12 @@ MENU:
                 goto MENU;
             }
 
-            break;
+            break;            
+        }
             
-        case y + 10:
+        case y + 10:{
             gotoXY(x + 20, y + 14); cout << "GOODBYE! SEE YOU AGAIN!";
-            exit(1);
+            exit(1);            
+        }
     }
 }

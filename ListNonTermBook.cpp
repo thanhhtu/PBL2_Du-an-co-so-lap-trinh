@@ -122,6 +122,9 @@ NonTermBook* ListNonTermBook::findBookByID(const string &IDBook) const{
 
 void ListNonTermBook::removeBookByIDBook(const string &IDBook){
     Node<NonTermBook> *current = this->head;
+    if(current == NULL){
+        return;
+    }
     while(current != NULL){
         if(current->data.getIDBook() == IDBook){
             this->remove(current);
@@ -135,6 +138,9 @@ void ListNonTermBook::removeBookByIDBook(const string &IDBook){
 
 void ListNonTermBook::removeBookByID(const string &ID){
     Node<NonTermBook> *current = this->head;
+    if(current == NULL){
+        return;
+    }
     while(current != NULL){
         if(current->data.getID() == ID){
             this->remove(current);

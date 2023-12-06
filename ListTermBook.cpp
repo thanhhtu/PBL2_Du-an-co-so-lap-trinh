@@ -149,6 +149,9 @@ TermBook* ListTermBook::findBookByID(const string &IDBook) const{
 
 void ListTermBook::removeBookByIDBook(const string &IDBook){
     Node<TermBook> *current = this->head;
+    if(current == NULL){
+        return;
+    }
     while(current != NULL){
         if(current->data.getIDBook() == IDBook){
             this->remove(current);
@@ -162,6 +165,9 @@ void ListTermBook::removeBookByIDBook(const string &IDBook){
 
 void ListTermBook::removeBookByID(const string &ID){
     Node<TermBook> *current = this->head;
+    if(current == NULL){
+        return;
+    }
     while(current != NULL){
         if(current->data.getID() == ID){
             this->remove(current);

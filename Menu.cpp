@@ -62,6 +62,25 @@ int toContinue(){
 	}
 }
 
+int toContinue1(int x, int y){
+	SetColor(72);
+	gotoXY(x, y); cout << " Press [ESC] to go back to MENU...";
+	gotoXY(x, y + 1); cout << "Press any key to exit the program...";
+
+	char c = getch();
+	if(c == 27){
+		return 1;
+	}else{
+		SetColor(15);
+		textcolor(0);
+		system("cls");
+		gotoXY(x + 20, y + 10); cout << "GOODBYE! SEE YOU AGAIN!";
+		exit(1);
+		return 2;
+	}
+}
+
+
 /* 
 	MO TA HINH THUC:
 	Khi user nhap them 1 ky tu vao temp_password thi tren man hinh console xuat hien 1 dau *.

@@ -13,12 +13,12 @@ int main(){
     title();
     ShowCur(0);
     system("cls");
-
+ 
     Date currentDate;
 	cin >> currentDate;
     system("cls");
 
-    const int x = 33, y = 5, w = 30, h = 2;
+    const int x = 45, y = 5, w = 30, h = 2;
     string text1 = "            ADMIN";
     string text2 = "            USER";
 
@@ -55,16 +55,19 @@ int main(){
     }
 
     switch(check){
-        case y:
+        case y:{
             textcolor(1);
             cin.ignore();
             homeAdmin(currentDate);
-            break;
-        case y + 2: 
+            break;            
+        }
+        case y + 2:{
+            system("cls");
             textcolor(1);
             cin.ignore();
             homeUser(currentDate);
-            break;
+            break;            
+        } 
     }
     return 0;
 }

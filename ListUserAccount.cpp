@@ -107,7 +107,7 @@ void ListUserAccount::signUp(Account &user){
     system("cls");
     SetColor(15);
 
-    int x = 30, y = 5, w = 45, h = 2;
+    int x = 35, y = 5, w = 45, h = 2;
     box(x, y - 3, w, h, 14, 1, 14, "************* USER SIGN UP **************");
 
     box(x, y, w, h, 15, 1, 15, " Username: ");
@@ -129,7 +129,7 @@ void ListUserAccount::signUp(Account &user){
     }
 
     system("cls");
-    x = 28, y = 5, w = 60, h = 2;
+    x = 30, y = 5, w = 60, h = 2;
 INFOR:
     box(x, y - 3, w, h, 14, 1, 14, "***************** USER INFORMATION FORM ******************");
 
@@ -193,12 +193,12 @@ bool ListUserAccount::checkSignIn(Account &user, const string &username, const s
 }
 
 void ListUserAccount::signIn(Account &user){
-    SetColor(15);
     system("cls");
+    SetColor(15);
 
     string tempUsername, tempPassword;
     
-    int x = 30, y = 5, w = 40, h = 2;
+    int x = 40, y = 5, w = 40, h = 2;
     box(x, y - 3, w, h, 14, 1, 14, "************* USER SIGN IN ************");
     box(x, y, w, h, 15, 1, 15, " Username: ");
     gotoXY(x + 12, y + 1); getline(cin, tempUsername); 
@@ -245,6 +245,9 @@ void ListUserAccount::getUserInforByID(){
 
 void ListUserAccount::removeUserByID(const string &ID){
     Node<Account> *current = this->head;
+    if(current == NULL){
+        return;
+    }
     while(current != NULL){
         if(current->data.getID() == ID){
             this->remove(current);

@@ -117,11 +117,11 @@ istream &operator >> (istream &in, Date &dt) {
 
     do{
         SetColor(15);
-        gotoXY(29, 1);
-        cout << "     The last logged date: ";
+        gotoXY(43, 1);
+        cout << " The last logged date: ";
         cout << setfill('0') << setw(2) << right << lastDate.day << "/" << setw(2) << right << lastDate.month << "/" << setw(4) << right << lastDate.year << setfill(' ') << endl;
         
-        int x = 30, y = 4, w = 40, h = 2;
+        int x = 40, y = 4, w = 40, h = 2;
         box(x, y - 2, w, h, 15, 1, 15, "      ENTER THE SYSTEM LOGIN DATE");
 
         keDuoi(x, y, w, h, 15, 1, 15, " Day: ");

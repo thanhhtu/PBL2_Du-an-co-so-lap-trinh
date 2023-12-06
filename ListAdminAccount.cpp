@@ -63,11 +63,12 @@ bool ListAdminAccount::checkSignIn(Account &admin, const string &username, const
 }
 
 void ListAdminAccount::signIn(Account &admin){
+    system("cls");
     SetColor(15);
 
     string tempUsername, tempPassword;
 
-    int x = 30, y = 5, w = 40, h = 2;
+    int x = 40, y = 5, w = 40, h = 2;
     box(x, y - 3, w, h, 11, 1, 11, "************* ADMIN SIGN IN ************");
 
     box(x, y, w, h, 15, 1, 15, " Username: ");
@@ -77,8 +78,6 @@ void ListAdminAccount::signIn(Account &admin){
     gotoXY(x, y + 2); cout << char(195);   
     gotoXY(x + w, y + 2); cout << char(180);   
     gotoXY(x + 12, y + 2 + 1); enterPassword(tempPassword);
-
-
 
     if(this->checkSignIn(admin, tempUsername, tempPassword) == false){
         gotoXY(x - 5, y + 6);
