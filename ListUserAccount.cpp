@@ -113,7 +113,7 @@ void ListUserAccount::signUp(Account &user){
     box(x, y, w, h, 15, 1, 15, " Username: ");
     gotoXY(x + 12, y + 1); getline(cin, tempUsername);
 
-    keDuoi(x, y + 2, w, h, 15, 1, 15, " Password: ");
+    box(x, y + 2, w, h, 15, 1, 15, " Password: ");
     gotoXY(x, y + 2); cout << char(195);   
     gotoXY(x + w, y + 2); cout << char(180);   
     gotoXY(x + 12, y + 2 + 1); enterPassword(tempPassword);
@@ -128,25 +128,25 @@ void ListUserAccount::signUp(Account &user){
         this->signUp(user);        
     }
 
+INFOR:
     system("cls");
     x = 30, y = 5, w = 60, h = 2;
-INFOR:
     box(x, y - 3, w, h, 14, 1, 14, "***************** USER INFORMATION FORM ******************");
 
     box(x, y, w, h, 15, 1, 15, " Full name: ");
     gotoXY(x + 13, y + 1); getline(cin, tempName);
 
-    keDuoi(x, y + 2, w, h, 15, 1, 15, " Identity card number: ");
+    box(x, y + 2, w, h, 15, 1, 15, " ID card number: ");
     gotoXY(x, y + 2); cout << char(195);   
     gotoXY(x + w, y + 2); cout << char(180);   
     gotoXY(x + 24, y + 2 + 1); getline(cin, tempIDCard);
 
-    keDuoi(x, y + 4, w, h, 15, 1, 15, " Address: ");
+    box(x, y + 4, w, h, 15, 1, 15, " Address: ");
     gotoXY(x, y + 4); cout << char(195);   
     gotoXY(x + w, y + 4); cout << char(180);   
     gotoXY(x + 11, y + 4 + 1); getline(cin, tempAddress);
 
-    keDuoi(x, y + 6, w, h, 15, 1, 15, " Phone number: ");
+    box(x, y + 6, w, h, 15, 1, 15, " Phone number: ");
     gotoXY(x, y + 6); cout << char(195);   
     gotoXY(x + w, y + 6); cout << char(180);   
     gotoXY(x + 16, y + 6 + 1); getline(cin, tempTel);
@@ -202,7 +202,7 @@ void ListUserAccount::signIn(Account &user){
     box(x, y - 3, w, h, 14, 1, 14, "************* USER SIGN IN ************");
     box(x, y, w, h, 15, 1, 15, " Username: ");
     gotoXY(x + 12, y + 1); getline(cin, tempUsername); 
-    keDuoi(x, y + 2, w, h, 15, 1, 15, " Password: ");
+    box(x, y + 2, w, h, 15, 1, 15, " Password: ");
     gotoXY(x, y + 2); cout << char(195);   
     gotoXY(x + w, y + 2); cout << char(180);   
     gotoXY(x + 12, y + 2 + 1); enterPassword(tempPassword);

@@ -39,14 +39,10 @@ MENU:
     box(x, y + 4, w, h, 11, 1, 15, text3);
     box(x, y + 6, w, h, 11, 1, 15, text4);
 
-    gotoXY(x, y); cout << char(218);
-    gotoXY(x + w, y); cout << char(191);
-    gotoXY(x, y + 2); cout << char(195);
-    gotoXY(x + w, y + 2); cout << char(180); 
-    gotoXY(x, y + 4); cout << char(195);
-    gotoXY(x + w, y + 4); cout << char(180);
-    gotoXY(x, y + 6); cout << char(195);
-    gotoXY(x + w, y + 6); cout << char(180); 
+    for(int i = 1; i < 4; i++){
+        gotoXY(x, y + 2 * i); cout << char(195);
+        gotoXY(x + w, y + 2 * i); cout << char(180);
+    }
     
     int xp = x;     //xp, yp: toa do thanh sang
     int yp = y;     
@@ -131,8 +127,6 @@ MENU:
             box(xx, yy, ww, hh, 15, 1, 15, text1);
             box(xx, yy + 2, ww, hh, 15, 1, 15, text2);
 
-            gotoXY(xx, yy); cout << char(218);
-            gotoXY(xx + ww, yy); cout << char(191);
             gotoXY(xx, yy + 2); cout << char(195);
             gotoXY(xx + ww, yy + 2); cout << char(180);     
 

@@ -28,11 +28,8 @@ void log(Account &user, ListUserAccount &listUser, TermBook &termBook, ListTermB
     const int x = 45, y = 5, w = 30, h = 2;
     string text1 = "           Sign up";
     string text2 = "           Sign in";
-
     box(x, y - 3, w, h, 14, 1, 14, "******* USER INTERFACE *******");
     box(x, y, w, h, 14, 1, 15, text1);
-    gotoXY(x, y); cout << char(218);
-    gotoXY(x + w, y); cout << char(191);
     box(x, y + 2, w, h, 14, 1, 15, text2);
     gotoXY(x, y + 2); cout << char(195);
     gotoXY(x + w, y + 2); cout << char(180);
@@ -100,18 +97,10 @@ MENU:
     box(x, y + 8, w, h, 14, 1, 15, text5);
     box(x, y + 10, w, h, 14, 1, 15, text6);
 
-    gotoXY(x, y); cout << char(218);
-    gotoXY(x + w, y); cout << char(191);
-    gotoXY(x, y + 2); cout << char(195);
-    gotoXY(x + w, y + 2); cout << char(180);
-    gotoXY(x, y + 4); cout << char(195);
-    gotoXY(x + w, y + 4); cout << char(180);
-    gotoXY(x, y + 6); cout << char(195);
-    gotoXY(x + w, y + 6); cout << char(180); 
-    gotoXY(x, y + 8); cout << char(195);
-    gotoXY(x + w, y + 8); cout << char(180); 
-    gotoXY(x, y + 10); cout << char(195);
-    gotoXY(x + w, y + 10); cout << char(180); 
+    for(int i = 1; i < 6; i++){
+        gotoXY(x, y + 2 * i); cout << char(195);
+        gotoXY(x + w, y + 2 * i); cout << char(180);
+    }
     
     int xp = x;     //xp, yp: toa do thanh sang
     int yp = y;     

@@ -17,4 +17,3 @@ void homeAdmin(const Date &currentDate);
 void menuAdmin(Account &admin, ListAdminAccount &listAdmin, Account &user, ListUserAccount &listUser, TermBook &termBook, ListTermBook &listTermBook, NonTermBook &nonTermBook, ListNonTermBook &listNonTermBook, const Date &currentDate);
 
 #endif
-

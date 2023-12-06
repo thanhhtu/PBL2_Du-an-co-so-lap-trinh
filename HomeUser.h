@@ -16,4 +16,3 @@ void log(Account &user, ListUserAccount &listUser, TermBook &termBook, ListTermB
 void menuUser(Account &user, ListUserAccount &listUser, TermBook &termBook, ListTermBook &listTermBook, NonTermBook &nonTermBook, ListNonTermBook &listNonTermBook, const Date &currentDate);
 
 #endif
-

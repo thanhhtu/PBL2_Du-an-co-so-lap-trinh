@@ -38,4 +38,3 @@ class ListUserAccount : public List<Account>{
 };
 
 #endif
-

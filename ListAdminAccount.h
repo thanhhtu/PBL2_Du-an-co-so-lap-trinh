@@ -26,4 +26,3 @@ class ListAdminAccount : public List<Account>{
 };
 
 #endif
-

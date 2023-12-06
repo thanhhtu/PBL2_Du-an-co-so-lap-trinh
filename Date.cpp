@@ -124,17 +124,17 @@ istream &operator >> (istream &in, Date &dt) {
         int x = 40, y = 4, w = 40, h = 2;
         box(x, y - 2, w, h, 15, 1, 15, "      ENTER THE SYSTEM LOGIN DATE");
 
-        keDuoi(x, y, w, h, 15, 1, 15, " Day: ");
+        box(x, y, w, h, 15, 1, 15, " Day: ");
         gotoXY(x, y); cout << char(195);    //displays '├'
         gotoXY(x + w, y); cout << char(180);    // displays '┤'
         gotoXY(x + 7, y + 1); in >> dt.day;
 
-        keDuoi(x, y + 2, w, h, 15, 1, 15, " Month: ");
+        box(x, y + 2, w, h, 15, 1, 15, " Month: ");
         gotoXY(x, y + 2); cout << char(195);   
         gotoXY(x + w, y + 2); cout << char(180);   
         gotoXY(x + 9, y + 2 + 1); in >> dt.month;
 
-        keDuoi(x, y + 4, w, h, 15, 1, 15, " Year: ");
+        box(x, y + 4, w, h, 15, 1, 15, " Year: ");
         gotoXY(x, y + 4); cout << char(195);   
         gotoXY(x + w, y + 4); cout << char(180);   
         gotoXY(x + 8, y + 4 + 1); in >> dt.year;

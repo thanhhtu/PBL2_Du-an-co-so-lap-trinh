@@ -187,43 +187,6 @@ void thanhSang(int x, int y, int w, int h, int b_color, int nd_color, string nd)
 	cout << nd;
 }
 
-void keDuoi(int x, int y, int w, int h, int t_color, int b_color, int nd_color, string nd){
-	//========== BACKGROUNG ==========
-	textcolor(b_color);
-	for(int iy = y + 1; iy <= y + h - 1; iy++){
-		for(int ix = x + 1; ix <= x + w - 1; ix++){
-			gotoXY(ix, iy);
-			cout << " ";
-		}
-	}
-	
-	//========== NOI DUNG ==========
-	SetColor(t_color);	//15: chu mau trang
-	gotoXY(x + 1, y + 1);
-	cout << nd;
-	
-	//========== VE VIEN ==========
-	textcolor(1);
-	SetColor(t_color);
-	//ke ngang
-	if(h <= 1 || w <= 1) return;
-	for(int ix = x; ix <= x + w; ix++){
-		gotoXY(ix, y + h);
-		cout << char(196);
-	}
-	//ke doc
-	for(int iy = y; iy <= y + h; iy++){
-		gotoXY(x, iy);
-		cout << char(179);	//179: ke doc
-		gotoXY(x + w, iy);
-		cout << char(179);
-	}
-	gotoXY(x, y + h);
-	cout << char(192);	//192: goc tren ben phai
-	gotoXY(x + w, y + h);
-	cout << char(217);	//217: goc tren ben phai	
-}
-
 int move(int x, int y, int h, int &yp, int &kt, int soKhung){
 	if(_kbhit()){
 		char c = getch();

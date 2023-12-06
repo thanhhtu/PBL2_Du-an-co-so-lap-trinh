@@ -74,7 +74,7 @@ void ListAdminAccount::signIn(Account &admin){
     box(x, y, w, h, 15, 1, 15, " Username: ");
     gotoXY(x + 12, y + 1); getline(cin, tempUsername);
 
-    keDuoi(x, y + 2, w, h, 15, 1, 15, " Password: ");
+    box(x, y + 2, w, h, 15, 1, 15, " Password: ");
     gotoXY(x, y + 2); cout << char(195);   
     gotoXY(x + w, y + 2); cout << char(180);   
     gotoXY(x + 12, y + 2 + 1); enterPassword(tempPassword);
