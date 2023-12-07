@@ -28,7 +28,7 @@ MENU:
     textcolor(15);
 
     const int x = 45, y = 5, w = 60, h = 2;
-    string text1 = "               List user account information";
+    string text1 = "             List all user information accounts";
     string text2 = "          Look up user information via account ID";
     string text3 = "            Delete a user account via account ID";
     string text4 = "                           Exit";
