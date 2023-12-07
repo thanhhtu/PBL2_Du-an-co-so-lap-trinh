@@ -29,8 +29,8 @@ MENU:
 
     const int x = 30, y = 5, w = 60, h = 2;
     string text1 = "               List user account information";
-    string text2 = "          Look up user information via ID account";
-    string text3 = "            Delete a user account via ID account";
+    string text2 = "          Look up user information via account ID";
+    string text3 = "            Delete a user account via account ID";
     string text4 = "                           Exit";
 
     box(x, y - 3, w, h, 11, 1, 11, "************************ ADMIN MENU ***********************");
@@ -75,7 +75,7 @@ MENU:
     textcolor(15);
     switch(check){
         case y:{
-        LISTACCOUNT:
+        LISTUSER:
 			system("cls");
             cout << "LIST OF USER ACCOUNT INFORMATION\n";
             fflush(stdin);
@@ -83,7 +83,7 @@ MENU:
 
 			isContinue = toContinue();
 			if(isContinue == 1){
-				goto LISTACCOUNT;
+				goto LISTUSER;
 			}
 			else if(isContinue == 2){
 				goto MENU;
@@ -96,16 +96,34 @@ MENU:
         FINDUSER:
 			system("cls");
             fflush(stdin);
-            listUser.getUserInforByID();
 
-			isContinue = toContinue();
-			if(isContinue == 1){
-				goto FINDUSER;
-			}
-			else if(isContinue == 2){
-				goto MENU;
-			}
-			
+            const int x = 30, y = 5, w = 60, h = 2;
+            box(x, y - 3, w, h, 11, 1, 11, "********* LOOK UP USER INFORMATION VIA ACCOUNT ID *********");
+            
+            box(x, y, w, h, 15, 1, 15, "      Enter the account ID: ");
+            string ID;
+            gotoXY(x + 33, y + 1); getline(cin, ID);
+            if(ID[0] != 'U' || ID[1] != 'S' || ID[2] != 'E' || ID[3] != 'R'){
+                gotoXY(x + 20, y + 4); cout << "Error: Invalid ID code! Please enter again!";
+                SetColor(72);
+                gotoXY(x + 19, y + 5);
+                system("pause");
+                goto FINDUSER;
+            }
+
+            listUser.getUserInforByID(ID, x + 10, y + 3, w - 20, h);
+
+            if(listUser.checkID(ID) == true){
+                isContinue = toContinue1(x + 13, y + 17);
+                if(isContinue == 1){
+                    goto MENU;
+                }
+            }else{
+                isContinue = toContinue1(x + 13, y + 5);
+                if(isContinue == 1){
+                    goto MENU;
+                }
+            }
             break;            
         }
 
@@ -115,13 +133,27 @@ MENU:
             fflush(stdin);
             
             const int x = 30, y = 5, w = 60, h = 2;
-            box(x, y - 3, w, h, 11, 1, 11, "************ DELETE USER ACCOUNT VIA ID ACCOUNT **********");
+            box(x, y - 3, w, h, 11, 1, 11, "************ DELETE USER ACCOUNT VIA ACCOUNT ID **********");
+
+            box(x, y, w, h, 15, 1, 15, "      Enter the account ID: ");
+            string ID;
+            gotoXY(x + 33, y + 1); getline(cin, ID);
+            if(ID[0] != 'U' || ID[1] != 'S' || ID[2] != 'E' || ID[3] != 'R'){
+                gotoXY(x + 10, y + 4); cout << "Error: Invalid ID code! Please enter again!";
+                SetColor(72);
+                gotoXY(x + 10, y + 5);
+                system("pause");
+                goto DELETEUSER;
+            }
+
+            listUser.getUserInforByID(ID, x + 10, y + 3, w - 20, h);
+
+//////////////////////////////
             SetColor(0);
-            textcolor(15);          
-            gotoXY(x - 10, y + 1); cout << "Warning: If a user account is deleted, all bank books of this user account will be deleted.";
-            box(x + 6, y + 3, w - 11, h + 5, 11, 1, 15, " Do you want to continue deleting this account?");
-            
-            const int xx = 56, yy = 10, ww = 10, hh = 2; 
+            textcolor(15);
+            box(x, y + 16, w, h + 7, 11, 1, 15, " Warning: If a user account is deleted, all bank books \n\t\t\t\t\t of this user account will be deleted.");
+            gotoXY(x + 7, y + 19); cout << " Do you want to continue deleting this account?";
+            const int xx = 55, yy = 25, ww = 10, hh = 2; 
             string text1 = "   Yes";
             string text2 = "   No";
             box(xx, yy, ww, hh, 15, 1, 15, text1);
@@ -152,23 +184,20 @@ MENU:
                 }
             }          
 
-            SetColor(15);
-            textcolor(0);
+            SetColor(0);
+            textcolor(15);
             switch(check){
                 case yy:{
-                    system("cls");
-                    const int x = 20, y = 5, w = 80, h = 2;
-                    box(x, y - 3, w, h, 11, 1, 11, "********************** DELETE USER ACCOUNT VIA ID ACCOUNT *********************");
-                    box(x, y, w, h, 15, 1, 15, " Enter the ID of user you want to delete account: ");
-
-                    string ID;
-                    gotoXY(x + 51, y + 1); getline(cin, ID);
-                    fflush(stdin);
                     listTermBook.removeBookByID(ID);
                     listNonTermBook.removeBookByID(ID);
                     listUser.removeUserByID(ID);
 
-                    gotoXY(x + 5, y + 4); cout << "The account of user with ID number " << ID << " has been successfully deleted!\n";
+                    gotoXY(xx + 5, yy + 4); cout << "The account of user with ID number " << ID << " has been successfully deleted!\n";
+
+                    isContinue = toContinue1(xx + 13, yy + 6);
+                    if(isContinue == 1){
+                        goto MENU;
+                    }
                     break;            
                 }
                 case yy + 2:{
@@ -176,15 +205,12 @@ MENU:
                     break;                                 
                 } 
             }
-            isContinue = toContinue1(x + 13, y + 6);
-            if(isContinue == 1){
-                goto MENU;
-            }
-			
             break;      
         }
               
         case y + 6:{
+            SetColor(0);
+            textcolor(15);            
             gotoXY(x + 20, y + 10); cout << "GOODBYE! SEE YOU AGAIN!";
             exit(1);            
         }

@@ -32,7 +32,7 @@ class ListUserAccount : public List<Account>{
         bool checkSignIn(Account &user, const string &username, const string &password);    //coi co tring username va password khong
         void signIn(Account &user);
 
-        void getUserInforByID(); //lay user account theo ID
+        void getUserInforByID(const string &ID, int x, int y, int w, int h); //lay user account theo ID
         
         void removeUserByID(const string &ID);   //xoa tk user
 };

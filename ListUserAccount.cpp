@@ -225,20 +225,30 @@ void ListUserAccount::signIn(Account &user){
     }
 }
 
-void ListUserAccount::getUserInforByID(){
-    string tempID;
-    cout << "Enter ID of user account: ";
-    getline(cin, tempID);
-
+void ListUserAccount::getUserInforByID(const string &ID, int x, int y, int w, int h){
     for(int i = 0; i < this->length(); i++){
-        if(this->get(i).getID() == tempID){
-            this->get(i).printInfor();
+        if(this->get(i).getID() == ID){
+            box(x, y, w, h, 15, 1, 15, "          USER INFORMATION");
+            box(x, y + 2, w, h, 15, 1, 15, "   Account ID   :");
+            box(x, y + 4, w, h, 15, 1, 15, "    Full name   :");
+            box(x, y + 6, w, h, 15, 1, 15, " ID card number :");
+            box(x, y + 8, w, h, 15, 1, 15, "     Address    :");
+            box(x, y + 10, w, h, 15, 1, 15, "  Phone number  :");
+            for(int j = 1; j < 6; j++){
+                gotoXY(x, y + 2 * j); cout << char(195);
+                gotoXY(x + w, y + 2 * j); cout << char(180);
+            }
+            gotoXY(x + 20, y + 2 + 1); cout << this->get(i).getID();
+            gotoXY(x + 20, y + 4 + 1); cout << this->get(i).getName();
+            gotoXY(x + 20, y + 6 + 1); cout << this->get(i).getIDCard();
+            gotoXY(x + 20, y + 8 + 1); cout << this->get(i).getAddress();
+            gotoXY(x + 20, y + 10 + 1); cout << this->get(i).getTel();
             return;
         }
     }
 
-    if(this->checkID(tempID) == false){
-        cout << "There is not this user account in the system.\n";
+    if(this->checkID(ID) == false){
+        gotoXY(x, y); cout << "There is not this user account in the system.\n";
         return;
     }
 }
