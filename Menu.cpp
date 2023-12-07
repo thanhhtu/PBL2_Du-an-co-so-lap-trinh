@@ -11,35 +11,35 @@
 #define Goc_Duoi_Phai 190
 
 void title() {
-	printf("\t%c", Goc_Tren_Trai);
+	printf("\t\t\t\t\t%c", Goc_Tren_Trai);
 	for (int i = 0; i <= 70; i++) {
 		printf("%c", Ngang);
 	}
 	printf("%c", Goc_Tren_Phai);
 	
-	printf("\n\t%c\t\t                                         \t\t%c", Doc, Doc);
-	printf("\n\t%c\t\t     PBL1: DU AN CO SO LAP TRINH         \t\t%c", Doc, Doc);
+	printf("\n\t\t\t\t\t%c\t\t                                         \t\t%c", Doc, Doc);
+	printf("\n\t\t\t\t\t%c\t\t    PBL2: DU AN CO SO LAP TRINH         \t\t%c", Doc, Doc);
 	
-	printf("\n\t%c\t\t      De tai: QUAN LY NGAN HANG		   \t\t%c", Doc, Doc);
+	printf("\n\t\t\t\t\t%c\t\t    De tai: QUAN LY SO TIET KIEM NGAN HANG	        %c", Doc, Doc);
 	
-	printf("\n\t%c\t\t                                         \t\t%c", Doc, Doc);
-	printf("\n\t%c\t Giao vien huong dan: NGUYEN VAN NGUYEN    \t\t\t%c", Doc, Doc);
+	printf("\n\t\t\t\t\t%c\t\t                                         \t\t%c", Doc, Doc);
+	printf("\n\t\t\t\t\t%c\t Giao vien huong dan: NGUYEN VAN NGUYEN    \t\t\t%c", Doc, Doc);
 
-	printf("\n\t%c\t Ten sinh vien: VO THANH TU               MSSV: 102220257\t%c", Doc, Doc);
-	printf("\n\t%c\t                LE NGUYEN AI TRAN         MSSV: 102220255\t%c", Doc, Doc);
+	printf("\n\t\t\t\t\t%c\t Ten sinh vien: VO THANH TU               MSSV: 102220257\t%c", Doc, Doc);
+	printf("\n\t\t\t\t\t%c\t                LE NGUYEN AI TRAN         MSSV: 102220255\t%c", Doc, Doc);
 
-	printf("\n\t%c\t Lop sinh hoat: 22T_DT5                                  \t%c", Doc, Doc);
-	printf("\n\t%c\t Lop hoc phan:  22NH10                                    \t%c", Doc, Doc);	
+	printf("\n\t\t\t\t\t%c\t Lop sinh hoat: 22T_DT5                                  \t%c", Doc, Doc);
+	printf("\n\t\t\t\t\t%c\t Lop hoc phan:  22NH10                                    \t%c", Doc, Doc);	
 	
-	printf("\n\t%c\t\t                                         \t\t%c", Doc, Doc);
-	printf("\n\t%c", Goc_Duoi_Trai);
+	printf("\n\t\t\t\t\t%c\t\t                                         \t\t%c", Doc, Doc);
+	printf("\n\t\t\t\t\t%c", Goc_Duoi_Trai);
 	for (int i = 0; i <= 70; i++) {
 		printf("%c", Ngang);
 	}
 	printf("%c", Goc_Duoi_Phai);
 	printf("\n");
 	
-	printf("\nPress any key to start the program ");
+	printf("\n\t\t\t\t\t Press any key to start the program ");
 
 	getch();
 	while (true){
@@ -70,6 +70,8 @@ int toContinue1(int x, int y){
 	char c = getch();
 	if(c == 27){
 		return 1;
+	}else{
+		return 0;
 	}
 }
 
@@ -181,7 +183,7 @@ void thanhSang(int x, int y, int w, int h, int b_color, int nd_color, string nd)
 }
 
 int move(int x, int y, int h, int &yp, int &kt, int soKhung){
-	if(_kbhit()){
+	if(_kbhit()){		//Hàm _kbhit() kiểm tra xem có phím nào được nhấn trên bàn phím hay không. Nếu hàm trả về một giá trị khác không, có nghĩa là một phím đang chờ trong bộ đệm
 		char c = getch();
 		if(c == -32){
 			kt = true;
@@ -203,10 +205,58 @@ int move(int x, int y, int h, int &yp, int &kt, int soKhung){
 }
 
 void end(){
-	SetColor(0);
-	textcolor(12);
-	gotoXY(45, 3);
-	cout << "GOODBYE AND SEE YOU AGAIN!!";
+	int x = 32, y = 3;
+	int i = 1;	
+	while(true){
+		if (i % 16 == 0){
+			i = 1;
+		}
+		SetColor(i);
+		gotoXY(x, y); cout << "	           _____    ____     ____    _____    ____   __     __  ______  " << endl;
+		gotoXY(x, y + 1); cout << "		  / ____|  / __ \\   / __ \\  |  __ \\  |  _ \\  \\ \\   / / |  ____| " << endl;
+		gotoXY(x, y + 2); cout << "		 | |  __  | |  | | | |  | | | |  | | | |_) |  \\ \\_/ /  | |__    " << endl;
+		gotoXY(x, y + 3); cout << "		 | | |_ | | |  | | | |  | | | |  | | |  _ <    \\   /   |  __|   " << endl;
+		gotoXY(x, y + 4); cout << "		 | |__| | | |__| | | |__| | | |__| | | |_) |    | |    | |____  " << endl;
+		gotoXY(x, y + 5); cout << "		  \\_____|  \\____/   \\____/  |_____/  |____/     |_|    |______| " << endl;
+	          
+	    i++;     
+		Sleep(500);	                                                       
+		if (_kbhit() == true){
+			char a = _getch();
+			if (a == 13){
+				break;
+			}
+		}		                                                  
+	}
+	SetColor(15);
+}
+
+void start(){
+	int x = 5, y = 3;
+	SetColor(6);
+	
+	gotoXY(x, y); cout <<	    "	                _______        ____     ,---.   .--. .--.   .--.   .-./`)  ,---.   .--.   .-_'''-.    					" << endl;                                   
+	gotoXY(x, y + 1); cout <<	"			\\  ____  \\   .'  __ `.  |    \\  |  | |  | _/  /    \\ .-.') |    \\  |  |  '_( )_   \\           " << endl;                           
+	gotoXY(x, y + 2); cout <<	"			| |    \\ |  /   '  \\  \\ |  ,  \\ |  | | (`' ) /     / `-' \\ |  ,  \\ |  | |(_ o _)|  '          " << endl;                           
+	gotoXY(x, y + 3); cout <<	"			| |____/ /  |___|  /  | |  |\\_ \\|  | |(_ ()_)       `-'`""`  |  |\\_ \\|  | . (_,_)/___|           " << endl;                         
+	gotoXY(x, y + 4); cout <<	"			|   _ _ '.     _.-`   | |  _( )_\   | | (_,_)   __   .---.  |  _( )_\|  | |  |   .-----.               " << endl;                    
+	gotoXY(x, y + 5); cout <<	"			|  ( ' )  \\ .'   _    | | (_ o _)  | |  |\\ \\  |  |  |   |  | (_ o _)  | '  \\  '-   .'           " << endl;                         
+	gotoXY(x, y + 6); cout <<	"			| (_{;}_) | |  _( )_  | |  (_,_)\\  | |  | \\ `'   /  |   |  |  (_,_)\\  |  \\  `-'`   |            " << endl;                         
+	gotoXY(x, y + 7); cout <<	"			|  (_,_)  / \\ (_ o _) / |  |    |  | |  |  \\    /   |   |  |  |    |  |   \\        /              " << endl;                       
+	gotoXY(x, y + 8); cout <<	"			/_______.'   '.(_,_).'  '--'    '--' `--'   `'-'    '---'  '--'    '--'    `'-...-'                 " << endl;                     
+	gotoXY(x, y + 9); cout <<	"			                                           .-'''-.     ____     __     .-'''-.  ,---------.      .-''-.   ,---.    ,---. 			" << endl;
+	gotoXY(x, y + 10); cout <<	"			                                          / _     \\    \\   \\   /  /   / _     \\ \\          \\   .'_ _   \\  |    \\  /    |    " << endl;
+	gotoXY(x, y + 11); cout <<	"			                                         (`' )/`--'     \  _. /  '   (`' )/`--'  `--.  ,---'  / ( ` )   '  |  ,  \/  ,   | 			" << endl;
+	gotoXY(x, y + 12); cout <<	"			                                        (_ o _).         _( )_ .'   (_ o _).        |   \\    . (_ o _)  | |  |\\_   /|  | 			" << endl;
+	gotoXY(x, y + 13); cout <<	"			                                         (_,_). '.   ___(_ o _)'     (_,_). '.      :_ _:    |  (_,_)___| |  _( )_/ |  | 			" << endl;
+	gotoXY(x, y + 14); cout <<	"			                                        .---.  \\  : |   |(_,_)'     .---.  \\  :     (_I_)    '  \\   .---. | (_ o _) |  | 		" << endl;
+	gotoXY(x, y + 15); cout <<	"			                                        \\    `-'  | |   `-'  /      \\    `-'  |    (_(=)_)    \\  `-'    / |  (_,_)  |  | 		" << endl;
+	gotoXY(x, y + 16); cout <<	"			                                         \\       /   \\      /        \\       /      (_I_)      \\       /  |  |      |  | 		" << endl;
+	gotoXY(x, y + 17); cout <<	"			                                          `-...-'     `-..-'          `-...-'       '---'       `'-..-'   '--'      '--' 			" << endl;
+                                                                                                                         
+	int w = 30, h = 2;
+	box(x + 58, y + 20, w, h, 15, 1, 15, "    ENTER TO START PROGRAM");  
+	gotoXY(x + 55, y + 23); SetColor(0); system("pause");                                                              
 }
 
 #endif

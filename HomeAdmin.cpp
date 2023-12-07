@@ -216,10 +216,8 @@ MENU:
         }
               
         case y + 6:{
-            SetColor(0);
-            textcolor(15);            
-            gotoXY(x + 20, y + 10); cout << "GOODBYE AND SEE YOU AGAIN!!";
-            exit(1);            
+            system("cls");
+            end();           
             break;
         }
     }

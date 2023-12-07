@@ -18,5 +18,6 @@ void box(int x, int y, int w, int h, int t_color, int b_color, int nd_color, str
 void thanhSang(int x, int y, int w, int h, int b_color, int nd_color, string nd);
 int move(int x, int y, int h, int &yp, int &kt, int soKhung);
 void end();
+void start();
 
 #endif

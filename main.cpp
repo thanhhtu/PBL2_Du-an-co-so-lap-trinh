@@ -10,10 +10,11 @@ using namespace std;
 #include "Date.cpp"
 
 int main(){
-    title();
     ShowCur(0);
+    title();
     system("cls");
- 
+    start();
+    system("cls");
     Date currentDate;
 	cin >> currentDate;
     system("cls");
