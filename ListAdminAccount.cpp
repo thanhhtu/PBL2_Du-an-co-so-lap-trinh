@@ -68,7 +68,7 @@ void ListAdminAccount::signIn(Account &admin){
 
     string tempUsername, tempPassword;
 
-    int x = 40, y = 5, w = 40, h = 2;
+    int x = 55, y = 5, w = 40, h = 2;
     box(x, y - 3, w, h, 11, 1, 11, "************* ADMIN SIGN IN ************");
 
     box(x, y, w, h, 15, 1, 15, " Username: ");

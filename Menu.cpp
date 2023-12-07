@@ -70,13 +70,6 @@ int toContinue1(int x, int y){
 	char c = getch();
 	if(c == 27){
 		return 1;
-	}else{
-		SetColor(15);
-		textcolor(0);
-		system("cls");
-		gotoXY(x + 20, y + 10); cout << "GOODBYE! SEE YOU AGAIN!";
-		exit(1);
-		return 2;
 	}
 }
 
@@ -207,6 +200,13 @@ int move(int x, int y, int h, int &yp, int &kt, int soKhung){
 			return yp;
 		}
 	}   
+}
+
+void end(){
+	SetColor(0);
+	textcolor(12);
+	gotoXY(45, 3);
+	cout << "GOODBYE AND SEE YOU AGAIN!!";
 }
 
 #endif

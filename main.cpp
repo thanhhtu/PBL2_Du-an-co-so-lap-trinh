@@ -18,7 +18,7 @@ int main(){
 	cin >> currentDate;
     system("cls");
 
-    const int x = 45, y = 5, w = 30, h = 2;
+    const int x = 60, y = 5, w = 30, h = 2;
     string text1 = "            ADMIN";
     string text2 = "            USER";
 
@@ -26,8 +26,6 @@ int main(){
     box(x, y, w, h, 15, 1, 15, text1);
     box(x, y + 2, w, h, 15, 1, 15, text2);
 
-    gotoXY(x, y); cout << char(218);
-    gotoXY(x + w, y); cout << char(191);
     gotoXY(x, y + 2); cout << char(195);
     gotoXY(x + w, y + 2); cout << char(180);
     
@@ -69,5 +67,8 @@ int main(){
             break;            
         } 
     }
+
+    system("cls");
+    end();
     return 0;
 }

@@ -25,7 +25,7 @@ void log(Account &user, ListUserAccount &listUser, TermBook &termBook, ListTermB
     system("cls");
     ShowCur(0);
 
-    const int x = 45, y = 5, w = 30, h = 2;
+    const int x = 60, y = 5, w = 30, h = 2;
     string text1 = "           Sign up";
     string text2 = "           Sign in";
     box(x, y - 3, w, h, 14, 1, 14, "******* USER INTERFACE *******");
@@ -81,11 +81,11 @@ MENU:
     SetColor(0);
     textcolor(15);
 
-    const int x = 30, y = 5, w = 60, h = 2;
+    const int x = 45, y = 5, w = 60, h = 2;
     string text1 = "                View personal information";
     string text2 = "                  List all saving books";
-    string text3 = "               Open fixed-term saving books";
-    string text4 = "              Open saving books without term";
+    string text3 = "               Open fixed-term saving book";
+    string text4 = "                 Open nonterm saving book";
     string text5 = "                Withdraw money via ID book";
     string text6 = "                           Exit";
 
@@ -139,18 +139,30 @@ MENU:
         case y:{
         INFOR:
 			system("cls");
-            cout << "YOUR INFORMATION\n";
             fflush(stdin);
-            user.printInfor();
+            
+            const int x = 55, y = 5, w = 40, h = 2;
+            box(x - 10, y - 3, w + 20, h, 14, 1, 14, "**************** VIEW PERSONAL INFORMATION ***************");
+            box(x, y, w, h, 15, 1, 15, "           USER INFORMATION");
+            box(x, y + 2, w, h, 15, 1, 15, "   Account ID   :");
+            box(x, y + 4, w, h, 15, 1, 15, "    Full name   :");
+            box(x, y + 6, w, h, 15, 1, 15, " ID card number :");
+            box(x, y + 8, w, h, 15, 1, 15, "     Address    :");
+            box(x, y + 10, w, h, 15, 1, 15, "  Phone number  :");
+            for(int j = 1; j < 6; j++){
+                gotoXY(x, y + 2 * j); cout << char(195);
+                gotoXY(x + w, y + 2 * j); cout << char(180);
+            }
+            gotoXY(x + 20, y + 2 + 1); cout << user.getID();
+            gotoXY(x + 20, y + 4 + 1); cout << user.getName();
+            gotoXY(x + 20, y + 6 + 1); cout << user.getIDCard();
+            gotoXY(x + 20, y + 8 + 1); cout << user.getAddress();
+            gotoXY(x + 20, y + 10 + 1); cout << user.getTel();
 
-			isContinue = toContinue();
-			if(isContinue == 1){
-				goto INFOR;
-			}
-			else if(isContinue == 2){
-				goto MENU;
-			}
-
+            isContinue = toContinue1(x + 3, y + 14);
+            if(isContinue == 1){
+                goto MENU;
+            }            
 			break;            
         }
 
@@ -177,34 +189,32 @@ MENU:
         OPENTERM:
 			system("cls");
             fflush(stdin);
-            listTermBook.openTermBook(termBook, user, currentDate);
 
-			isContinue = toContinue();
-			if(isContinue == 1){
-				goto OPENTERM;
-			}
-			else if(isContinue == 2){
-				goto MENU;
-			}
-			
-            break;            
+            const int x = 45, y = 5, w = 60, h = 2;
+            box(x, y - 3, w, h, 14, 1, 14, "*************** OPEN FIXED-TERM SAVING BOOK **************");
+            listTermBook.openTermBook(termBook, user, currentDate, x + 5, y + 2, w - 10, h);
+
+			isContinue = toContinue1(x + 13, y + 18);
+            if(isContinue == 1){
+                goto MENU;
+            }            
+			break;        
         }
 
         case y + 6:{
         OPENNONTERM:
 			system("cls");
             fflush(stdin);
-            listNonTermBook.openNonTermBook(nonTermBook, user, currentDate);
 
-			isContinue = toContinue();
-			if(isContinue == 1){
-				goto OPENNONTERM;
-			}
-			else if(isContinue == 2){
-				goto MENU;
-			}
-			
-            break;            
+            const int x = 45, y = 5, w = 60, h = 2;
+            box(x, y - 3, w, h, 14, 1, 14, "**************** OPEN NONTERM SAVING BOOK ****************");
+            listNonTermBook.openNonTermBook(nonTermBook, user, currentDate, x, y, w, h);
+
+			isContinue = toContinue1(x + 13, y + 5);
+            if(isContinue == 1){
+                goto MENU;
+            }            
+			break;            
         }
             
         case y + 8:{
@@ -277,8 +287,11 @@ MENU:
         }
             
         case y + 10:{
-            gotoXY(x + 20, y + 14); cout << "GOODBYE! SEE YOU AGAIN!";
-            exit(1);            
+            SetColor(0);
+            textcolor(15);
+            gotoXY(x + 20, y + 14); cout << "GOODBYE AND SEE YOU AGAIN!!";
+            exit(1);        
+            break;    
         }
     }
 }

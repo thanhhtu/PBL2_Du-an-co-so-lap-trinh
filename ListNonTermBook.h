@@ -27,7 +27,7 @@ class ListNonTermBook : public List<NonTermBook>{
         void printUserNonTermBook(const Account &user);   //non term books cua 1 nguoi
 
         bool checkIDBook(const string &IDBook);
-        void openNonTermBook(NonTermBook &nonTermBook, const Account &user, const Date &currentDate);
+        void openNonTermBook(NonTermBook &nonTermBook, const Account &user, const Date &currentDate, int x, int y, int w, int h);
 
         NonTermBook* findBookByID(const string &IDBook) const;
 

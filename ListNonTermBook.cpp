@@ -81,7 +81,7 @@ bool ListNonTermBook::checkIDBook(const string &IDBook){
     return false;
 }
 
-void ListNonTermBook::openNonTermBook(NonTermBook &nonTermBook, const Account &user, const Date &currentDate){
+void ListNonTermBook::openNonTermBook(NonTermBook &nonTermBook, const Account &user, const Date &currentDate, int x, int y, int w, int h){
     string tempIDBook; 
     string tempID = user.getID();  
     Date tempOpeningDate(currentDate);
@@ -94,10 +94,10 @@ void ListNonTermBook::openNonTermBook(NonTermBook &nonTermBook, const Account &u
         cout << "Error: The ID Book has been already existed!\n";
     }
 
-    cout << "Enter the amount of money: ";
-    getline(cin, tempMoney);
+    box(x, y, w, h, 15, 1, 15, "   Enter the amount of money: ");
+    gotoXY(x + 33, y + 1); getline(cin, tempMoney);
 
-    cout << "\nOpen successfully!\n";
+    gotoXY(x + 16, y + 3); cout << "Open saving book successfully!";
 
     nonTermBook.setIDBook(tempIDBook);
     nonTermBook.setID(tempID);

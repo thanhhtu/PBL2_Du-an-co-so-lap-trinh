@@ -81,7 +81,7 @@ bool ListTermBook::checkIDBook(const string &IDBook){
     return false;
 }
 
-void ListTermBook::openTermBook(TermBook &termBook, const Account &user, const Date &currentDate){
+void ListTermBook::openTermBook(TermBook &termBook, const Account &user, const Date &currentDate, int x, int y, int w, int h){
     string tempIDBook; 
     string tempID = user.getID();  
     Date tempOpeningDate(currentDate);
@@ -95,35 +95,68 @@ void ListTermBook::openTermBook(TermBook &termBook, const Account &user, const D
         cout << "Error: The ID Book has been already existed!\n";
     }
 
-    float choice;
-    do{
-        cout << "Select the term you want to open: \n";
-        cout << "1. 3-month saving book.\n";
-        cout << "2. 6-month saving book.\n";
-        cout << "3. 12-month saving book.\n";
-        cout << "4. 18-month saving book.\n";
+    const int xx = x, yy = y, ww = w, hh = h;
+    string text1 = "                      3-month";
+    string text2 = "                      6-month";
+    string text3 = "                     12-month";
+    string text4 = "                     18-month";    
 
-        cout << "Your choice: ";
-        cin >> choice;
-        cin.ignore();
-        
-        if(!(choice == int(choice) && choice >= 1 && choice <= 3)){
-            cout << "Invalid input!! Please choose again.\n" << endl;
-        }        
-    }while(!(choice == int(choice) && choice >= 1 && choice <= 3));
-    if(choice == 1){
+    box(xx, yy - 2, ww, hh, 15, 14, 15, "******* Select the term you want to open ********");
+    box(xx, yy, ww, hh, 15, 1, 15, text1);
+    box(xx, yy + 2, ww, hh, 15, 1, 15, text2);
+    box(xx, yy + 4, ww, hh, 15, 1, 15, text3);
+    box(xx, yy + 6, ww, hh, 15, 1, 15, text4);
+
+    for(int i = 0; i < 4; i++){
+        gotoXY(xx, yy + 2 * i); cout << char(195);
+        gotoXY(xx + ww, yy + 2 * i); cout << char(180);
+    }
+    
+    int xp = xx;     //xp, yp: toa do thanh sang
+    int yp = yy;     
+    int xcu, ycu;   //xcu, ycu: toa do cu
+    int check;
+    int kt = true;
+
+    while(true){
+        if(kt == true){
+            gotoXY(xcu, ycu);
+            if(ycu == yy) thanhSang(xcu, ycu, ww, hh, 1, 15, text1);
+            if(ycu == yy + 2) thanhSang(xcu, ycu, ww, hh, 1, 15, text2);
+            if(ycu == yy + 4) thanhSang(xcu, ycu, ww, hh, 1, 15, text3);
+            if(ycu == yy + 6) thanhSang(xcu, ycu, ww, hh, 1, 15, text4);
+            xcu = xp;
+            ycu = yp;
+            if(ycu == yy) thanhSang(xp, yp, ww, hh, 100, 15, text1);
+            if(ycu == yy + 2) thanhSang(xp, yp, ww, hh, 100, 15, text2);
+            if(ycu == yy + 4) thanhSang(xp, yp, ww, hh, 100, 15, text3);
+            if(ycu == yy + 6) thanhSang(xp, yp, ww, hh, 100, 15, text4);
+            kt = false;            
+        }
+        check = move(xx, yy, hh, yp, kt, 4);
+        if(check == yy || check == yy + 2 || check == yy + 4 || check == yy + 6){
+            break;
+        }
+    }
+
+    if(check ==  yy){
         tempTerm = 3;
-    }else if(choice == 2){
+    }else if(check == yy + 2){
         tempTerm = 6;
-    }else if(choice == 3){
+    }else if(check == yy + 4){
         tempTerm = 12;
     }else{
         tempTerm = 18;
     }
-    cout << "Enter the amount of money: ";
-    getline(cin, tempMoney);
 
-    cout << "\nOpen successfully!\n";
+    SetColor(0);
+    textcolor(15);
+    int nx = 45, ny = yy + 9, nw = 60, nh = 2;
+    gotoXY(nx + 8, ny); cout << "Open a savings book with a term of " << tempTerm << " book.";
+    box(nx, ny + 2, nw, nh, 15, 14, 15, "   Enter the amount of money: ");
+    gotoXY(nx + 33, ny + 3); getline(cin, tempMoney);
+
+    gotoXY(nx + 16, ny + 5); cout << "Open saving book successfully!";
 
     termBook.setIDBook(tempIDBook);
     termBook.setID(tempID);

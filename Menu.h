@@ -10,11 +10,13 @@ using namespace std;
 
 void title();
 int toContinue();
+int toContinue1(int x, int y);
 void enterPassword(string &temp_password);
 void enterNumber(string &number);
 
 void box(int x, int y, int w, int h, int t_color, int b_color, int nd_color, string nd);
 void thanhSang(int x, int y, int w, int h, int b_color, int nd_color, string nd);
 int move(int x, int y, int h, int &yp, int &kt, int soKhung);
+void end();
 
 #endif

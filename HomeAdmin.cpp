@@ -27,7 +27,7 @@ MENU:
     SetColor(0);
     textcolor(15);
 
-    const int x = 30, y = 5, w = 60, h = 2;
+    const int x = 45, y = 5, w = 60, h = 2;
     string text1 = "               List user account information";
     string text2 = "          Look up user information via account ID";
     string text3 = "            Delete a user account via account ID";
@@ -97,7 +97,7 @@ MENU:
 			system("cls");
             fflush(stdin);
 
-            const int x = 30, y = 5, w = 60, h = 2;
+            const int x = 45, y = 5, w = 60, h = 2;
             box(x, y - 3, w, h, 11, 1, 11, "********* LOOK UP USER INFORMATION VIA ACCOUNT ID *********");
             
             box(x, y, w, h, 15, 1, 15, "      Enter the account ID: ");
@@ -123,8 +123,8 @@ MENU:
                 if(isContinue == 1){
                     goto MENU;
                 }
-            }
-            break;            
+            }   
+            break;      
         }
 
         case y + 4:{
@@ -132,7 +132,7 @@ MENU:
 			system("cls");
             fflush(stdin);
             
-            const int x = 30, y = 5, w = 60, h = 2;
+            const int x = 45, y = 5, w = 60, h = 2;
             box(x, y - 3, w, h, 11, 1, 11, "************ DELETE USER ACCOUNT VIA ACCOUNT ID **********");
 
             box(x, y, w, h, 15, 1, 15, "      Enter the account ID: ");
@@ -148,71 +148,79 @@ MENU:
 
             listUser.getUserInforByID(ID, x + 10, y + 3, w - 20, h);
 
-//////////////////////////////
-            SetColor(0);
-            textcolor(15);
-            box(x, y + 16, w, h + 7, 11, 1, 15, " Warning: If a user account is deleted, all bank books \n\t\t\t\t\t of this user account will be deleted.");
-            gotoXY(x + 7, y + 19); cout << " Do you want to continue deleting this account?";
-            const int xx = 55, yy = 25, ww = 10, hh = 2; 
-            string text1 = "   Yes";
-            string text2 = "   No";
-            box(xx, yy, ww, hh, 15, 1, 15, text1);
-            box(xx, yy + 2, ww, hh, 15, 1, 15, text2);
+            //truong hop co hoac khong co account
+            if(listUser.checkID(ID) == true){
+                box(x, y + 16, w, h + 7, 11, 1, 15, " Warning: If a user account is deleted, all bank books \n\t\t\t\t\t\t\t of this user account will be deleted.");
+                gotoXY(x + 7, y + 19); cout << " Do you want to continue deleting this account?";
+                const int xx = 70, yy = 25, ww = 10, hh = 2; 
+                string text1 = "   Yes";
+                string text2 = "   No";
+                box(xx, yy, ww, hh, 15, 1, 15, text1);
+                box(xx, yy + 2, ww, hh, 15, 1, 15, text2);
 
-            gotoXY(xx, yy + 2); cout << char(195);
-            gotoXY(xx + ww, yy + 2); cout << char(180);     
+                gotoXY(xx, yy + 2); cout << char(195);
+                gotoXY(xx + ww, yy + 2); cout << char(180);     
 
-            int xp = xx;     
-            int yp = yy;     
-            int xcu, ycu;   
-            int check;
-            int kt = true;            
-            while(true){
-                if(kt == true){
-                    gotoXY(xcu, ycu);
-                    if(ycu == yy) thanhSang(xcu, ycu, ww, hh, 1, 15, text1);
-                    if(ycu == yy + 2) thanhSang(xcu, ycu, ww, hh, 1, 15,  text2);
-                    xcu = xp;
-                    ycu = yp;
-                    if(ycu == yy) thanhSang(xp, yp, ww, h, 150, 15, text1); 
-                    if(ycu == yy + 2) thanhSang(xp, yp, ww, h, 150, 15, text2);
-                    kt = false;            
-                }
-                check = move(xx, yy, hh, yp, kt, 2);
-                if(check == yy || check == yy + 2){
-                    break;
-                }
-            }          
-
-            SetColor(0);
-            textcolor(15);
-            switch(check){
-                case yy:{
-                    listTermBook.removeBookByID(ID);
-                    listNonTermBook.removeBookByID(ID);
-                    listUser.removeUserByID(ID);
-
-                    gotoXY(xx + 5, yy + 4); cout << "The account of user with ID number " << ID << " has been successfully deleted!\n";
-
-                    isContinue = toContinue1(xx + 13, yy + 6);
-                    if(isContinue == 1){
-                        goto MENU;
+                int xp = xx;     
+                int yp = yy;     
+                int xcu, ycu;   
+                int check;
+                int kt = true;            
+                while(true){
+                    if(kt == true){
+                        gotoXY(xcu, ycu);
+                        if(ycu == yy) thanhSang(xcu, ycu, ww, hh, 1, 15, text1);
+                        if(ycu == yy + 2) thanhSang(xcu, ycu, ww, hh, 1, 15,  text2);
+                        xcu = xp;
+                        ycu = yp;
+                        if(ycu == yy) thanhSang(xp, yp, ww, h, 150, 15, text1); 
+                        if(ycu == yy + 2) thanhSang(xp, yp, ww, h, 150, 15, text2);
+                        kt = false;            
                     }
-                    break;            
+                    check = move(xx, yy, hh, yp, kt, 2);
+                    if(check == yy || check == yy + 2){
+                        break;
+                    }
+                }          
+
+                SetColor(0);
+                textcolor(15);
+                switch(check){
+                    case yy:{
+                        listTermBook.removeBookByID(ID);
+                        listNonTermBook.removeBookByID(ID);
+                        listUser.removeUserByID(ID);
+
+                        gotoXY(x - 2, yy + 6); cout << "The account of user with ID number " << ID << " has been successfully deleted!\n";
+
+                        isContinue = toContinue1(x + 13, yy + 8);
+                        if(isContinue == 1){
+                            goto MENU;
+                        }
+                        break;            
+                    }
+                    case yy + 2:{
+                        goto MENU;
+                        break;                                 
+                    } 
                 }
-                case yy + 2:{
+                break; 
+
+            }else{
+                isContinue = toContinue1(x + 13, y + 5);
+                if(isContinue == 1){
                     goto MENU;
-                    break;                                 
-                } 
-            }
+                }
+            }   
             break;      
         }
               
         case y + 6:{
             SetColor(0);
             textcolor(15);            
-            gotoXY(x + 20, y + 10); cout << "GOODBYE! SEE YOU AGAIN!";
+            gotoXY(x + 20, y + 10); cout << "GOODBYE AND SEE YOU AGAIN!!";
             exit(1);            
+            break;
         }
     }
 }

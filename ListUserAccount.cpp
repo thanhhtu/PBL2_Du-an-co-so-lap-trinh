@@ -107,7 +107,7 @@ void ListUserAccount::signUp(Account &user){
     system("cls");
     SetColor(15);
 
-    int x = 35, y = 5, w = 45, h = 2;
+    int x = 50, y = 5, w = 45, h = 2;
     box(x, y - 3, w, h, 14, 1, 14, "************* USER SIGN UP **************");
 
     box(x, y, w, h, 15, 1, 15, " Username: ");
@@ -130,7 +130,7 @@ void ListUserAccount::signUp(Account &user){
 
 INFOR:
     system("cls");
-    x = 30, y = 5, w = 60, h = 2;
+    x = 45, y = 5, w = 60, h = 2;
     box(x, y - 3, w, h, 14, 1, 14, "***************** USER INFORMATION FORM ******************");
 
     box(x, y, w, h, 15, 1, 15, " Full name: ");
@@ -139,7 +139,7 @@ INFOR:
     box(x, y + 2, w, h, 15, 1, 15, " ID card number: ");
     gotoXY(x, y + 2); cout << char(195);   
     gotoXY(x + w, y + 2); cout << char(180);   
-    gotoXY(x + 24, y + 2 + 1); getline(cin, tempIDCard);
+    gotoXY(x + 18, y + 2 + 1); getline(cin, tempIDCard);
 
     box(x, y + 4, w, h, 15, 1, 15, " Address: ");
     gotoXY(x, y + 4); cout << char(195);   
@@ -198,7 +198,7 @@ void ListUserAccount::signIn(Account &user){
 
     string tempUsername, tempPassword;
     
-    int x = 40, y = 5, w = 40, h = 2;
+    int x = 55, y = 5, w = 40, h = 2;
     box(x, y - 3, w, h, 14, 1, 14, "************* USER SIGN IN ************");
     box(x, y, w, h, 15, 1, 15, " Username: ");
     gotoXY(x + 12, y + 1); getline(cin, tempUsername); 
@@ -228,7 +228,7 @@ void ListUserAccount::signIn(Account &user){
 void ListUserAccount::getUserInforByID(const string &ID, int x, int y, int w, int h){
     for(int i = 0; i < this->length(); i++){
         if(this->get(i).getID() == ID){
-            box(x, y, w, h, 15, 1, 15, "          USER INFORMATION");
+            box(x, y, w, h, 15, 1, 15, "           USER INFORMATION");
             box(x, y + 2, w, h, 15, 1, 15, "   Account ID   :");
             box(x, y + 4, w, h, 15, 1, 15, "    Full name   :");
             box(x, y + 6, w, h, 15, 1, 15, " ID card number :");
