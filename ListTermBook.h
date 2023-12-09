@@ -23,7 +23,7 @@ class ListTermBook : public List<TermBook>{
         void saveTermBooks();   //ghi list term books lai vao file
         void printTermBooks();  //list term books
 
-        void printUserTermBook(const Account &user);   //term books cua 1 nguoi
+        void printUserTermBook(const Account &user, int &ck);   //term books cua 1 nguoi
 
         bool checkIDBook(const string &IDBook);
         void openTermBook(TermBook &termBook, const Account &user, const Date &currentDate, int x, int y, int w, int h);

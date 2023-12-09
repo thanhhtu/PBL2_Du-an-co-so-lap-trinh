@@ -45,46 +45,58 @@ void TermBook::saveBook(ofstream &f){
 }
 
 void TermBook::printBook() const{
-    cout << "ID Book: " << this->IDBook << endl;
-    cout << "The opening date: " << this->openingDate << endl;
-    cout << "The term: " << this->getTerm() << endl;
-    cout << "The money you add: " << this->money << endl;
+    int x1=whereX(); int y1 = whereY();
+	cout << "    " << this->IDBook;
+	gotoXY(x1 + 23, y1);
+    cout << this->openingDate;
+    gotoXY(x1 + 48, y1);
+    cout << this->getTerm();
+    gotoXY(x1 + 64, y1);
+    cout << this->money ;
 }
 
 float TermBook::interestRate(const Date &currentDate, const Account &user) const{
     //Check if the term of the book has come
+    const int z=whereY();
+    const int x1= 35, y1 =z+5, h1=2;
     if(openingDate.getDayDifference(currentDate) < this->term * 30){      //mac dinh 1 thang co 30 ngay
-        //If not, ask the user if they want to withdraw money
-        cout << "The term of this book has not yet come. Are you sure you want to withdraw money?\n";
+		int w1= 90;
+		box(x1, y1 - 2, w1, h1, 15, 1, 14, "  The first term of this book has not yet come. Are you sure you want to withdraw money?\n ");
+        string text1 = "                                         1. Yes";
+        string text2 = "                                         2. No";
+        box(x1, y1, 90, h1, 15, 1, 15, text1);
+        box(x1, y1 + 2, 90, h1, 15, 1, 15, text2);
+
+    	gotoXY(x1, y1); cout << char(195);
+        gotoXY(x1, y1 + 2); cout << char(195); 
+    	gotoXY(x1 + 90, y1); cout << char(180);
+        gotoXY(x1 +90,  y1 + 2); cout << char(180);  
         int choice;
         do{
-            cout << "1. Yes. \n";
-            cout << "2. No. \n";
-            cout << "Your choice: ";
-            cin >> choice;
-            if(!(choice >= 1 && choice <= 2)){
-                cout << "Invalid input!! Please choose again.\n" << endl;
+        gotoXY(whereX() - 50, whereY() + 3);
+        SetColor(72);
+        cout << "Your choice: ";
+        cin >> choice;
+        if(!(choice >= 1 && choice <= 2)){
+            gotoXY(whereX() + 50,whereY());
+            cout << "Invalid input!! Please choose again.\n" << endl;
             }
         }while(!(choice >= 1 && choice <= 2));
 
         //If the user chooses to withdraw money early, return 0
         if(choice == 1){
             cin.ignore();
-            return 0;
+		    //Calculate the interest rate
+		    auto it = interestRates.find(this->term);
+		    float interest = it->second;
+		    //Calculate the interest earned
+		    float interestEarned = stof(this->money) * interest * openingDate.getDayDifference(currentDate)/ this->term;
+			return interestEarned; 
         }else{
             //If the user chooses not to withdraw money, don't calculate interest
             cin.ignore();
-            return 0;
+            return -1;
         }
     }
-
-    //Calculate the interest rate
-    auto it = interestRates.find(this->term);
-    float interest = it->second;
-    
-    //Calculate the interest earned
-    float interestEarned = stof(this->money) * interest;
-    return interestEarned;
 }
-
 #endif

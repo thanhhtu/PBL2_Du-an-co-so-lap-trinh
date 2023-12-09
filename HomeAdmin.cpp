@@ -75,19 +75,36 @@ MENU:
     textcolor(15);
     switch(check){
         case y:{
-        LISTUSER:
+        LISTACCOUNT:
 			system("cls");
-            cout << "LIST OF USER ACCOUNT INFORMATION\n";
+            const int x1 = 30, y1 = 5, w1 = 100, h1 = 2;
+            box(x1, y1 - 3, w1, h1, 11, 1, 11, "****************************** LIST ALL USER INFORMATION ACCOUNTS *****************************");
+            
+            string text0 = "  Account ID";
+            string text1 = "  Name";
+            string text2 = "  ID number";
+            string text3 = "  Phone number";
+            string text4 = "  Address";
+            
+            box(x1, y1, 20, h1, 15, 1, 15, text0);
+            box(x1 + 20, y1, 20, h1, 15, 1, 15, text1);
+            box(x1 + 40, y1, 20, h1, 15, 1, 15, text2); 
+            box(x1 + 60, y1, 20, h1, 15, 1, 15, text3);
+            box(x1 + 80, y1, 20, h1, 15, 1, 15, text4);
+            
+            for(int J = 1; J < 5; J++){
+                gotoXY(x1 + (J * 20), y1);
+                cout << char(194);
+            }
+
             fflush(stdin);
             listUser.printInforUsers();
+		
+			isContinue = toContinue1(whereX() + 33, whereY() + 2);
+            if (isContinue == 1){
+                goto MENU;
+            }
 
-			isContinue = toContinue();
-			if(isContinue == 1){
-				goto LISTUSER;
-			}
-			else if(isContinue == 2){
-				goto MENU;
-			}
 
 			break;
         }
@@ -144,6 +161,12 @@ MENU:
                 gotoXY(x + 10, y + 5);
                 system("pause");
                 goto DELETEUSER;
+            }else if(!listUser.checkID(ID)){
+                gotoXY(x + 10, y + 4); cout << "Error: Invalid ID code! Please enter again!";
+                SetColor(72);
+                gotoXY(x + 10, y + 5);
+                system("pause");
+                goto DELETEUSER;               
             }
 
             listUser.getUserInforByID(ID, x + 10, y + 3, w - 20, h);

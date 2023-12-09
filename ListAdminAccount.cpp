@@ -19,7 +19,7 @@ ListAdminAccount::~ListAdminAccount(){
 }
 
 void ListAdminAccount::setAdmins(){
-    ifstream f ("dataUserAccount.txt");
+    ifstream f ("dataAdminAccount.txt");
 
     while(!f.eof()){
         Account admin;

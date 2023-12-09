@@ -170,21 +170,18 @@ MENU:
         LIST:
             system("cls");
             fflush(stdin);
-            listTermBook.printUserTermBook(user);
-            cout << endl;
-            listNonTermBook.printUserNonTermBook(user);
-
-			isContinue = toContinue();
-			if(isContinue == 1){
-				goto LIST;
-			}
-			else if(isContinue == 2){
-				goto MENU;
-			}
-			
-            break;            
+            const int x1 = 33, y1 = 5, h1 = 2, z1 = 5;
+            int ck = 1;
+            listTermBook.printUserTermBook(user, ck);
+            cout << "\n\n";
+            gotoXY(x1, getCurrentCursorPositionY());
+            listNonTermBook.printUserNonTermBook(user, ck);
+			isContinue = toContinue1(whereX() - 55, whereY() + 3);
+            if(isContinue == 1){
+                goto MENU;
+            }            
+			break;
         }
-
         case y + 4:{
         OPENTERM:
 			system("cls");
@@ -221,71 +218,160 @@ MENU:
         WITHDRAW:	
 		    system("cls");
             fflush(stdin);
+            SetColor(0); 
+            textcolor(15);
+
+            const int x = 45, y = 5, w = 60, h = 2;
+            box(x, y - 3, w, h, 14, 1, 14, "**************** WITHDRAW MONEY VIA ID BOOK ****************");
+
+
+            const int x1 = 45, y1 = 7, h1 = 2, z1 = 5;
+            int w1 = 60, w2 = 20;
+            int J;
+            int z;
+            text1 = "     Term Book";
+           	text2 = "  Non - term Book";
+			
+            gotoXY(x1, y1 - 1); cout << "           Which type of book do you want to withdraw?";
+    		box(x1 + 20, y1, w2, h1, 15, 1, 15, text1);
+    		gotoXY(x1 + 20, y1); cout << char(218);
+    		gotoXY(x1 + 20 + w2, y1); cout << char(191);
+    		box(x1 + 20, y1 + 2, w2, h1, 15, 1, 15, text2);
+    		gotoXY(x1 + 20, y1 + 2); cout << char(195);
+        	gotoXY(x1 + 20 + w2, y1 + 2); cout << char(180);
+        	
+    		int xp1;     //xp, yp: toa do thanh sang
+    		xp1 = x1 + 20;
+    		int yp1;    
+			yp1 = y1; 
+    		int xcu1, ycu1;   //xcu, ycu: toa do cu
+    		int check;
+    		kt = true;
+
+            while(true){
+                if(kt == true){
+                    gotoXY(xcu, ycu);
+                    if(ycu1 == y1) thanhSang(xcu1, ycu1, w2, h1, 1, 15, text1);
+                    if(ycu1 == y1 + 2) thanhSang(xcu1, ycu1, w2, h1, 1, 15, text2);
+                    xcu1 = xp1;
+                    ycu1 = yp1;
+                    if(ycu1 == y1) thanhSang(xp1, yp1, w2, h1, 100, 15, text1); //reset thanh sang cu
+                    if(ycu1 == y1 + 2) thanhSang(xp1, yp1, w2, h1, 110, 15, text2);
+                    kt = false;            
+                }
+                check = move(x1 + 20, y1, h1, yp1, kt, 2);
+                if(check == y1 || check == y1 + 2){
+                    break;
+                }
+            } 
             
-            float choice;
-            do{
-                cout << "Which type of book do you want to withdraw?\n";
-                cout << "1. Term Book.\n";
-                cout << "2. Non-term Book.\n";
-
-                cout << "Your choice: ";
-                cin >> choice;
-                cin.ignore();
-                
-                if(!(choice == int(choice) && choice >= 1 && choice <= 2)){
-                    cout << "Invalid input!! Please choose again.\n" << endl;
-                }        
-            }while(!(choice == int(choice) && choice >= 1 && choice <= 2));
-
-            switch((int)choice){
-                case 1:{
+            SetColor(0); 
+            textcolor(15);
+            switch(check){
+                case y1:{
+                M:	system("cls");
+                	SetColor(0); 
+            		textcolor(15);
+                    
                     //Prompt user to enter the ID of the term book from which they want to withdraw money.
-                    listTermBook.printUserTermBook(user);
-
-                    string IDBook;
-                    cout << "Enter the ID Book of the book that you want to withdraw: ";
-                    cin >> IDBook;
-                    cin.ignore();
-
-                    TermBook *termBook = listTermBook.findBookByID(IDBook);
-                    if(termBook != NULL){
-                        float interestEarned = termBook->interestRate(currentDate, user);
-                        cout << "Interest earned: " << interestEarned << endl;
-                    }    
-                    listTermBook.removeBookByIDBook(IDBook);
-                                       
+                    int ck = 1;
+                    listTermBook.printUserTermBook(user, ck);
+                    if(ck == 0){
+                        break;
+                    }else{
+                        cout << endl;
+                        string IDBook;
+                        z = whereY();
+                        box(x1 + 5, whereY() + 2, w1, h1, 15, 1, 14, "********* WITHDRAW MONEY FROM TERMBOOK VIA ITS ID **********");
+                        box(x1 + 5, whereY(), w1, h1, 15, 1, 15, "      Enter the ID book: ");
+                        gotoXY(x1 + 5, z + 4);
+                        cout << char(195);
+                        gotoXY(x1 + 5 + w1, z + 4);
+                        cout << char(180);
+                        gotoXY(x1 + 40, whereY() + 1);
+                        cin >> IDBook;
+                        cin.ignore();
+                        TermBook *termBook = listTermBook.findBookByID(IDBook);
+                        if(termBook != NULL){
+                            float interestEarned = termBook->interestRate(currentDate, user);
+                            gotoXY(x1 + 28, whereY() + 3);
+                            if (interestEarned == -1){
+                                goto F;
+                            }else{
+                                box(x1 + 10, whereY() + 1, w1 - 10, h1, 14, 1, 14, "       Interest earned:\n");
+                                gotoXY(x1 + 45, whereY() - 1);
+                                cout << interestEarned;
+                                listTermBook.removeBookByIDBook(IDBook);
+                            }
+                        }    
+                        else{
+                            gotoXY(x1 + 20, whereY() + 2);
+                            cout << "Error: Invalid ID TermBook. Try again!" << endl;
+                            SetColor(72);
+                            gotoXY(x1 + 25, whereY() + 1);
+                            system("pause");
+                            goto M;
+                        }
+                    }
+                               
                     break; 
                 }
 
-                case 2: {
-                    listNonTermBook.printUserNonTermBook(user);
+                case y1 + 2: {
+                M1:
+                 	system("cls");
+                	SetColor(0); 
+            		textcolor(15);
+                    
+                    //Prompt user to enter the ID of the term book from which they want to withdraw money.
+                    int ck = 1;
+                    listNonTermBook.printUserNonTermBook(user, ck);
+                    if(ck == 0){
+                        break;
+                    }else{
+                        cout << endl;
+                        string IDBook;
 
-                    string IDBook;
-                    cout << "Enter the ID Book of the book that you want to withdraw: ";
-                    cin >> IDBook;
-                    cin.ignore();
-
-                    NonTermBook *nonTermBook = listNonTermBook.findBookByID(IDBook);
-                    if(nonTermBook != NULL){
-                        float interestEarned = nonTermBook->interestRate(currentDate, user);
-                        cout << "Interest earned: " << interestEarned << endl;
-                    }    
-                    listNonTermBook.removeBookByIDBook(IDBook);
+                        z = whereY();
+                        box(x1 + 5, whereY() + 2, w1, h1, 15, 1, 14, "******** WITHDRAW MONEY FROM NONTERMBOOK VIA ITS ID ********");
+                        box(x1 + 5, whereY(), w1, h1, 15, 1, 15, "      Enter the ID book: ");
+                        gotoXY(x1 + 5, z + 4);
+                        cout << char(195);
+                        gotoXY(x1 + 5 + w1, z + 4);
+                        cout << char(180);
+                        gotoXY(x1 + 40, whereY() + 1);
+                        cin >> IDBook;
+                        cin.ignore();
+                        NonTermBook *nonTermBook = listNonTermBook.findBookByID(IDBook);
+                        if(nonTermBook != NULL){
+                            float interestEarned = nonTermBook->interestRate(currentDate, user);
+                            box(x1 + 10, whereY() + 1, w1 - 10, h1, 14, 1, 14, "       Interest earned:\n");
+                            gotoXY(x1 + 45, whereY() - 1);
+                            cout << interestEarned;
+                            listNonTermBook.removeBookByIDBook(IDBook);
+                        }else{
+                            gotoXY(x1 + 15, whereY() + 2);
+                            cout << "Error: Invalid ID non-termBook. Try again!";
+                            SetColor(72);
+                            gotoXY(x1 + 25, whereY() + 1);
+                            system("pause");
+                            goto M1;
+                        }
+                    }
 
                     break; 
                 }
             }
-            
-            isContinue = toContinue();
-            if (isContinue == 1) {
-                goto WITHDRAW;
-            } else if (isContinue == 2) {
+
+		F:
+            isContinue = toContinue1(x1 + 20, whereY() + 3);
+            if (isContinue == 1){
                 goto MENU;
             }
 
-            break;            
-        }
-            
+            break;
+        }    
+              
         case y + 10:{
             system("cls");
             end();       

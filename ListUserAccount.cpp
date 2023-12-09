@@ -49,12 +49,39 @@ void ListUserAccount::saveUsers(){
 }
 
 void ListUserAccount::printInforUsers(){
+	int x1 = 30, y1 = 5, w1 = 100, h1 = 2;
+	for(int i = 0; i < this->length(); i++){
+            y1 += 2;
+            box1(x1, y1, 20, h1, 15, 1);
+            box1(x1+20, y1, 20, h1, 15, 1);
+            box1(x1+40, y1, 20, h1, 15, 1);
+            box1(x1+60, y1, 20, h1, 15, 1);
+            box1(x1+80, y1, 20, h1, 15, 1);
+            gotoXY(x1, y1);
+            cout << char(195);
+            gotoXY(x1+100, y1);
+            cout << char(180);
+            gotoXY(x1, y1);
+            for (int J = 1; J < 5; J++){
+                gotoXY(x1+(J*20), y1);
+                cout << char(197);
+                gotoXY(x1+(J*20), y1+2);
+                cout << char(193);
+            }
+	}
+	int y2 = 8;
     for(int i = 0; i < this->length(); i++){
-        cout << "Numerical order " << i + 1 << ": \n";
+    	gotoXY(x1+1, y2);
         this->get(i).printInfor();
-        cout << endl;
+        y2 += 2;
+        for (int J = 0; J < 5; J++){
+            gotoXY(x1 + (J * 20), y2 - 2);
+            cout << char(179);
+        }
     }
+    gotoXY(x1,y2);
 }
+
 
 
 bool ListUserAccount::checkID(const string &ID){
@@ -108,7 +135,7 @@ void ListUserAccount::signUp(Account &user){
     SetColor(15);
 
     int x = 50, y = 5, w = 45, h = 2;
-    box(x, y - 3, w, h, 14, 1, 14, "************* USER SIGN UP **************");
+    box(x, y - 3, w, h, 14, 1, 14, "*********** USER SIGN UP ************");
 
     box(x, y, w, h, 15, 1, 15, " Username: ");
     gotoXY(x + 12, y + 1); getline(cin, tempUsername);
@@ -127,11 +154,21 @@ void ListUserAccount::signUp(Account &user){
         system("cls");
         this->signUp(user);        
     }
+    
+    if(isEmptyNoWhitespace(tempUsername) == true || isEmptyNoWhitespace(tempPassword) == true){
+        gotoXY(x - 5, y + 6);
+        cout << "Error: Username and password can not be empty. Please enter again!";
+        gotoXY(x - 5, y + 7);
+        SetColor(72);
+        system("pause");
+        system("cls");
+        this->signUp(user);     	
+	}
 
 INFOR:
     system("cls");
     x = 45, y = 5, w = 60, h = 2;
-    box(x, y - 3, w, h, 14, 1, 14, "***************** USER INFORMATION FORM ******************");
+    box(x, y - 3, w, h, 14, 1, 14, "*************** USER INFORMATION FORM ****************");
 
     box(x, y, w, h, 15, 1, 15, " Full name: ");
     gotoXY(x + 13, y + 1); getline(cin, tempName);
@@ -160,9 +197,19 @@ INFOR:
         system("cls");
         goto INFOR;  
     }
-
+    
+    if(isEmptyNoWhitespace(tempName) == true  || isEmptyNoWhitespace(tempIDCard) == true || isEmptyNoWhitespace(tempAddress) == true || isEmptyNoWhitespace(tempTel) == true){
+        gotoXY(x + 2, y + 10);
+        cout << "Error: The information can not be empty. Please re-enter!";
+        gotoXY(x + 2, y + 11);
+        SetColor(72);
+        system("pause");
+        system("cls");
+        goto INFOR;     	
+	}
+	
     gotoXY(x + 20, y + 10);
-    cout << "Sign in successfully!";
+    cout << "Sign up successfully!";
     gotoXY(x + 17, y + 11);
     SetColor(72);
     system("pause");

@@ -33,9 +33,10 @@ void NonTermBook::saveBook(ofstream &f){
 }
 
 void NonTermBook::printBook() const{
-    cout << "ID Book: " << this->IDBook << endl;
-    cout << "The opening date: " << this->openingDate << endl;
-    cout << "The money you add: " << this->money << endl;
+    cout << " " << this->IDBook << "        " ;
+    cout << this->openingDate<< "           " ;
+    cout << this->money << endl;
+    cout << endl;
 }
 
 float NonTermBook::interestRate(const Date &currentDate, const Account &user) const{

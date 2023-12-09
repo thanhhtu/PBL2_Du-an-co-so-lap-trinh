@@ -13,7 +13,7 @@ int main(){
     ShowCur(0);
     title();
     system("cls");
-    start();
+    start(); 
     system("cls");
     Date currentDate;
 	cin >> currentDate;

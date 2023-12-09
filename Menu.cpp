@@ -47,19 +47,10 @@ void title() {
 	}
 }
 
-int toContinue(){
-	char choice;
-	printf("\nPress c to continue.\nPress b to back to menu.\nPress any key to exit the program.\n");
-	printf("Your choice: ");
-
-	scanf("%c", &choice);
-	if(choice == 'c' || choice == 'C'){
-		return 1;
-	}else if(choice == 'b' || choice == 'B'){
-		return 2;
-	}else{
-		return 0;
-	}
+int getCurrentCursorPositionY(){
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    return csbi.dwCursorPosition.Y;
 }
 
 int toContinue1(int x, int y){
@@ -182,8 +173,46 @@ void thanhSang(int x, int y, int w, int h, int b_color, int nd_color, string nd)
 	cout << nd;
 }
 
+void box1(int x, int y, int w, int h, int t_color, int b_color){
+	//========== BACKGROUNG ==========
+	textcolor(b_color);
+	for(int iy = y + 1; iy <= y + h - 1; iy++){
+		for(int ix = x + 1; ix <= x + w - 1; ix++){
+			gotoXY(ix, iy);
+			cout << " ";
+		}
+	}
+	//========== VE VIEN ==========
+	textcolor(1);
+	SetColor(t_color);
+	//ke ngang
+	if(h <= 1 || w <= 1) return;
+	for(int ix = x; ix <= x + w; ix++){
+		gotoXY(ix, y);
+		cout << char(196);	//196: ke ngang
+		gotoXY(ix, y + h);
+		cout << char(196);
+	}
+	//ke doc
+	for(int iy = y; iy <= y + h; iy++){
+		gotoXY(x, iy);
+		cout << char(179);	//179: ke doc
+		gotoXY(x + w, iy);
+		cout << char(179);
+	}
+	//4 goc
+	gotoXY(x, y);
+	cout << char(218);	//218: goc tren ben trai
+	gotoXY(x + w, y);
+	cout << char(191);	//191: goc tren ben phai
+	gotoXY(x, y + h);
+	cout << char(192);	//192: goc tren ben phai
+	gotoXY(x + w, y + h);
+	cout << char(217);	//217: goc tren ben phai
+}
+
 int move(int x, int y, int h, int &yp, int &kt, int soKhung){
-	if(_kbhit()){		//Hàm _kbhit() kiểm tra xem có phím nào được nhấn trên bàn phím hay không. Nếu hàm trả về một giá trị khác không, có nghĩa là một phím đang chờ trong bộ đệm
+	if(_kbhit()){		
 		char c = getch();
 		if(c == -32){
 			kt = true;
@@ -202,6 +231,23 @@ int move(int x, int y, int h, int &yp, int &kt, int soKhung){
 			return yp;
 		}
 	}   
+}
+
+bool isEmptyNoWhitespace(const string& str){
+    if (str.empty()){
+        return true;		
+    }
+    int tmp = 0;
+    for(int i = 0; i < str.length(); i++){
+    	char c = str[i];
+        if (!isspace(c)){
+        	tmp = 1;
+            return false;
+        }
+    }
+    if(tmp == 0){
+    	return true;
+	}
 }
 
 void end(){
