@@ -36,6 +36,12 @@ void ListNonTermBook::setNonTermBooks(){
 void ListNonTermBook::saveNonTermBooks(){
     ofstream f ("dataNonTermBook.txt");
 
+    if(this->length() == 0){
+        this->numOfNonTermBook = 0;
+        f << this->numOfNonTermBook << "\n";
+        return;
+    }
+
     f << this->numOfNonTermBook << "\n";
 
 	this->get(0).saveBook(f);

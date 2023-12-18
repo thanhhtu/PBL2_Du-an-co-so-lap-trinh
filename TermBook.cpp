@@ -70,18 +70,19 @@ float TermBook::interestRate(const Date &currentDate, const Account &user) const
     	gotoXY(x1, y1); cout << char(195);
         gotoXY(x1, y1 + 2); cout << char(195); 
     	gotoXY(x1 + 90, y1); cout << char(180);
-        gotoXY(x1 +90,  y1 + 2); cout << char(180);  
+        gotoXY(x1 +90,  y1 + 2); cout << char(180);
+
         int choice;
         do{
-        gotoXY(whereX() - 50, whereY() + 3);
-        SetColor(72);
-        cout << "Your choice: ";
-        cin >> choice;
-        if(!(choice >= 1 && choice <= 2)){
-            gotoXY(whereX() + 50,whereY());
-            cout << "Invalid input!! Please choose again.\n" << endl;
+            gotoXY(whereX() - 50, whereY() + 3);
+            SetColor(72);
+            cout << "Your choice: ";
+            cin >> choice;
+            if(!(choice >= 1 && choice <= 2)){
+                gotoXY(whereX() + 50, whereY());
+                cout << "Invalid input!! Please choose again.\n";
             }
-        }while(!(choice >= 1 && choice <= 2));
+        }while (!(choice >= 1 && choice <= 2));
 
         //If the user chooses to withdraw money early, return 0
         if(choice == 1){
@@ -90,8 +91,8 @@ float TermBook::interestRate(const Date &currentDate, const Account &user) const
 		    auto it = interestRates.find(this->term);
 		    float interest = it->second;
 		    //Calculate the interest earned
-		    float interestEarned = stof(this->money) * interest * openingDate.getDayDifference(currentDate)/ this->term;
-			return interestEarned; 
+            float interestEarned = stof(this->money) * interest * openingDate.getDayDifference(currentDate) / this->term;
+            return interestEarned; 
         }else{
             //If the user chooses not to withdraw money, don't calculate interest
             cin.ignore();

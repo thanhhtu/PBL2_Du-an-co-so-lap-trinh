@@ -104,8 +104,6 @@ MENU:
             if (isContinue == 1){
                 goto MENU;
             }
-
-
 			break;
         }
 
@@ -126,6 +124,12 @@ MENU:
                 gotoXY(x + 19, y + 5);
                 system("pause");
                 goto FINDUSER;
+            }else if(!listUser.checkID(ID)){
+                gotoXY(x, y + 4); cout << "Error: There is not this user in the system! Please enter again!";
+                SetColor(72);
+                gotoXY(x + 10, y + 5);
+                system("pause");
+                goto FINDUSER;               
             }
 
             listUser.getUserInforByID(ID, x + 10, y + 3, w - 20, h);
@@ -162,7 +166,7 @@ MENU:
                 system("pause");
                 goto DELETEUSER;
             }else if(!listUser.checkID(ID)){
-                gotoXY(x + 10, y + 4); cout << "Error: Invalid ID code! Please enter again!";
+                gotoXY(x, y + 4); cout << "Error: There is not this user in the system! Please enter again!";
                 SetColor(72);
                 gotoXY(x + 10, y + 5);
                 system("pause");

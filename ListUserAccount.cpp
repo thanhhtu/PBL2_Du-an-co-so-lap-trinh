@@ -37,6 +37,12 @@ void ListUserAccount::setUsers(){
 void ListUserAccount::saveUsers(){
     ofstream f ("dataUserAccount.txt");
 
+    if(this->length() == 0){
+        this->numOfUser = 0;
+        f << this->numOfUser << "\n";
+        return;
+    }
+
     f << this->numOfUser << "\n";
 
 	this->get(0).saveAccount(f);
@@ -49,40 +55,40 @@ void ListUserAccount::saveUsers(){
 }
 
 void ListUserAccount::printInforUsers(){
-	int x1 = 30, y1 = 5, w1 = 100, h1 = 2;
-	for(int i = 0; i < this->length(); i++){
-            y1 += 2;
-            box1(x1, y1, 20, h1, 15, 1);
-            box1(x1+20, y1, 20, h1, 15, 1);
-            box1(x1+40, y1, 20, h1, 15, 1);
-            box1(x1+60, y1, 20, h1, 15, 1);
-            box1(x1+80, y1, 20, h1, 15, 1);
-            gotoXY(x1, y1);
-            cout << char(195);
-            gotoXY(x1+100, y1);
-            cout << char(180);
-            gotoXY(x1, y1);
-            for (int J = 1; J < 5; J++){
-                gotoXY(x1+(J*20), y1);
-                cout << char(197);
-                gotoXY(x1+(J*20), y1+2);
-                cout << char(193);
-            }
-	}
-	int y2 = 8;
+    int x1 = 30, y1 = 5, w1 = 100, h1 = 2;
     for(int i = 0; i < this->length(); i++){
-    	gotoXY(x1+1, y2);
+        y1 += 2;
+        box1(x1, y1, 20, h1, 15, 1);
+        box1(x1 + 20, y1, 20, h1, 15, 1);
+        box1(x1 + 40, y1, 20, h1, 15, 1);
+        box1(x1 + 60, y1, 20, h1, 15, 1);
+        box1(x1 + 80, y1, 20, h1, 15, 1);
+
+        gotoXY(x1, y1);
+        cout << char(195);
+        gotoXY(x1 + 100, y1);
+        cout << char(180);
+        gotoXY(x1, y1);
+        for (int J = 1; J < 5; J++){
+            gotoXY(x1 + (J * 20), y1);
+            cout << char(197);
+            gotoXY(x1 + (J * 20), y1 + 2);
+            cout << char(193);
+        }
+    }
+    
+    int y2 = 8;
+    for(int i = 0; i < this->length(); i++){
+        gotoXY(x1 + 1, y2);
         this->get(i).printInfor();
         y2 += 2;
-        for (int J = 0; J < 5; J++){
+        for(int J = 0; J < 5; J++){
             gotoXY(x1 + (J * 20), y2 - 2);
             cout << char(179);
         }
     }
-    gotoXY(x1,y2);
+    gotoXY(x1, y2);
 }
-
-
 
 bool ListUserAccount::checkID(const string &ID){
     for(int i = 0; i < this->length(); i++){

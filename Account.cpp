@@ -85,21 +85,22 @@ void Account::saveAccount(ofstream &f){
 }
 
 void Account::printInfor() const{
-//	cout << "Account ID: " << this->ID << endl;
-//	cout << "Name: " << this->name << endl;
-//	cout << "Identity card number: " << this->IDCard << endl;
-//	cout << "Address: " << this->address << endl;
-//	cout << "Phone number: " << this->tel << endl;
-	int x1=whereX(); int y1=whereY();
-	cout <<"   "<<this->ID;
-	gotoXY(x1+20,y1);
-    cout <<this->name;
-    gotoXY(x1+40,y1);
-    cout <<this->IDCard;
-    gotoXY(x1+60,y1);
-    cout <<this->tel ;
-    gotoXY(x1+80,y1);
-    cout <<this->address << endl;
+	int x1 = whereX();
+	int y1 = whereY();
+
+	cout << "   " << this->ID;
+
+	gotoXY(x1 + 20, y1);
+	cout << this->name;
+
+	gotoXY(x1 + 40, y1);
+	cout << this->IDCard;
+
+	gotoXY(x1 + 60, y1);
+	cout << this->tel;
+	
+	gotoXY(x1 + 80, y1);
+	cout << this->address << endl;
 }
 
 Account &Account::operator = (const Account &acc){

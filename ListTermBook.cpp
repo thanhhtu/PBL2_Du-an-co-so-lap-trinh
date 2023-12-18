@@ -37,6 +37,12 @@ void ListTermBook::setTermBooks(){
 void ListTermBook::saveTermBooks(){
     ofstream f ("dataTermBook.txt");
 
+    if(this->length() == 0){
+        this->numOfTermBook = 0;
+        f << this->numOfTermBook << "\n";
+        return;
+    }
+
     f << this->numOfTermBook << "\n";
 
 	this->get(0).saveBook(f);
