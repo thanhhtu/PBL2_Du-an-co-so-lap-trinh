@@ -29,9 +29,12 @@ class ListTermBook : public List<TermBook>{
         void openTermBook(TermBook &termBook, const Account &user, const Date &currentDate, int x, int y, int w, int h);
 
         TermBook* findBookByID(const string &IDBook) const;
+        TermBook* findUserBookByID(const string &ID, const string &IDBook) const;   //tim book cua 1 nguoi
 
         void removeBookByIDBook(const string &IDBook);
         void removeBookByID(const string &ID);
+        
+        void listBookByYear(const string &year);    //liet ke cac so theo nam da nhap
 };
 
 #endif

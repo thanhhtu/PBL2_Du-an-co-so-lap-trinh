@@ -170,13 +170,15 @@ MENU:
         LIST:
             system("cls");
             fflush(stdin);
+
             const int x1 = 33, y1 = 5, h1 = 2, z1 = 5;
             int ck = 1;
             listTermBook.printUserTermBook(user, ck);
-            cout << "\n\n";
-            gotoXY(x1, getCurrentCursorPositionY());
+            gotoXY(x1, getCurrentCursorPositionY() + 2);
             listNonTermBook.printUserNonTermBook(user, ck);
-			isContinue = toContinue1(whereX() - 55, whereY() + 3);
+            if(ck == 1) cout << "\n\n";
+
+			isContinue = toContinue1(whereX() + 65, whereY() + 1);
             if(isContinue == 1){
                 goto MENU;
             }            
@@ -221,9 +223,10 @@ MENU:
             SetColor(0); 
             textcolor(15);
 
+            string ID = user.getID();
+            
             const int x = 45, y = 5, w = 60, h = 2;
             box(x, y - 3, w, h, 14, 1, 14, "**************** WITHDRAW MONEY VIA ID BOOK ****************");
-
 
             const int x1 = 45, y1 = 7, h1 = 2, z1 = 5;
             int w1 = 60, w2 = 20;
@@ -269,20 +272,20 @@ MENU:
             textcolor(15);
             switch(check){
                 case y1:{
-                M:	system("cls");
+                TB:	system("cls");
                 	SetColor(0); 
             		textcolor(15);
                     
                     //Prompt user to enter the ID of the term book from which they want to withdraw money.
                     int ck = 1;
                     listTermBook.printUserTermBook(user, ck);
+                    cout << endl;
                     if(ck == 0){
                         break;
-                    }else{
-                        cout << endl;
+                    }else{                        
                         string IDBook;
-                        z = whereY();
-                        box(x1 + 5, whereY() + 2, w1, h1, 15, 1, 14, "********* WITHDRAW MONEY FROM TERMBOOK VIA ITS ID **********");
+                        z = whereY() - 1;
+                        box(x1 + 5, whereY() + 1, w1, h1, 15, 1, 14, "********* WITHDRAW MONEY FROM TERMBOOK VIA ITS ID **********");
                         box(x1 + 5, whereY(), w1, h1, 15, 1, 15, "      Enter the ID book: ");
                         gotoXY(x1 + 5, z + 4);
                         cout << char(195);
@@ -291,26 +294,29 @@ MENU:
                         gotoXY(x1 + 40, whereY() + 1);
                         cin >> IDBook;
                         cin.ignore();
-                        TermBook *termBook = listTermBook.findBookByID(IDBook);
+
+                        TermBook *termBook = listTermBook.findUserBookByID(ID, IDBook);
                         if(termBook != NULL){
                             float interestEarned = termBook->interestRate(currentDate, user);
                             gotoXY(x1 + 28, whereY() + 3);
                             if (interestEarned == -1){
-                                goto F;
+                                cout << "\n";
+                                break;
                             }else{
-                                box(x1 + 10, whereY() + 1, w1 - 10, h1, 14, 1, 14, "       Interest earned:\n");
+                                box(x1 + 10, whereY() - 2, w1 - 10, h1, 14, 1, 14, "       Interest earned:\n");
                                 gotoXY(x1 + 45, whereY() - 1);
                                 cout << interestEarned;
+                                cout << "\n\n";
                                 listTermBook.removeBookByIDBook(IDBook);
                             }
                         }    
                         else{
-                            gotoXY(x1 + 20, whereY() + 2);
+                            gotoXY(x1 + 18, whereY() + 2);
                             cout << "Error: Invalid ID TermBook. Try again!" << endl;
                             SetColor(72);
-                            gotoXY(x1 + 25, whereY() + 1);
+                            gotoXY(x1 + 23, whereY());
                             system("pause");
-                            goto M;
+                            goto TB;
                         }
                     }
                                
@@ -318,7 +324,7 @@ MENU:
                 }
 
                 case y1 + 2: {
-                M1:
+                NTB:
                  	system("cls");
                 	SetColor(0); 
             		textcolor(15);
@@ -329,9 +335,7 @@ MENU:
                     if(ck == 0){
                         break;
                     }else{
-                        cout << endl;
                         string IDBook;
-
                         z = whereY();
                         box(x1 + 5, whereY() + 2, w1, h1, 15, 1, 14, "******** WITHDRAW MONEY FROM NONTERMBOOK VIA ITS ID ********");
                         box(x1 + 5, whereY(), w1, h1, 15, 1, 15, "      Enter the ID book: ");
@@ -342,12 +346,14 @@ MENU:
                         gotoXY(x1 + 40, whereY() + 1);
                         cin >> IDBook;
                         cin.ignore();
-                        NonTermBook *nonTermBook = listNonTermBook.findBookByID(IDBook);
+
+                        NonTermBook *nonTermBook = listNonTermBook.findUserBookByID(ID, IDBook);
                         if(nonTermBook != NULL){
                             float interestEarned = nonTermBook->interestRate(currentDate, user);
-                            box(x1 + 10, whereY() + 1, w1 - 10, h1, 14, 1, 14, "       Interest earned:\n");
+                            box(x1 + 10, whereY() + 1, w1 - 10, h1, 14, 1, 14, "       Interest earned:");
                             gotoXY(x1 + 45, whereY() - 1);
                             cout << interestEarned;
+                            cout << "\n\n";
                             listNonTermBook.removeBookByIDBook(IDBook);
                         }else{
                             gotoXY(x1 + 15, whereY() + 2);
@@ -355,7 +361,7 @@ MENU:
                             SetColor(72);
                             gotoXY(x1 + 25, whereY() + 1);
                             system("pause");
-                            goto M1;
+                            goto NTB;
                         }
                     }
 
@@ -363,8 +369,7 @@ MENU:
                 }
             }
 
-		F:
-            isContinue = toContinue1(x1 + 20, whereY() + 3);
+            isContinue = toContinue1(whereX() + 65, whereY() + 1);
             if (isContinue == 1){
                 goto MENU;
             }

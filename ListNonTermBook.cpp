@@ -63,39 +63,41 @@ void ListNonTermBook::printNonTermBooks(){
 }
 
 void ListNonTermBook::printUserNonTermBook(const Account &user, int &ck){
-
     int y1 = getCurrentCursorPositionY();
     y1 = y1 + 4;
     int x1 = 40, w1 = 80, h1 = 2;
     box(x1, y1 - 3, w1, h1, 14, 1, 15, "********************************** NONTERM BOOK *******************************");
-    int dem=0;
+    int dem = 0;
+    
     for(int i = 0; i < this->length(); i++){
         if(this->get(i).getID() == user.getID()){
             ++dem;
         }
     }
+
     if(dem == 0){ 
-    	gotoXY(65, y1);
-		cout << "You do not have any non term books.\t\t\t";
-        ck = 0; //ck de kiem tra user co so hay k (0: k co, 1: co)
+    	gotoXY(63, y1);
+		cout << "You do not have any non term books.\n";
+        ck = 0; //kiem tra user co so hay k (0: k co, 1: co)
         return;
     }else{
-        string text0= "      Number";
-        string text1= "         ID";
-        string text2= "     Opening Day";
-        string text4= "      Money";
+        string text0 = "      Number";
+        string text1 = "         ID";
+        string text2 = "     Opening Day";
+        string text3 = "      Money";
+
         box(x1, y1, 20, h1, 15, 1, 15, text0);
-        box(x1+20, y1, 20, h1, 15, 1, 15, text1);
-        box(x1+40, y1, 20, h1, 15, 1, 15, text2); 
-    //    box(x1+60, y1, 20, h1, 11, 1, 11, text3);
-        box(x1+60, y1, 20, h1, 15, 1, 15, text4);
+        box(x1 + 20, y1, 20, h1, 15, 1, 15, text1);
+        box(x1 + 40, y1, 20, h1, 15, 1, 15, text2); 
+        box(x1 + 60, y1, 20, h1, 15, 1, 15, text3);
+
         for (int i = 1; i < 4; i++){
-            gotoXY(x1+(i*20), y1+2);
+            gotoXY(x1 + (i * 20), y1 + 2);
             cout << char(193);
-            gotoXY(x1+(i*20), y1);
+            gotoXY(x1 + (i * 20), y1);
             cout << char(194);
         }
-        int count1 = 0;
+
         int z = y1 + 2;
         for(int i = 0; i < this->length(); i++){
             if(this->get(i).getID() == user.getID()){
@@ -108,6 +110,7 @@ void ListNonTermBook::printUserNonTermBook(const Account &user, int &ck){
                 cout << char(195);
                 gotoXY(x1 + 80, y1);
                 cout << char(180);
+                
                 for (int J = 1; J < 4; J++){
                     gotoXY(x1 + (J * 20), y1);
                     cout << char(197);
@@ -116,8 +119,10 @@ void ListNonTermBook::printUserNonTermBook(const Account &user, int &ck){
                 }
             }
         }
-        int y2 =z+1;
+
+        int y2 = z + 1;
         dem = 0;
+
         for(int i = 0; i < this->length(); i++){
             if(this->get(i).getID() == user.getID()){
                 gotoXY(x1 + 2, y2);
@@ -131,7 +136,6 @@ void ListNonTermBook::printUserNonTermBook(const Account &user, int &ck){
                 y2 += 2;
             }
         }
-
     }
 }
 
@@ -158,8 +162,15 @@ void ListNonTermBook::openNonTermBook(NonTermBook &nonTermBook, const Account &u
         cout << "Error: The ID Book has been already existed!\n";
     }
 
-    box(x, y, w, h, 15, 1, 15, "   Enter the amount of money: ");
-    gotoXY(x + 33, y + 1); getline(cin, tempMoney);
+    do{
+        box(x, y, w, h, 15, 14, 15, "   Enter the amount of money: ");
+        gotoXY(x + 33, y + 1); getline(cin, tempMoney);
+        if(!isNumeric(tempMoney) || isEmptyNoWhitespace(tempMoney)){
+            gotoXY(x + 16, y + 3);
+            cout << "Error: The money is invalid!";
+            return;
+        }
+    }while(!isNumeric(tempMoney) || isEmptyNoWhitespace(tempMoney));
 
     gotoXY(x + 16, y + 3); cout << "Open saving book successfully!";
 
@@ -182,6 +193,17 @@ NonTermBook* ListNonTermBook::findBookByID(const string &IDBook) const{
         current = current->next;
     }
     return NULL; 
+}
+
+NonTermBook *ListNonTermBook::findUserBookByID(const string &ID, const string &IDBook) const{
+    Node<NonTermBook> *current = head;
+    while(current != NULL){
+        if(current->data.getID() == ID && current->data.getIDBook() == IDBook){
+            return &(current->data);    //Return address of the TermBook object
+        }
+        current = current->next;
+    }
+    return NULL;     //Return nullptr if not found    
 }
 
 void ListNonTermBook::removeBookByIDBook(const string &IDBook){
@@ -212,6 +234,77 @@ void ListNonTermBook::removeBookByID(const string &ID){
         current = current->next;
     }
     this->saveNonTermBooks();
+}
+
+void ListNonTermBook::listBookByYear(const string &year){
+    int x1 = 40, y1 = getCurrentCursorPositionY() + 4, w1 = 80, h1 = 2;
+    int y2 = y1 + 3;
+    int dem = 0, count = 0;
+
+    box(x1, y1 - 3, w1, h1, 14, 1, 15, "*************************** LIST NONTERM BOOK BY YEAR *************************");
+
+    for(int i = 0; i < this->length(); i++){
+        if(this->get(i).getOpeningYear() == year){
+           ++dem;
+        }
+    }
+
+    if(dem == 0){
+    	gotoXY(x1 + 17, y1);
+		cout << "There are not any nonterm books in this year.";
+        gotoXY(x1 + 25, whereY() - 1);
+        return;
+	}else{
+        string text0 = "      Number";
+        string text1 = "        ID";
+        string text2 = "     Opening Day";
+        string text3 = "      Money";
+        // string text5 = "       Interest";   
+        
+        box(x1, y1, 20, h1, 15, 1, 15, text0);
+        box(x1 + 20, y1, 20, h1, 15, 1, 15, text1);
+        box(x1 + 40, y1, 20, h1, 15, 1, 15, text2); 
+        box(x1 + 60, y1, 20, h1, 15, 1, 15, text3);
+        // box(x1 + 100, y1, 20, h1, 15, 1, 15, text5);
+
+        for (int i = 1; i < 4; i++){
+            gotoXY(x1 + (i * 20), y1 + 2);
+            cout << char(193);
+            gotoXY(x1 + (i * 20), y1);
+            cout << char(194);
+        }
+
+        for(int i = 0; i < this->length(); i++){
+            if(this->get(i).getOpeningYear() == year){
+                y1 += 2;
+                box1(x1, y1, 20, h1, 15, 1);
+                box1(x1 + 20, y1, 20, h1, 15, 1);
+                box1(x1 + 40, y1, 20, h1, 15, 1);
+                box1(x1 + 60, y1, 20, h1, 15, 1);
+                // box1(x1 + 80, y1, 20, h1, 15, 1);
+
+                gotoXY(x1, y1); cout << char(195);
+                gotoXY(x1 + 80, y1); cout << char(180);
+
+                for(int J = 1; J < 4; J++){
+                    gotoXY(x1 + (J * 20), y1);
+                    cout << char(197);
+                    gotoXY(x1 + (J * 20), y1 + 2);
+                    cout << char(193);
+                }
+
+                gotoXY(x1 + 2, y2);
+                cout << "        " << ++count << "            ";
+                this->get(i).printBook();
+                for(int J = 0; J < 4; J++){
+                    gotoXY(x1 + (J * 20), y2);
+                    cout << char(179);
+                }
+                y2 += 2;  
+            }
+        }
+        return;
+    }
 }
 
 #endif

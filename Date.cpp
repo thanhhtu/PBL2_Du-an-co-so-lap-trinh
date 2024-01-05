@@ -166,8 +166,7 @@ ostream &operator << (ostream &out, const Date &dt){
 	return out;
 }
 
-//thuat toan Zeller's Congruence
-//ham san co: tinh hieu so ngay tu date 1/1/0 den date hien tai
+//thuat toan Zeller's Congruence (ham san co: tinh hieu so ngay tu date 1/1/0 den date hien tai)
 int Date::calDay() const{
     Date temp = *this;
     if(temp.month < 3){

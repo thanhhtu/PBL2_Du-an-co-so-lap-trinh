@@ -19,12 +19,12 @@ class Date{
 		Date(const Date &dt);
         ~Date();
 
-		bool isLeap() const;   //kiem tra nam nhuan
-		bool isValid();
-		string dtAsString() const;  //class date to string
+		bool isLeap() const;	//kiem tra nam nhuan
+		bool isValid();	//kiem tra ngay, thang, nam nhap vao co hop le khong (ngay: 1 -> so ngay cua thang nhap vao, thang: 1 -> 12, nam phai lon hon 4 chu so)
+		string dtAsString() const;	//class date to string
 
-		Date &operator = (const Date &dt); //gan cac gia tri date duoc truyen vao date hien tai
-		bool operator < (const Date &dt) const; //so sanh doi tuong date hien tai va date duoc truyen vao
+		Date &operator = (const Date &dt);	//gan cac gia tri date duoc truyen vao date hien tai
+		bool operator < (const Date &dt) const;	//so sanh doi tuong date hien tai va date duoc truyen vao
 		bool operator > (const Date &dt) const;
 		bool operator == (const Date &dt) const;
 		Date &operator ++ ();
@@ -35,7 +35,7 @@ class Date{
 		friend ostream &operator << (ostream &out, const Date &dt);
 
 		int calDay() const;
-		int getDayDifference(const Date &dt2) const;	//dem so ngay khac
+		int getDayDifference(const Date &dt) const;	//dem so ngay giua date this va date dt
 };
 
 #endif

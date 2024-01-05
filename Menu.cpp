@@ -47,12 +47,6 @@ void title() {
 	}
 }
 
-int getCurrentCursorPositionY(){
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
-    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-    return csbi.dwCursorPosition.Y;
-}
-
 int toContinue1(int x, int y){
 	SetColor(72);
 	gotoXY(x, y); cout << " Press [ESC] to go back to MENU...";
@@ -65,7 +59,6 @@ int toContinue1(int x, int y){
 		return 0;
 	}
 }
-
 
 /* 
 	MO TA HINH THUC:
@@ -104,15 +97,36 @@ void enterPassword(string &password){
     }	
 }
 
-void enterNumber(string &number){
-	getline(cin, number);
-	for(int i = 0; i < number.size(); i++){
-		if(number[i] < 48 || number[i] > 57){
-			cout << "Error: Phone number can not a charater. Please enter again!\n";
-			enterNumber(number);
-		}
+bool isNumeric(const string &str){
+    for (char ch : str){
+        if(!isdigit(ch)){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool isEmptyNoWhitespace(const string &str){
+    if(str.empty()){
+        return true;		
+    }
+    int tmp = 0;
+    for(int i = 0; i < str.length(); i++){
+    	char c = str[i];
+        if (!isspace(c)){
+        	tmp = 1;
+            return false;
+        }
+    }
+    if(tmp == 0){
+    	return true;
 	}
-	return;
+}
+
+int getCurrentCursorPositionY(){
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    return csbi.dwCursorPosition.Y;
 }
 
 void box(int x, int y, int w, int h, int t_color, int b_color, int nd_color, string nd){
@@ -233,23 +247,32 @@ int move(int x, int y, int h, int &yp, int &kt, int soKhung){
 	}   
 }
 
-bool isEmptyNoWhitespace(const string& str){
-    if (str.empty()){
-        return true;		
-    }
-    int tmp = 0;
-    for(int i = 0; i < str.length(); i++){
-    	char c = str[i];
-        if (!isspace(c)){
-        	tmp = 1;
-            return false;
-        }
-    }
-    if(tmp == 0){
-    	return true;
-	}
+//BANKING SYSTEM
+void start(){
+	int x = 5, y = 3;
+	SetColor(6);
+	
+	gotoXY(x, y); cout <<	    "			  ____               _   _   _  __  _____   _   _    _____     		";  
+	gotoXY(x, y + 1); cout <<	"			 |  _  \\     /\\     | \\ | | | |/ / |_   _| | \\ | |  / ____|    	";  
+	gotoXY(x, y + 2); cout <<	"			 | |_) |    /  \\    |  \\| | | ' /    | |   |  \\| | | |  __     	";  
+	gotoXY(x, y + 3); cout <<	"			 |  _ <    / /\\ \\   | . ` | |  <     | |   | . ` | | | |_ |    	";  
+	gotoXY(x, y + 4); cout <<	"			 | |_) |  / ____ \\  | |\\  | | . \\   _| |_  | |\\  | | |__| |    	";  
+	gotoXY(x, y + 5); cout <<	"			 |____/  /_/    \\_\\ |_| \\_| |_|\\_\\ |_____| |_| \\_|  \\_____|  ";  
+                                                        
+    int xx = 40;
+	gotoXY(xx, y + 10); cout <<	"			   _____  __     __   _____   _______   ______   __  __   ";
+	gotoXY(xx, y + 11); cout <<	"			  / ____| \\ \\   / /  / ____| |__   __| |  ____| |  \\/  |  ";
+	gotoXY(xx, y + 12); cout <<	"			 | (___     \\ \\_/ /  | (___      | |    | |__    | \\  / |  ";
+	gotoXY(xx, y + 13); cout <<	"			  \\___ \\    \\   /    \\___ \\     | |    |  __|   | |\\/| |  ";
+	gotoXY(xx, y + 14); cout <<	"			  ____) |    | |     ____) |    | |    | |____  | |  | |  ";
+	gotoXY(xx, y + 15); cout <<	"			 |_____/     |_|    |_____/     |_|    |______| |_|  |_|  ";
+                                                                                                                         
+	int w = 30, h = 2;
+	box(x + 58, y + 20, w, h, 15, 1, 15, "    ENTER TO START PROGRAM");  
+	gotoXY(x + 55, y + 23); SetColor(0); system("pause");                                                              
 }
 
+//GOODBYE
 void end(){
 	int x = 32, y = 3;
 	int i = 1;	
@@ -277,28 +300,52 @@ void end(){
 	SetColor(15);
 }
 
-void start(){
-	int x = 5, y = 3;
-	SetColor(6);
-	
-	gotoXY(x, y); cout <<	    "			  ____               _   _   _  __  _____   _   _    _____     		";  
-	gotoXY(x, y + 1); cout <<	"			 |  _  \\     /\\     | \\ | | | |/ / |_   _| | \\ | |  / ____|    	";  
-	gotoXY(x, y + 2); cout <<	"			 | |_) |    /  \\    |  \\| | | ' /    | |   |  \\| | | |  __     	";  
-	gotoXY(x, y + 3); cout <<	"			 |  _ <    / /\\ \\   | . ` | |  <     | |   | . ` | | | |_ |    	";  
-	gotoXY(x, y + 4); cout <<	"			 | |_) |  / ____ \\  | |\\  | | . \\   _| |_  | |\\  | | |__| |    	";  
-	gotoXY(x, y + 5); cout <<	"			 |____/  /_/    \\_\\ |_| \\_| |_|\\_\\ |_____| |_| \\_|  \\_____|  ";  
-                                                        
-    int xx = 40;
-	gotoXY(xx, y + 10); cout <<	"			   _____  __     __   _____   _______   ______   __  __   ";
-	gotoXY(xx, y + 11); cout <<	"			  / ____| \\ \\   / /  / ____| |__   __| |  ____| |  \\/  |  ";
-	gotoXY(xx, y + 12); cout <<	"			 | (___     \\ \_/ /  | (___      | |    | |__    | \\  / |  ";
-	gotoXY(xx, y + 13); cout <<	"			  \\___ \\    \\   /    \\___ \\     | |    |  __|   | |\\/| |  ";
-	gotoXY(xx, y + 14); cout <<	"			  ____) |    | |     ____) |    | |    | |____  | |  | |  ";
-	gotoXY(xx, y + 15); cout <<	"			 |_____/     |_|    |_____/     |_|    |______| |_|  |_|  ";
-                                                                                                                         
-	int w = 30, h = 2;
-	box(x + 58, y + 20, w, h, 15, 1, 15, "    ENTER TO START PROGRAM");  
-	gotoXY(x + 55, y + 23); SetColor(0); system("pause");                                                              
-}
+// //tra ve ket qua cua phep nhan 2 so nguyen khong am duoi dang chuoi
+// string multiply(string& num1,string& num2) {
+//     int n1 = num1.size();
+//     int n2 = num2.size();
+//     if (n1 == 0 || n2 == 0) return "0";
+//     vector<int> result(n1 + n2, 0);	//kich thuoc vector la n1 + n2 va tat ca phan tu deu bang 0
+//     int i_n1 = 0;
+//     int i_n2 = 0; 
+//     for (int i = n1 - 1; i >= 0; i--) {
+//         int carry = 0;
+//         int n1 = num1[i] - '0';
+//         i_n2 = 0; 
+//         for (int j = n2 - 1; j >= 0; j--) {
+//             int n2 = num2[j] - '0';
+//             int sum = n1 * n2 + result[i_n1 + i_n2] + carry;
+//             carry = sum / 10;
+//             result[i_n1 + i_n2] = sum % 10;
+//             i_n2++;
+//         }
+//         if (carry > 0) {
+//             result[i_n1 + i_n2] += carry;
+//         }
+//         i_n1++;
+//     }
+//     int i = result.size() - 1;
+//     while (i >= 0 && result[i] == 0) {
+//         i--;
+//     }
+//     if (i == -1) return "0";
+//     std::string s = "";
+//     while (i >= 0) {
+//         s += to_string(result[i--]);
+//     }
+//     return s;
+// }
+
+// string multiplyMultiple(const vector<string>& numbers) {
+//     string result = "1";
+//     for (const string& num : numbers) {
+//         if (num == "0") {
+//             return "0";
+//         }
+//         string tempResult = result;     //Make a copy if necessary
+//         result = multiply(tempResult, num);
+//     }
+//     return result;
+// }
 
 #endif

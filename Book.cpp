@@ -44,14 +44,9 @@ void Book::setMoney(const string &money){
     this->money = money;
 }
 
-
-bool isNumeric(const string &str) {
-    for (char ch : str) {
-        if (!std::isdigit(ch)) {
-            return false;
-        }
-    }
-    return true;
+string Book::getOpeningYear() const {
+    string dateString = openingDate.dtAsString();
+    return dateString.substr(dateString.size() - 4); //Extract the last 4 characters (YYYY)
 }
 
 #endif

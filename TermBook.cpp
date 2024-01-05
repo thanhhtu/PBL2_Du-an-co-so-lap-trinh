@@ -45,7 +45,9 @@ void TermBook::saveBook(ofstream &f){
 }
 
 void TermBook::printBook() const{
-    int x1=whereX(); int y1 = whereY();
+    int x1 = whereX(); 
+    int y1 = whereY();
+
 	cout << "    " << this->IDBook;
 	gotoXY(x1 + 23, y1);
     cout << this->openingDate;
@@ -57,11 +59,11 @@ void TermBook::printBook() const{
 
 float TermBook::interestRate(const Date &currentDate, const Account &user) const{
     //Check if the term of the book has come
-    const int z=whereY();
-    const int x1= 35, y1 =z+5, h1=2;
+    const int z = whereY();
+    const int x1 = 35, y1 = z + 4, h1 = 2;
     if(openingDate.getDayDifference(currentDate) < this->term * 30){      //mac dinh 1 thang co 30 ngay
-		int w1= 90;
-		box(x1, y1 - 2, w1, h1, 15, 1, 14, "  The first term of this book has not yet come. Are you sure you want to withdraw money?\n ");
+		int w1 = 90;
+		box(x1, y1 - 2, w1, h1, 15, 1, 14, "  The first term of this book has not yet come. Are you sure you want to withdraw money?\n\n");
         string text1 = "                                         1. Yes";
         string text2 = "                                         2. No";
         box(x1, y1, 90, h1, 15, 1, 15, text1);
@@ -77,7 +79,7 @@ float TermBook::interestRate(const Date &currentDate, const Account &user) const
             gotoXY(whereX() - 50, whereY() + 3);
             SetColor(72);
             cout << "Your choice: ";
-            cin >> choice;
+            cin >> choice; 
             if(!(choice >= 1 && choice <= 2)){
                 gotoXY(whereX() + 50, whereY());
                 cout << "Invalid input!! Please choose again.\n";
