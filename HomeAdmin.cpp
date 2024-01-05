@@ -358,12 +358,12 @@ MENU:
                     } 
                 }
             }else{
-				gotoXY(x, getCurrentCursorPositionY());
+                				gotoXY(x, getCurrentCursorPositionY());
             	listTermBook.listBookByYear(year);
                 cout << "\n\n";
                 listNonTermBook.listBookByYear(year);
             	gotoXY(x, getCurrentCursorPositionY() + 1);
-                
+                                
                 isContinue = toContinue1(whereX() + 20, whereY() + 2);
                 if(isContinue == 1){
                     goto MENU;

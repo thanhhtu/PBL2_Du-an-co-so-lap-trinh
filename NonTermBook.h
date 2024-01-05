@@ -25,7 +25,7 @@ class NonTermBook : public Book{
 
         void printBook() const;
         
-        float interestRate(const Date &currentDate, const Account &user) const;
+        float interestRate(const Date &currentDate) const;
 };
 
 #endif

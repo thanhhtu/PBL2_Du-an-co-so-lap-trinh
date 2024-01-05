@@ -297,7 +297,7 @@ MENU:
 
                         TermBook *termBook = listTermBook.findUserBookByID(ID, IDBook);
                         if(termBook != NULL){
-                            float interestEarned = termBook->interestRate(currentDate, user);
+                            float interestEarned = termBook->interestRate(currentDate);       
                             gotoXY(x1 + 28, whereY() + 3);
                             if (interestEarned == -1){
                                 cout << "\n";
@@ -349,7 +349,7 @@ MENU:
 
                         NonTermBook *nonTermBook = listNonTermBook.findUserBookByID(ID, IDBook);
                         if(nonTermBook != NULL){
-                            float interestEarned = nonTermBook->interestRate(currentDate, user);
+                            float interestEarned = nonTermBook->interestRate(currentDate);
                             box(x1 + 10, whereY() + 1, w1 - 10, h1, 14, 1, 14, "       Interest earned:");
                             gotoXY(x1 + 45, whereY() - 1);
                             cout << interestEarned;

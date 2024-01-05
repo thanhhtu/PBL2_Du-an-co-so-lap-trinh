@@ -57,7 +57,17 @@ void TermBook::printBook() const{
     cout << this->money ;
 }
 
-float TermBook::interestRate(const Date &currentDate, const Account &user) const{
+float TermBook::interestRate(const Date &currentDate) const{
+    if(openingDate.getDayDifference(currentDate) < this->term * 30) return 0;
+    
+    auto it = interestRates.find(this->term);
+    float interest = it->second;
+    //Calculate the interest earned
+    float interestEarned = stof(this->money) * interest * float(openingDate.getDayDifference(currentDate)) / (float(this->term) * 30);
+    return interestEarned; 
+}
+
+float TermBook::interest(const Date &currentDate) const{
     //Check if the term of the book has come
     const int z = whereY();
     const int x1 = 35, y1 = z + 4, h1 = 2;
@@ -88,18 +98,14 @@ float TermBook::interestRate(const Date &currentDate, const Account &user) const
 
         //If the user chooses to withdraw money early, return 0
         if(choice == 1){
-            cin.ignore();
-		    //Calculate the interest rate
-		    auto it = interestRates.find(this->term);
-		    float interest = it->second;
-		    //Calculate the interest earned
-            float interestEarned = stof(this->money) * interest * openingDate.getDayDifference(currentDate) / this->term;
-            return interestEarned; 
-        }else{
+            return this->interestRate(currentDate);
+        }else if(choice == 2){
             //If the user chooses not to withdraw money, don't calculate interest
             cin.ignore();
             return -1;
         }
     }
+    
+    return this->interestRate(currentDate);
 }
 #endif

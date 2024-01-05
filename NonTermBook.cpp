@@ -39,7 +39,7 @@ void NonTermBook::printBook() const{
     cout << endl;
 }
 
-float NonTermBook::interestRate(const Date &currentDate, const Account &user) const{
+float NonTermBook::interestRate(const Date &currentDate) const{
     float interestEarned = stof(this->money) * openingDate.getDayDifference(currentDate) * this->interest;
     return interestEarned;
 }

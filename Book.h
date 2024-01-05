@@ -39,7 +39,7 @@ class Book{
 
         virtual void printBook() const = 0;
         
-        virtual float interestRate(const Date &currentDate, const Account &user) const = 0;
+        virtual float interestRate(const Date &currentDate) const = 0;
         
         string getOpeningYear() const;
 };
