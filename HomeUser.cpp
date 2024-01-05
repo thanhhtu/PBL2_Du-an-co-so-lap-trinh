@@ -297,7 +297,7 @@ MENU:
 
                         TermBook *termBook = listTermBook.findUserBookByID(ID, IDBook);
                         if(termBook != NULL){
-                            float interestEarned = termBook->interestRate(currentDate);       
+                            float interestEarned = termBook->interest(currentDate);       
                             gotoXY(x1 + 28, whereY() + 3);
                             if (interestEarned == -1){
                                 cout << "\n";

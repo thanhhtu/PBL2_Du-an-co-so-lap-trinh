@@ -84,11 +84,11 @@ MENU:
             const int x1 = 30, y1 = 5, w1 = 100, h1 = 2;
             box(x1, y1 - 3, w1, h1, 11, 1, 11, "****************************** LIST ALL USER INFORMATION ACCOUNTS *****************************");
             
-            string text0 = "  Account ID";
-            string text1 = "  Name";
-            string text2 = "  ID number";
-            string text3 = "  Phone number";
-            string text4 = "  Address";
+            string text0 = "    Account ID";
+            string text1 = "       Name";
+            string text2 = "     ID number";
+            string text3 = "   Phone number";
+            string text4 = "      Address";
             
             box(x1, y1, 20, h1, 15, 1, 15, text0);
             box(x1 + 20, y1, 20, h1, 15, 1, 15, text1);
@@ -358,13 +358,18 @@ MENU:
                     } 
                 }
             }else{
-                				gotoXY(x, getCurrentCursorPositionY());
-            	listTermBook.listBookByYear(year);
+                float itr = 0;
+                gotoXY(x, getCurrentCursorPositionY());
+            	listTermBook.listBookByYear(year, itr, currentDate);
                 cout << "\n\n";
-                listNonTermBook.listBookByYear(year);
-            	gotoXY(x, getCurrentCursorPositionY() + 1);
-                                
-                isContinue = toContinue1(whereX() + 20, whereY() + 2);
+                listNonTermBook.listBookByYear(year, itr, currentDate);
+
+                SetColor(0);
+                textcolor(11);
+            	gotoXY(x, getCurrentCursorPositionY() + 3);
+                cout << "Total interest payable for savings books created in " << year << " is:  " << itr;                  
+
+                isContinue = toContinue1(whereX() - 49, whereY() + 2);
                 if(isContinue == 1){
                     goto MENU;
             	}            

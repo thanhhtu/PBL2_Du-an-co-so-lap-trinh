@@ -76,6 +76,8 @@ void ListNonTermBook::printUserNonTermBook(const Account &user, int &ck){
     }
 
     if(dem == 0){ 
+        SetColor(0);
+        textcolor(15);
     	gotoXY(63, y1);
 		cout << "You do not have any non term books.\n";
         ck = 0; //kiem tra user co so hay k (0: k co, 1: co)
@@ -236,12 +238,12 @@ void ListNonTermBook::removeBookByID(const string &ID){
     this->saveNonTermBooks();
 }
 
-void ListNonTermBook::listBookByYear(const string &year){
+void ListNonTermBook::listBookByYear(const string &year, float &itr, const Date &currentDate){
     int x1 = 40, y1 = getCurrentCursorPositionY() + 4, w1 = 80, h1 = 2;
     int y2 = y1 + 3;
     int dem = 0, count = 0;
 
-    box(x1, y1 - 3, w1, h1, 14, 1, 15, "*************************** LIST NONTERM BOOK BY YEAR *************************");
+    box(x1, y1 - 3, w1, h1, 11, 1, 15, "*************************** LIST NONTERM BOOK BY YEAR *************************");
 
     for(int i = 0; i < this->length(); i++){
         if(this->get(i).getOpeningYear() == year){
@@ -250,6 +252,8 @@ void ListNonTermBook::listBookByYear(const string &year){
     }
 
     if(dem == 0){
+        SetColor(0);
+        textcolor(15);
     	gotoXY(x1 + 17, y1);
 		cout << "There are not any nonterm books in this year.";
         gotoXY(x1 + 25, whereY() - 1);
@@ -301,6 +305,12 @@ void ListNonTermBook::listBookByYear(const string &year){
                     cout << char(179);
                 }
                 y2 += 2;  
+            }
+        }
+
+        for(int i = 0; i < this->length(); i++){
+            if(this->get(i).getOpeningYear() == year){
+                itr += this->get(i).interestRate(currentDate);
             }
         }
         return;

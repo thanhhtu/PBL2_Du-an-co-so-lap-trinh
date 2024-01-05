@@ -88,19 +88,19 @@ void Account::printInfor() const{
 	int x1 = whereX();
 	int y1 = whereY();
 
-	cout << "   " << this->ID;
+	cout << " " << this->ID;
 
 	gotoXY(x1 + 20, y1);
-	cout << this->name;
+	cout << " " << this->name;
 
 	gotoXY(x1 + 40, y1);
-	cout << this->IDCard;
+	cout << " " << this->IDCard;
 
 	gotoXY(x1 + 60, y1);
-	cout << this->tel;
+	cout << " " << this->tel;
 	
 	gotoXY(x1 + 80, y1);
-	cout << this->address << endl;
+	cout << " " << this->address << endl;
 }
 
 Account &Account::operator = (const Account &acc){

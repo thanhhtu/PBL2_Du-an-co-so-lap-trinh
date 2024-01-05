@@ -75,6 +75,8 @@ void ListTermBook::printUserTermBook(const Account &user, int &ck){
     }
 
     if(dem == 0){
+        SetColor(0);
+        textcolor(15);
     	gotoXY(65, y1);
 		cout << "You do not have any term books.";
         ck = 0; //kiem tra user co so hay k (0: k co, 1: co)
@@ -296,13 +298,13 @@ void ListTermBook::removeBookByID(const string &ID){
     this->saveTermBooks();
 }
 
-void ListTermBook::listBookByYear(const string &year){
+void ListTermBook::listBookByYear(const string &year, float &itr, const Date &currentDate){
     system("cls");
     int x1 = 30, y1 = 5, w1 = 100, h1 = 2;
     int y2 = 8;
     int dem = 0, count = 0;
 
-    box(x1, y1 - 3, w1, h1, 14, 1, 15, "************************************** LIST TERM BOOK BY YEAR *************************************");
+    box(x1, y1 - 3, w1, h1, 11, 1, 15, "************************************** LIST TERM BOOK BY YEAR *************************************");
 
     for(int i = 0; i < this->length(); i++){
         if(this->get(i).getOpeningYear() == year){
@@ -311,7 +313,9 @@ void ListTermBook::listBookByYear(const string &year){
     }
 
     if(dem == 0){
-    	gotoXY(x1 + 25, y1);
+        SetColor(0);
+        textcolor(15);
+    	gotoXY(x1 + 30, y1);
 		cout << "There are not any term books in this year.";
         return;
 	}else{
@@ -366,6 +370,14 @@ void ListTermBook::listBookByYear(const string &year){
                 y2 += 2;  
             }
         }
+
+        //tinh lai
+        for(int i = 0; i < this->length(); i++){
+            if(this->get(i).getOpeningYear() == year){
+                itr += this->get(i).interestRate(currentDate);
+            }
+        }
+        
         return;
     }
 }

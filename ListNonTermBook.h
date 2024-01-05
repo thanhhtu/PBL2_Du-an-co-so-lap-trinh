@@ -35,7 +35,7 @@ class ListNonTermBook : public List<NonTermBook>{
         void removeBookByIDBook(const string &IDBook);
         void removeBookByID(const string &ID);
 
-        void listBookByYear(const string &year);
+        void listBookByYear(const string &year, float &itr, const Date &currentDate);
 };
 
 #endif
