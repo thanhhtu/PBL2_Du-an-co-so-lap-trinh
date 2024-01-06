@@ -298,7 +298,7 @@ void ListTermBook::removeBookByID(const string &ID){
     this->saveTermBooks();
 }
 
-void ListTermBook::listBookByYear(const string &year, float &itr, const Date &currentDate){
+void ListTermBook::listBookByYear(const string &year, long double &itr, const Date &currentDate){
     system("cls");
     int x1 = 30, y1 = 5, w1 = 100, h1 = 2;
     int y2 = 8;
@@ -370,7 +370,6 @@ void ListTermBook::listBookByYear(const string &year, float &itr, const Date &cu
                 y2 += 2;  
             }
         }
-
         //tinh lai
         for(int i = 0; i < this->length(); i++){
             if(this->get(i).getOpeningYear() == year){

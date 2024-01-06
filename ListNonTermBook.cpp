@@ -238,7 +238,7 @@ void ListNonTermBook::removeBookByID(const string &ID){
     this->saveNonTermBooks();
 }
 
-void ListNonTermBook::listBookByYear(const string &year, float &itr, const Date &currentDate){
+void ListNonTermBook::listBookByYear(const string &year, long double &itr, const Date &currentDate){
     int x1 = 40, y1 = getCurrentCursorPositionY() + 4, w1 = 80, h1 = 2;
     int y2 = y1 + 3;
     int dem = 0, count = 0;

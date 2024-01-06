@@ -177,7 +177,7 @@ int Date::calDay() const{
 }
 
 //days1.days2 : days1 la ngay truoc, days2 la ngay sau
-int Date::getDayDifference(const Date &dt) const {
+long double Date::getDayDifference(const Date &dt) const {
     if (*this == dt) return 0;  //cung 1 date
 
     int days1 = this->calDay();

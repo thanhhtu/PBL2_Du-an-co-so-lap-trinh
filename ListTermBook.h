@@ -34,7 +34,7 @@ class ListTermBook : public List<TermBook>{
         void removeBookByIDBook(const string &IDBook);
         void removeBookByID(const string &ID);
         
-        void listBookByYear(const string &year, float &itr, const Date &currentDate);    //liet ke cac so theo nam da nhap
+        void listBookByYear(const string &year, long double &itr, const Date &currentDate);    //liet ke cac so theo nam da nhap
 };
 
 #endif

@@ -18,7 +18,7 @@ int TermBook::getTerm() const{
     return this->term;
 }
 
-void TermBook::setTerm(int term){
+void TermBook::setTerm(long double term){
     this->term = term;
 }
 
@@ -57,17 +57,18 @@ void TermBook::printBook() const{
     cout << this->money ;
 }
 
-float TermBook::interestRate(const Date &currentDate) const{
+long double TermBook::interestRate(const Date &currentDate) const{
     if(openingDate.getDayDifference(currentDate) < this->term * 30) return 0;
     
     auto it = interestRates.find(this->term);
-    float interest = it->second;
+    long double interest = it->second;
     //Calculate the interest earned
-    float interestEarned = stof(this->money) * interest * float(openingDate.getDayDifference(currentDate)) / (float(this->term) * 30);
+    int m = openingDate.getDayDifference(currentDate) / (this->term) / 30;
+    long double interestEarned = stof(this->money) * interest * m;
     return interestEarned; 
 }
 
-float TermBook::interest(const Date &currentDate) const{
+long double TermBook::interest(const Date &currentDate) const{
     //Check if the term of the book has come
     const int z = whereY();
     const int x1 = 35, y1 = z + 4, h1 = 2;

@@ -297,7 +297,7 @@ MENU:
 
                         TermBook *termBook = listTermBook.findUserBookByID(ID, IDBook);
                         if(termBook != NULL){
-                            float interestEarned = termBook->interest(currentDate);       
+                            long double interestEarned = termBook->interest(currentDate);       
                             gotoXY(x1 + 28, whereY() + 3);
                             if (interestEarned == -1){
                                 cout << "\n";
@@ -305,7 +305,7 @@ MENU:
                             }else{
                                 box(x1 + 10, whereY() - 2, w1 - 10, h1, 14, 1, 14, "       Interest earned:\n");
                                 gotoXY(x1 + 45, whereY() - 1);
-                                cout << interestEarned;
+                                cout << fixed << setprecision(3) << interestEarned;
                                 cout << "\n\n";
                                 listTermBook.removeBookByIDBook(IDBook);
                             }
@@ -349,10 +349,10 @@ MENU:
 
                         NonTermBook *nonTermBook = listNonTermBook.findUserBookByID(ID, IDBook);
                         if(nonTermBook != NULL){
-                            float interestEarned = nonTermBook->interestRate(currentDate);
+                            unsigned long interestEarned = nonTermBook->interestRate(currentDate);
                             box(x1 + 10, whereY() + 1, w1 - 10, h1, 14, 1, 14, "       Interest earned:");
                             gotoXY(x1 + 45, whereY() - 1);
-                            cout << interestEarned;
+                            cout << fixed << setprecision(3) << interestEarned;
                             cout << "\n\n";
                             listNonTermBook.removeBookByIDBook(IDBook);
                         }else{

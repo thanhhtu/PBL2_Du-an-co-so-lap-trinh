@@ -14,21 +14,21 @@ using namespace std;
 class TermBook : public Book{
     private:
         int term;
-        map<int, float> interestRates;  //luu han muc
+        map<int, long double> interestRates;  //luu han muc
     public:
         TermBook();
         ~TermBook();
         
         int getTerm() const;
-		void setTerm(int term);
+		void setTerm(long double term);
 
         void setBook(ifstream &f);
 		void saveBook(ofstream &f);
 
         void printBook() const;
         
-        float interestRate(const Date &currentDate) const;
-        float interest(const Date &currentDate) const;
+        long double interestRate(const Date &currentDate) const;
+        long double interest(const Date &currentDate) const;
 };
 
 #endif

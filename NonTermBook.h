@@ -14,7 +14,7 @@ using namespace std;
 
 class NonTermBook : public Book{
     private:
-        float interest = (0.15/100) / 365;    //0.15%/ nam
+        long double interest = (0.15/100) / 365;    //0.15%/ nam
     public:
         NonTermBook();
         ~NonTermBook();
@@ -25,7 +25,7 @@ class NonTermBook : public Book{
 
         void printBook() const;
         
-        float interestRate(const Date &currentDate) const;
+        long double interestRate(const Date &currentDate) const;
 };
 
 #endif

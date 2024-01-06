@@ -35,7 +35,7 @@ class Date{
 		friend ostream &operator << (ostream &out, const Date &dt);
 
 		int calDay() const;
-		int getDayDifference(const Date &dt) const;	//dem so ngay giua date this va date dt
+		long double getDayDifference(const Date &dt) const;	//dem so ngay giua date this va date dt
 };
 
 #endif

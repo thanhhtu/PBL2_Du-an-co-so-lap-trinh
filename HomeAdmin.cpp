@@ -358,7 +358,7 @@ MENU:
                     } 
                 }
             }else{
-                float itr = 0;
+                long double itr = 0;
                 gotoXY(x, getCurrentCursorPositionY());
             	listTermBook.listBookByYear(year, itr, currentDate);
                 cout << "\n\n";
@@ -366,8 +366,8 @@ MENU:
 
                 SetColor(0);
                 textcolor(11);
-            	gotoXY(x, getCurrentCursorPositionY() + 3);
-                cout << "Total interest payable for savings books created in " << year << " is:  " << itr;                  
+            	gotoXY(x, getCurrentCursorPositionY() + 3);                
+				cout << "Total interest payable for savings books created in " << year << " is:  " << fixed << setprecision(3) << itr;
 
                 isContinue = toContinue1(whereX() - 49, whereY() + 2);
                 if(isContinue == 1){
